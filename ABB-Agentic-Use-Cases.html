@@ -377,6 +377,7 @@ html.reduced-motion .arch.playing .node.active .node-body { transform: none; }
 
 /* node kinds: product (logo), proposed, process */
 .kind-product .chip-bg { fill: #fff; stroke: var(--line-soft); }
+.kind-product .logo { color: var(--ink); }
 .node.kind-product.active .chip-bg { fill: #fff; stroke: var(--line); }
 .node.kind-product .node-eyebrow { fill: var(--ink-3); }
 .node.kind-proposed .node-bg { stroke-dasharray: 5 4; stroke: #9fb8d0; }
@@ -415,8 +416,8 @@ html.reduced-motion .arch.playing .node.active .node-body { transform: none; }
 .cover-issues .issue h3 { font-size: 15.5px; }
 .cover-issues .issue p { font-size: 13px; }
 /* entrance */
-.slide-cover .rise { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(.05s + var(--i, 0) * .045s); }
-.slide-cover.entered .rise { opacity: 1; transform: none; }
+.slide-cover .rise, .slide-scope .rise { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(.05s + var(--i, 0) * .045s); }
+.slide-cover.entered .rise, .slide-scope.entered .rise { opacity: 1; transform: none; }
 
 /* ---- workflow page -------------------------------------------------------- */
 .wf { display: grid; grid-template-rows: auto 1fr; min-height: 0; padding-top: 10px; }
@@ -440,6 +441,172 @@ html.reduced-motion .arch.playing .node.active .node-body { transform: none; }
 .wf.playing .wf-step.active { background: #fff; border-color: var(--ink); box-shadow: 0 10px 28px rgba(27, 30, 35, .10); transform: translateY(-1px); }
 .wf.playing .wf-step.active .wf-num { color: var(--accent); }
 html.reduced-motion .wf.playing .wf-step.active { transform: none; }
+
+/* ============================================================================
+   Project 03 additions: focus, scenarios, review gates, stop/config kinds,
+   component explorer, example outputs, scope page
+   ========================================================================== */
+:focus-visible { outline: 2px solid var(--steel); outline-offset: 2px; }
+.node:focus-visible { outline: none; } .node:focus-visible .node-ring { opacity: 1; stroke: var(--steel); }
+.wf-step:focus-visible { outline-offset: -2px; }
+
+/* cover scope note */
+.scope-note { display: inline-flex; align-items: center; margin-top: 22px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+
+/* scenario selector (architecture header) */
+.scn { display: flex; align-items: center; gap: 4px; }
+.scn-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-right: 8px; }
+.scn-btn { height: 28px; padding: 0 12px; border-radius: 14px; border: 1px solid transparent; background: transparent; color: var(--ink-3); font: inherit; font-size: 12.5px; font-weight: 500; cursor: pointer; transition: all .22s var(--ease); }
+.scn-btn:hover { background: #ececea; color: var(--ink); }
+.scn-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* review gate in the control bar */
+.ctl-gate { height: 32px; padding: 0 14px 0 10px; background: var(--accent); border-color: var(--accent); color: #fff; font-size: 13px; flex: none; }
+.ctl-gate:hover { background: #c01e27; border-color: #c01e27; }
+.gate-hint { font-size: 12.5px; color: var(--ink-3); margin-left: 12px; }
+.bar.is-gated .cap-text { display: flex; align-items: center; -webkit-line-clamp: unset; overflow: visible; }
+.bar.is-gated .cap-step { color: var(--amber); }
+
+/* stop connector + node kinds */
+.edge-stop .edge-base { stroke: #b8bcc3; marker-end: url(#m-stop); }
+.edge-stop .edge-hi { stroke: var(--slate); } .edge-stop .signal { fill: var(--slate); }
+.edge-stop .edge-hi.drawn { marker-end: url(#m-stop-hi); }
+.mk-stop path { fill: #b8bcc3; } .mk-stop-hi path { fill: var(--slate); }
+.arch.focus .edge.related.edge-stop .edge-base { stroke: var(--slate); marker-end: url(#m-stop-hi); }
+.dot-stop { background: var(--slate); }
+.node.kind-stop .node-bg { stroke: #c9ced6; stroke-dasharray: 4 3; }
+.kind-stop .chip-bg { fill: var(--slate-soft); } .kind-stop .ico { stroke: var(--slate); }
+.node.kind-stop .node-eyebrow { fill: var(--slate); }
+.node.kind-stop.active .node-bg { stroke-dasharray: none; stroke: var(--slate); }
+.node.kind-stop.active .chip-bg { fill: var(--slate); } .node.kind-stop.active .node-ring { stroke: var(--slate); }
+.node.kind-config .node-bg { stroke: #c4c9d1; stroke-dasharray: 3 3; }
+.kind-config .chip-bg { fill: var(--steel-soft); } .kind-config .ico { stroke: var(--steel); }
+.node.kind-config.active .node-bg { stroke-dasharray: none; stroke: var(--steel); }
+.node.kind-config.active .chip-bg { fill: var(--steel); } .node.kind-config.active .node-ring { stroke: var(--steel); }
+.insp-kind.kind-config, .insp-kind.kind-process { color: var(--slate); background: var(--slate-soft); }
+.insp-kind.kind-stop { color: var(--slate); background: var(--slate-soft); }
+.insp-platform { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--steel); background: var(--steel-soft); padding: 3px 8px; border-radius: 4px; }
+.insp-detail { margin: 8px 0 0; padding-left: 16px; font-size: 12.5px; line-height: 1.45; color: var(--ink-2); }
+.insp-detail li + li { margin-top: 3px; }
+.wf-tag { display: inline-block; margin: 4px 0 2px; padding: 2px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--steel); background: var(--steel-soft); }
+
+/* ---- component explorer ---------------------------------------------------- */
+.comp { display: grid; grid-template-rows: auto 1fr; min-height: 0; padding-top: 10px; }
+.comp-head h2 { margin: 10px 0 0; font-size: 26px; font-weight: 600; letter-spacing: -.015em; }
+.comp-body { display: grid; grid-template-columns: 620px 1fr; column-gap: 40px; margin-top: 22px; min-height: 0; align-items: start; }
+.comp-list { list-style: none; margin: 0; padding: 0; display: grid; row-gap: 8px; }
+.comp-item { display: grid; grid-template-columns: 40px 1fr; column-gap: 12px; width: 100%; text-align: left; padding: 15px 18px; border-radius: 12px; border: 1px solid var(--line-soft); background: var(--lane); color: var(--ink); font: inherit; cursor: pointer; transition: all .22s var(--ease); }
+.comp-item:hover { background: #fff; border-color: var(--line); }
+.comp-item.active { background: #fff; border-color: var(--ink); box-shadow: 0 10px 28px rgba(27, 30, 35, .10); }
+.comp-num { font-size: 12px; font-weight: 700; color: var(--ink-4); letter-spacing: .04em; padding-top: 3px; font-variant-numeric: tabular-nums; }
+.comp-item.active .comp-num { color: var(--accent); }
+.comp-text { display: flex; flex-direction: column; gap: 4px; }
+.comp-text b { font-size: 16px; font-weight: 600; letter-spacing: -.005em; }
+.comp-text span { font-size: 13px; line-height: 1.4; color: var(--ink-2); }
+.comp-text small { margin-top: 2px; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.comp-detail { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 34px 40px 36px; box-shadow: 0 2px 6px rgba(27, 30, 35, .04); opacity: 0; transform: translateY(6px); transition: opacity .22s var(--ease), transform .22s var(--ease); }
+.comp-detail.in { opacity: 1; transform: none; }
+.cd-head { display: flex; justify-content: space-between; align-items: center; }
+.cd-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-variant-numeric: tabular-nums; }
+.cd-platform { font-size: 11.5px; font-weight: 600; letter-spacing: .04em; color: var(--steel); background: var(--steel-soft); padding: 4px 10px; border-radius: 5px; }
+.comp-detail h3 { margin: 14px 0 0; font-size: 30px; font-weight: 600; letter-spacing: -.02em; }
+.cd-blurb { margin: 10px 0 0; font-size: 16px; line-height: 1.5; color: var(--ink-2); }
+.cd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 32px; margin-top: 30px; padding-top: 26px; border-top: 1px solid var(--line-soft); }
+.cd-block h4 { margin: 0 0 8px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.cd-block p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--ink); }
+.cd-boundary { border-left: 2px solid var(--amber); padding-left: 18px; }
+.cd-boundary h4 { color: var(--amber); }
+
+/* ---- example outputs ------------------------------------------------------- */
+.ex { display: grid; grid-template-rows: auto auto 1fr; min-height: 0; padding-top: 10px; }
+.ex-head { display: flex; justify-content: space-between; align-items: flex-end; }
+.ex-head h2 { margin: 10px 0 0; font-size: 26px; font-weight: 600; letter-spacing: -.015em; }
+.demo-banner { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 7px; border: 1px solid #e6d3ad; background: var(--amber-soft); color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.demo-banner::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+.ex-tabs { display: inline-flex; gap: 4px; margin-top: 18px; padding: 4px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); width: max-content; }
+.ex-tab { height: 34px; padding: 0 18px; border-radius: 9px; border: 0; background: transparent; color: var(--ink-3); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .22s var(--ease); }
+.ex-tab:hover { color: var(--ink); background: #f0f0ee; }
+.ex-tab.active { background: var(--ink); color: #fff; }
+.ex-body { position: relative; display: grid; grid-template-columns: 1fr 380px; column-gap: 32px; margin-top: 22px; min-height: 0; align-items: start; }
+.ex-view { display: none; } .ex-view.active { display: block; animation: pop-in .22s var(--ease); }
+.kv { display: grid; grid-template-columns: 190px 1fr; column-gap: 14px; padding: 5px 0; }
+.kv dt { font-size: 13px; color: var(--ink-3); } .kv dd { margin: 0; font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+.src-chip { display: inline-flex; align-items: center; gap: 7px; padding: 7px 11px; border-radius: 7px; border: 1px solid var(--line); background: #fff; color: var(--ink); font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; transition: border-color .22s var(--ease); }
+.src-chip .ui-ico { width: 14px; height: 14px; color: var(--steel); }
+.src-chip:hover { border-color: var(--ink); }
+.src-chip.inline { padding: 3px 8px; font-size: 12.5px; }
+.src-chip.muted { color: var(--ink-3); border-style: dashed; cursor: default; } .src-chip.muted .ui-ico { color: var(--ink-4); }
+/* teams */
+.teams { max-width: 1120px; background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.teams-chan { display: flex; justify-content: space-between; align-items: center; padding: 14px 22px; background: #f6f6f5; border-bottom: 1px solid var(--line-soft); }
+.teams-chan b { font-size: 14px; font-weight: 600; } .teams-chan span { font-size: 12px; color: var(--ink-3); }
+.teams-msg { display: grid; grid-template-columns: 40px 1fr; column-gap: 14px; padding: 22px 24px 20px; }
+.teams-avatar { width: 40px; height: 40px; border-radius: 9px; background: #5b5fc7; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.teams-meta { display: flex; align-items: center; gap: 10px; }
+.teams-meta b { font-size: 14px; font-weight: 600; } .teams-meta time { font-size: 12px; color: var(--ink-3); }
+.teams-bot { font-size: 9.5px; font-weight: 700; letter-spacing: .08em; padding: 2px 5px; border-radius: 3px; background: #eceef7; color: #5b5fc7; }
+.teams-card { margin-top: 10px; padding: 18px 20px 16px; border: 1px solid var(--line); border-left: 4px solid var(--amber); border-radius: 10px; }
+.tc-top { display: flex; gap: 8px; align-items: center; }
+.tc-cat { font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: var(--ink); padding: 3px 8px; border-radius: 4px; }
+.tc-sev { font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); background: var(--amber-soft); padding: 3px 8px; border-radius: 4px; }
+.teams-card h3 { margin: 12px 0 0; font-size: 21px; font-weight: 600; letter-spacing: -.01em; }
+.teams-card > p { margin: 8px 0 0; font-size: 15.5px; line-height: 1.5; color: var(--ink-2); }
+.tc-facts { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.tc-facts .kv { grid-template-columns: 160px 1fr; }
+.tc-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.tc-foot { margin-top: 14px; font-size: 12px; color: var(--ink-3); } .tc-foot em { color: var(--accent); font-style: normal; font-weight: 600; }
+/* record */
+.record { max-width: 1120px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px 28px 20px; }
+.rec-head { display: flex; align-items: center; gap: 14px; }
+.rec-id { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; font-weight: 600; padding: 4px 9px; border-radius: 6px; background: var(--slate-soft); color: var(--slate); }
+.rec-head h3 { flex: 1; margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -.01em; }
+.rec-state { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--emerald); background: var(--emerald-soft); padding: 5px 10px; border-radius: 5px; }
+.rec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; margin-top: 20px; }
+.rec-grid section h4 { margin: 0 0 6px; padding-bottom: 6px; border-bottom: 1px solid var(--line-soft); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.rec-grid dl { margin: 0; } .rec-grid .kv { grid-template-columns: 170px 1fr; }
+.rec-foot { margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--line-soft); font-size: 12px; color: var(--ink-3); }
+/* copilot */
+.chat { max-width: 1120px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px 26px 22px; }
+.chat-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; margin-bottom: 8px; border-bottom: 1px solid var(--line-soft); }
+.chat-head b { font-size: 14px; font-weight: 600; } .chat-head span { font-size: 12px; color: var(--ink-3); }
+.turn { display: flex; margin-top: 14px; gap: 12px; }
+.turn-user { justify-content: flex-end; }
+.turn-user .bubble { max-width: 620px; background: var(--ink); color: #fff; padding: 13px 18px; border-radius: 14px 14px 4px 14px; font-size: 15.5px; line-height: 1.45; }
+.turn-bot .bubble { max-width: 760px; background: var(--lane); border: 1px solid var(--line-soft); padding: 14px 18px; border-radius: 14px 14px 14px 4px; }
+.turn-bot .bubble p { margin: 0; font-size: 15.5px; line-height: 1.5; }
+.bot-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--steel); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; margin-top: 2px; }
+.chat-src { margin-top: 10px; }
+.chat-note { display: block; margin-top: 8px; font-size: 12px; color: var(--ink-3); }
+/* shared facts aside + evidence panel */
+.ex-facts { background: var(--lane); border: 1px solid var(--line-soft); border-radius: 14px; padding: 22px 24px; }
+.ex-facts h4 { margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.ex-facts p { margin: 6px 0 10px; font-size: 12.5px; color: var(--ink-3); }
+.ex-facts dl { margin: 0; } .ex-facts .kv { grid-template-columns: 150px 1fr; padding: 6px 0; border-top: 1px solid var(--line-soft); }
+.evidence { position: absolute; top: 0; right: 0; z-index: 6; width: 400px; max-height: 100%; overflow: auto; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px 24px 22px; box-shadow: 0 18px 40px rgba(27, 30, 35, .14), 0 2px 6px rgba(27, 30, 35, .06); animation: pop-in .22s var(--ease); }
+.ev-head { display: flex; justify-content: space-between; align-items: center; }
+.evidence h3 { margin: 12px 0 8px; font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.evidence dl { margin: 0; } .evidence .kv { grid-template-columns: 140px 1fr; border-top: 1px solid var(--line-soft); padding: 7px 0; }
+.evidence code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; word-break: break-all; }
+.ev-note { margin: 12px 0 0; font-size: 12.5px; line-height: 1.45; color: var(--ink-3); }
+
+/* ---- scope page ------------------------------------------------------------- */
+.scope { display: grid; grid-template-rows: auto auto auto; align-content: start; min-height: 0; padding-top: 10px; }
+.scope-head h2 { margin: 10px 0 0; font-size: 30px; font-weight: 600; letter-spacing: -.02em; }
+.scope-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; column-gap: 64px; margin-top: 52px; align-items: start; }
+.scope-col h3 { margin: 0; padding-bottom: 14px; margin-bottom: 20px; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+.scope-col h3 b { color: var(--accent); font-weight: 700; margin-right: 8px; }
+.scope-list { list-style: none; margin: 0; padding: 0; }
+.scope-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 17px; line-height: 1.45; padding: 9px 0; }
+.scope-list .ui-ico { width: 18px; height: 18px; color: var(--emerald); flex: none; margin-top: 2px; }
+.scope-mvp { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid var(--line-soft); font-size: 13.5px; line-height: 1.5; color: var(--ink-3); }
+.scope-measures { margin: 0; } .scope-measures div { padding: 7px 0; }
+.scope-measures div { padding: 9px 0; }
+.scope-measures dt { font-size: 17px; font-weight: 600; } .scope-measures dd { margin: 4px 0 0; font-size: 14.5px; line-height: 1.45; color: var(--ink-2); }
+.scope-note-line { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--line-soft); font-size: 13px; color: var(--ink-3); }
+.scope-ask { margin: 0; font-size: 21px; line-height: 1.45; font-weight: 500; letter-spacing: -.01em; }
+.scope-review { margin: 24px 0 0; padding-top: 18px; border-top: 1px solid var(--line-soft); font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+.scope-boundary { margin-top: 64px; padding: 24px 30px 26px; background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 12px; }
+.scope-boundary p { margin: 10px 0 0; font-size: 18px; line-height: 1.5; font-weight: 500; }
 
 </style>
 </head>
@@ -478,6 +645,16 @@ window.Icons = {
   usercheck:'<circle cx="9" cy="7.5" r="3.8"/><path d="M2.5 21a6.5 6.5 0 0 1 13 0"/><path d="m15.5 11.5 2 2 4-4"/>',
   shieldcheck:'<path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
 
+  rss:      '<path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/>',
+  clipboard:'<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/>',
+  compare:  '<circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M11 18H8a2 2 0 0 1-2-2V9"/>',
+  sparkles: '<path d="m12 3 1.9 5.6 5.6 1.9-5.6 1.9L12 18l-1.9-5.6-5.6-1.9 5.6-1.9z"/><path d="M19 17v4M17 19h4M5 3v3M3.5 4.5h3"/>',
+  stop:     '<circle cx="12" cy="12" r="9.5"/><path d="M8 12h8"/>',
+  send:     '<path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/>',
+  bell:     '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>',
+  link:     '<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>',
+  calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+
   /* UI icons */
   ui: {
     play:     '<path d="M8 5.5v13l10-6.5z"/>',
@@ -487,6 +664,8 @@ window.Icons = {
     next:     '<path d="m10 6 6 6-6 6"/>',
     overview: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
     expand:   '<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>',
+    check:    '<path d="m5 12 5 5L20 7"/>',
+    close:    '<path d="M18 6 6 18M6 6l12 12"/>',
     prevSlide:'<path d="m15 4-8 8 8 8"/>',
     nextSlide:'<path d="m9 4 8 8-8 8"/>',
     help:     '<circle cx="12" cy="12" r="9.5"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7"/><circle cx="12" cy="17" r=".6"/>'
@@ -507,6 +686,22 @@ window.Logos = {
  "intune": {
   "viewBox": "0.69 5.4 400 390.62",
   "body": "<g fill=\"none\"> <g clip-path=\"url(#lg-intune-clip0_10641_164)\"> <path d=\"M0.685165 65.8523C0.685165 14.7648 67.4855 -13.2029 111.616 19.4083L207.551 90.2535L288.514 44.373C331.305 21.0394 399.874 37.7748 400.685 101.559L400.685 336.622C400.685 387.71 335.845 414.343 291.715 381.732L194.031 309.34L112.973 355.23C69.7783 378.784 0.752625 360.714 0.752625 298.637C0.752654 224.124 0.685165 252.734 0.685165 65.8523Z\" fill=\"url(#lg-intune-paint0_linear_10641_164)\"/> <path d=\"M0.685165 65.8523C0.685165 14.7648 67.4855 -13.2029 111.616 19.4083L207.551 90.2535L288.514 44.373C331.305 21.0394 399.874 37.7748 400.685 101.559L400.685 336.622C400.685 387.71 335.845 414.343 291.715 381.732L194.031 309.34L112.973 355.23C69.7783 378.784 0.752625 360.714 0.752625 298.637C0.752654 224.124 0.685165 252.734 0.685165 65.8523Z\" fill=\"url(#lg-intune-paint1_radial_10641_164)\"/> <path d=\"M0.685165 65.8523C0.685165 14.7648 67.4855 -13.2029 111.616 19.4083L207.551 90.2535L288.514 44.373C331.305 21.0394 399.874 37.7748 400.685 101.559L400.685 336.622C400.685 387.71 335.845 414.343 291.715 381.732L194.031 309.34L112.973 355.23C69.7783 378.784 0.752625 360.714 0.752625 298.637C0.752654 224.124 0.685165 252.734 0.685165 65.8523Z\" fill=\"url(#lg-intune-paint2_radial_10641_164)\"/> <path d=\"M111.616 19.4083C67.4855 -13.2029 0.685165 14.7648 0.685165 65.8523V295.742C0.685165 290.153 3.5327 279.026 3.5327 279.026C16.6954 236.001 72.6487 219.869 111.36 248.223L291.715 381.732C335.845 414.343 400.685 387.71 400.685 336.622V101.559C400.685 145.201 343.643 189.011 289.755 151.051L111.616 19.4083Z\" fill=\"url(#lg-intune-paint3_radial_10641_164)\"/> <path d=\"M111.616 19.4083C67.4855 -13.2029 0.685165 14.7648 0.685165 65.8523V295.742C0.685165 290.153 3.5327 279.026 3.5327 279.026C16.6954 236.001 72.6487 219.869 111.36 248.223L291.715 381.732C335.845 414.343 400.685 387.71 400.685 336.622V101.559C400.685 145.201 343.643 189.011 289.755 151.051L111.616 19.4083Z\" fill=\"url(#lg-intune-paint4_radial_10641_164)\" fill-opacity=\"0.25\"/> <path d=\"M111.616 19.4083C67.4855 -13.2029 0.685165 14.7648 0.685165 65.8523V295.742C0.685165 290.153 3.5327 279.026 3.5327 279.026C16.6954 236.001 72.6487 219.869 111.36 248.223L291.715 381.732C335.845 414.343 400.685 387.71 400.685 336.622V101.559C400.685 145.201 343.643 189.011 289.755 151.051L111.616 19.4083Z\" fill=\"url(#lg-intune-paint5_radial_10641_164)\" fill-opacity=\"0.55\"/> <path d=\"M111.616 149.691C67.4855 117.08 0.685165 145.048 0.685165 196.135L0.685179 65.8523C0.685183 14.7648 67.4855 -13.2029 111.616 19.4083C170.996 63.2888 230.374 107.171 289.755 151.051C343.643 189.011 400.685 145.201 400.685 101.559V234.89C400.685 285.978 333.885 313.946 289.755 281.334C230.374 237.454 170.996 193.572 111.616 149.691Z\" fill=\"url(#lg-intune-paint6_linear_10641_164)\"/> <path d=\"M111.616 149.691C67.4855 117.08 0.685165 145.048 0.685165 196.135L0.685179 65.8523C0.685183 14.7648 67.4855 -13.2029 111.616 19.4083C170.996 63.2888 230.374 107.171 289.755 151.051C343.643 189.011 400.685 145.201 400.685 101.559V234.89C400.685 285.978 333.885 313.946 289.755 281.334C230.374 237.454 170.996 193.572 111.616 149.691Z\" fill=\"url(#lg-intune-paint7_radial_10641_164)\" fill-opacity=\"0.35\"/> </g> <defs> <linearGradient id=\"lg-intune-paint0_linear_10641_164\" x1=\"171.501\" y1=\"396.026\" x2=\"314.256\" y2=\"90.5646\" gradientUnits=\"userSpaceOnUse\"> <stop offset=\"0.02\" stop-color=\"#1169DA\"/> <stop offset=\"0.434784\" stop-color=\"#0151BD\"/> <stop offset=\"0.614436\" stop-color=\"#014DB7\"/> <stop offset=\"1\" stop-color=\"#126AD9\"/> </linearGradient> <radialGradient id=\"lg-intune-paint1_radial_10641_164\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(358.656 -48.704) rotate(110.224) scale(292.248 218.917)\"> <stop offset=\"0.422966\" stop-color=\"#004AFF\" stop-opacity=\"0.1\"/> <stop offset=\"0.728672\" stop-color=\"#014DB9\"/> <stop offset=\"0.836135\" stop-color=\"#014DB9\" stop-opacity=\"0.9\"/> <stop offset=\"0.955\" stop-color=\"#014DB9\" stop-opacity=\"0\"/> </radialGradient> <radialGradient id=\"lg-intune-paint2_radial_10641_164\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(54.0821 384.087) rotate(-73.6432) scale(232.668 283.419)\"> <stop offset=\"0.0908532\" stop-color=\"#004AFF\" stop-opacity=\"0.1\"/> <stop offset=\"0.56036\" stop-color=\"#014DB9\"/> <stop offset=\"0.749466\" stop-color=\"#014DB9\" stop-opacity=\"0.99\"/> <stop offset=\"1\" stop-color=\"#014DB9\" stop-opacity=\"0\"/> </radialGradient> <radialGradient id=\"lg-intune-paint3_radial_10641_164\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(439.444 5.40101) rotate(134.068) scale(563.957 434.374)\"> <stop offset=\"0.249322\" stop-color=\"#23C0FE\"/> <stop offset=\"0.717207\" stop-color=\"#23C0FE\"/> <stop offset=\"0.995168\" stop-color=\"#1C91FF\"/> </radialGradient> <radialGradient id=\"lg-intune-paint4_radial_10641_164\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(119.961 37.1103) rotate(45.9092) scale(403.457 95.9789)\"> <stop offset=\"0.165\" stop-color=\"#096DD6\" stop-opacity=\"0\"/> <stop offset=\"0.484233\" stop-color=\"#096DD6\"/> <stop offset=\"0.900505\" stop-color=\"#0876DE\" stop-opacity=\"0.813868\"/> <stop offset=\"1\" stop-color=\"#029AFF\" stop-opacity=\"0\"/> </radialGradient> <radialGradient id=\"lg-intune-paint5_radial_10641_164\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(385.776 245.022) rotate(91.6099) scale(64.799 58.3555)\"> <stop stop-color=\"#0068B3\"/> <stop offset=\"0.93\" stop-color=\"#006CB8\" stop-opacity=\"0\"/> </radialGradient> <linearGradient id=\"lg-intune-paint6_linear_10641_164\" x1=\"114.72\" y1=\"97.5227\" x2=\"182.067\" y2=\"383.699\" gradientUnits=\"userSpaceOnUse\"> <stop stop-color=\"#92EEFE\"/> <stop offset=\"0.564559\" stop-color=\"#35DDFF\"/> <stop offset=\"1\" stop-color=\"#08B1F9\"/> </linearGradient> <radialGradient id=\"lg-intune-paint7_radial_10641_164\" cx=\"0\" cy=\"0\" r=\"1\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"translate(67.7807 5.4011) rotate(69.461) scale(99.6637 80.4988)\"> <stop stop-color=\"#CCF9FF\" stop-opacity=\"0.93\"/> <stop offset=\"1\" stop-color=\"#35DDFF\"/> </radialGradient> <clipPath id=\"lg-intune-clip0_10641_164\"> <rect width=\"400\" height=\"400\" fill=\"white\" transform=\"translate(0.685181 0.713501)\"/> </clipPath> </defs> </g>"
+ },
+ "teams": {
+  "viewBox": "4 4 36 38",
+  "body": "<g fill=\"none\"><path fill=\"url(#lg-teams-a)\" d=\"M21.9999 20h12c3.3137 0 6 2.6863 6 6v10c0 3.3137-2.6863 6-6 6s-6-2.6863-6-6V26c0-3.3137-2.6863-6-6-6\"/><path fill=\"url(#lg-teams-b)\" d=\"M7.99988 24c0-3.3137 2.68632-6 6.00002-6h8c3.3137 0 6 2.6863 6 6v12c0 3.3137 2.6863 6 6 6l-16.0001-.0001c-5.5228 0-9.99992-4.4771-9.99992-10z\"/><path fill=\"url(#lg-teams-c)\" fill-opacity=\".7\" d=\"M7.99988 24c0-3.3137 2.68632-6 6.00002-6h8c3.3137 0 6 2.6863 6 6v12c0 3.3137 2.6863 6 6 6l-16.0001-.0001c-5.5228 0-9.99992-4.4771-9.99992-10z\"/><path fill=\"url(#lg-teams-d)\" fill-opacity=\".7\" d=\"M7.99988 24c0-3.3137 2.68632-6 6.00002-6h8c3.3137 0 6 2.6863 6 6v12c0 3.3137 2.6863 6 6 6l-16.0001-.0001c-5.5228 0-9.99992-4.4771-9.99992-10z\"/><path fill=\"url(#lg-teams-e)\" d=\"M32.9999 18c2.7614 0 5-2.2386 5-5s-2.2386-5-5-5-5 2.2386-5 5 2.2386 5 5 5\"/><path fill=\"url(#lg-teams-f)\" fill-opacity=\".46\" d=\"M32.9999 18c2.7614 0 5-2.2386 5-5s-2.2386-5-5-5-5 2.2386-5 5 2.2386 5 5 5\"/><path fill=\"url(#lg-teams-g)\" fill-opacity=\".4\" d=\"M32.9999 18c2.7614 0 5-2.2386 5-5s-2.2386-5-5-5-5 2.2386-5 5 2.2386 5 5 5\"/><path fill=\"url(#lg-teams-h)\" d=\"M17.9999 16c3.3137 0 6-2.6863 6-6 0-3.31371-2.6863-6-6-6s-6 2.68629-6 6c0 3.3137 2.6863 6 6 6\"/><path fill=\"url(#lg-teams-i)\" fill-opacity=\".6\" d=\"M17.9999 16c3.3137 0 6-2.6863 6-6 0-3.31371-2.6863-6-6-6s-6 2.68629-6 6c0 3.3137 2.6863 6 6 6\"/><path fill=\"url(#lg-teams-j)\" fill-opacity=\".5\" d=\"M17.9999 16c3.3137 0 6-2.6863 6-6 0-3.31371-2.6863-6-6-6s-6 2.68629-6 6c0 3.3137 2.6863 6 6 6\"/><rect width=\"16\" height=\"16\" x=\"4\" y=\"23\" fill=\"url(#lg-teams-k)\" rx=\"3.25\"/><rect width=\"16\" height=\"16\" x=\"4\" y=\"23\" fill=\"url(#lg-teams-l)\" fill-opacity=\".7\" rx=\"3.25\"/><path fill=\"#fff\" d=\"M15.4792 28.1054h-2.4471v7.466h-2.0648v-7.466H8.52014v-1.6768h6.95906z\"/><defs><radialGradient id=\"lg-teams-a\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"matrix(13.4784 0 0 33.2694 39.7967 22.1739)\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#a98aff\"/><stop offset=\".14\" stop-color=\"#8c75ff\"/><stop offset=\".565\" stop-color=\"#5f50e2\"/><stop offset=\".9\" stop-color=\"#3c2cb8\"/></radialGradient><radialGradient id=\"lg-teams-b\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"rotate(68.1539 -7.71566095 14.71355834)scale(32.752 33.1231)\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#85c2ff\"/><stop offset=\".69\" stop-color=\"#7588ff\"/><stop offset=\"1\" stop-color=\"#6459fe\"/></radialGradient><radialGradient id=\"lg-teams-d\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"rotate(113.326 8.09285255 17.64474501)scale(19.2186 15.4273)\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#bd96ff\"/><stop offset=\".686685\" stop-color=\"#bd96ff\" stop-opacity=\"0\"/></radialGradient><radialGradient id=\"lg-teams-e\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"matrix(0 -10 12.6216 0 32.9999 11.5714)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".268201\" stop-color=\"#6868f7\"/><stop offset=\"1\" stop-color=\"#3923b1\"/></radialGradient><radialGradient id=\"lg-teams-f\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"rotate(40.0516 -.03068196 44.8729095)scale(7.14629 10.3363)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".270711\" stop-color=\"#a1d3ff\"/><stop offset=\".813393\" stop-color=\"#a1d3ff\" stop-opacity=\"0\"/></radialGradient><radialGradient id=\"lg-teams-g\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"rotate(-41.6581 32.11799918 -43.41948423)scale(8.51275 20.8824)\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#e3acfd\"/><stop offset=\".816041\" stop-color=\"#9fa2ff\" stop-opacity=\"0\"/></radialGradient><radialGradient id=\"lg-teams-h\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"matrix(0 -12 15.146 0 17.9999 8.28571)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".268201\" stop-color=\"#8282ff\"/><stop offset=\"1\" stop-color=\"#3923b1\"/></radialGradient><radialGradient id=\"lg-teams-i\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"rotate(40.0516 -3.15465147 21.41641466)scale(8.57554 12.4035)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".270711\" stop-color=\"#a1d3ff\"/><stop offset=\".813393\" stop-color=\"#a1d3ff\" stop-opacity=\"0\"/></radialGradient><radialGradient id=\"lg-teams-j\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"rotate(-41.6581 20.38180375 -26.51566158)scale(10.2153 25.0589)\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#e3acfd\"/><stop offset=\".816041\" stop-color=\"#9fa2ff\" stop-opacity=\"0\"/></radialGradient><radialGradient id=\"lg-teams-k\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"rotate(45 -25.76345597 16.32842712)scale(22.6274)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".046875\" stop-color=\"#688eff\"/><stop offset=\".946875\" stop-color=\"#230f94\"/></radialGradient><radialGradient id=\"lg-teams-l\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"matrix(0 11.2 -13.0702 0 12 32.6)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".570647\" stop-color=\"#6965f6\" stop-opacity=\"0\"/><stop offset=\"1\" stop-color=\"#8f8fff\"/></radialGradient><linearGradient id=\"lg-teams-c\" x1=\"20.5936\" x2=\"20.5936\" y1=\"18\" y2=\"42\" gradientUnits=\"userSpaceOnUse\"><stop offset=\".801159\" stop-color=\"#6864f6\" stop-opacity=\"0\"/><stop offset=\"1\" stop-color=\"#5149de\"/></linearGradient></defs></g>"
+ },
+ "sharepoint": {
+  "viewBox": "0 0 450 500",
+  "body": "<defs> <linearGradient id=\"lg-sharepoint-linear0\" gradientUnits=\"userSpaceOnUse\" x1=\"92.18\" y1=\"477.480011\" x2=\"292.290009\" y2=\"214.839996\" gradientTransform=\"matrix(1,0,0,-1,0,502)\"> <stop offset=\"0\" style=\"stop-color:rgb(0%,89.019608%,87.45098%);stop-opacity:1;\"/> <stop offset=\"0.41\" style=\"stop-color:rgb(0%,59.215686%,65.882353%);stop-opacity:1;\"/> <stop offset=\"1\" style=\"stop-color:rgb(0%,46.666667%,56.862745%);stop-opacity:1;\"/> </linearGradient> <radialGradient id=\"lg-sharepoint-radial0\" gradientUnits=\"userSpaceOnUse\" cx=\"-777.140015\" cy=\"770.840027\" fx=\"-777.140015\" fy=\"770.840027\" r=\"0.9\" gradientTransform=\"matrix(-98.022052,-236.879968,-426.555517,175.978041,252868.125,-319393.71875)\"> <stop offset=\"0.29\" style=\"stop-color:rgb(0%,23.137255%,36.470588%);stop-opacity:0.2;\"/> <stop offset=\"0.61\" style=\"stop-color:rgb(0%,29.019608%,42.352941%);stop-opacity:0.138039;\"/> <stop offset=\"0.97\" style=\"stop-color:rgb(0%,43.529412%,58.039216%);stop-opacity:0;\"/> </radialGradient> <radialGradient id=\"lg-sharepoint-radial1\" gradientUnits=\"userSpaceOnUse\" cx=\"-785.22998\" cy=\"766.900024\" fx=\"-785.22998\" fy=\"766.900024\" r=\"0.9\" gradientTransform=\"matrix(-81.368639,-200.487205,-360.582879,145.895883,212855.734375,-269057.375)\"> <stop offset=\"0.26\" style=\"stop-color:rgb(0%,16.470588%,25.882353%);stop-opacity:0.309804;\"/> <stop offset=\"0.61\" style=\"stop-color:rgb(0%,25.882353%,38.039216%);stop-opacity:0.213825;\"/> <stop offset=\"0.97\" style=\"stop-color:rgb(0%,43.529412%,58.039216%);stop-opacity:0;\"/> </radialGradient> <radialGradient id=\"lg-sharepoint-radial2\" gradientUnits=\"userSpaceOnUse\" cx=\"-739.840027\" cy=\"872.710022\" fx=\"-739.840027\" fy=\"872.710022\" r=\"0.9\" gradientTransform=\"matrix(-102.53313,149.242437,149.468015,102.381369,-206024.5,21094.220703)\"> <stop offset=\"0\" style=\"stop-color:rgb(47.058824%,92.941176%,100%);stop-opacity:0.698039;\"/> <stop offset=\"1\" style=\"stop-color:rgb(17.254902%,81.176471%,79.215686%);stop-opacity:0;\"/> </radialGradient> <linearGradient id=\"lg-sharepoint-linear1\" gradientUnits=\"userSpaceOnUse\" x1=\"245.139999\" y1=\"331.570007\" x2=\"411.899994\" y2=\"112.699997\" gradientTransform=\"matrix(1,0,0,-1,0,502)\"> <stop offset=\"0\" style=\"stop-color:rgb(0%,89.019608%,87.45098%);stop-opacity:1;\"/> <stop offset=\"0.48\" style=\"stop-color:rgb(0%,63.529412%,72.156863%);stop-opacity:1;\"/> <stop offset=\"0.95\" style=\"stop-color:rgb(0%,38.823529%,48.627451%);stop-opacity:1;\"/> </linearGradient> <radialGradient id=\"lg-sharepoint-radial3\" gradientUnits=\"userSpaceOnUse\" cx=\"-746.380005\" cy=\"743.75\" fx=\"-746.380005\" fy=\"743.75\" r=\"0.9\" gradientTransform=\"matrix(56.607296,-162.280342,-292.839823,-101.831895,260296.265625,-45019.25)\"> <stop offset=\"0\" style=\"stop-color:rgb(0%,23.137255%,36.470588%);stop-opacity:0.501961;\"/> <stop offset=\"0.49\" style=\"stop-color:rgb(0%,29.803922%,42.352941%);stop-opacity:0.362199;\"/> <stop offset=\"0.97\" style=\"stop-color:rgb(0%,47.843137%,52.54902%);stop-opacity:0;\"/> </radialGradient> <radialGradient id=\"lg-sharepoint-radial4\" gradientUnits=\"userSpaceOnUse\" cx=\"-741.460022\" cy=\"888.909973\" fx=\"-741.460022\" fy=\"888.909973\" r=\"0.9\" gradientTransform=\"matrix(-85.443327,124.367318,124.552559,85.31498,-173675.6875,16546.900391)\"> <stop offset=\"0\" style=\"stop-color:rgb(47.058824%,92.941176%,100%);stop-opacity:0.698039;\"/> <stop offset=\"1\" style=\"stop-color:rgb(17.254902%,81.176471%,79.215686%);stop-opacity:0;\"/> </radialGradient> <linearGradient id=\"lg-sharepoint-linear2\" gradientUnits=\"userSpaceOnUse\" x1=\"153.419998\" y1=\"214.529999\" x2=\"259.709991\" y2=\"1.97\" gradientTransform=\"matrix(1,0,0,-1,0,502)\"> <stop offset=\"0.05\" style=\"stop-color:rgb(45.882353%,100%,96.470588%);stop-opacity:1;\"/> <stop offset=\"0.51\" style=\"stop-color:rgb(0%,78.039216%,81.960784%);stop-opacity:1;\"/> <stop offset=\"0.96\" style=\"stop-color:rgb(0%,58.823529%,67.843137%);stop-opacity:1;\"/> </linearGradient> <linearGradient id=\"lg-sharepoint-linear3\" gradientUnits=\"userSpaceOnUse\" x1=\"292.440002\" y1=\"-12.27\" x2=\"235.630005\" y2=\"67.449997\" gradientTransform=\"matrix(1,0,0,-1,0,502)\"> <stop offset=\"0.26\" style=\"stop-color:rgb(5.490196%,35.294118%,36.470588%);stop-opacity:0.321569;\"/> <stop offset=\"0.54\" style=\"stop-color:rgb(7.058824%,42.352941%,41.960784%);stop-opacity:0.221945;\"/> <stop offset=\"0.97\" style=\"stop-color:rgb(10.980392%,58.039216%,54.117647%);stop-opacity:0;\"/> </linearGradient> <radialGradient id=\"lg-sharepoint-radial5\" gradientUnits=\"userSpaceOnUse\" cx=\"-686.599976\" cy=\"804.179993\" fx=\"-686.599976\" fy=\"804.179993\" r=\"0.9\" gradientTransform=\"matrix(222.887003,222.576004,222.926115,-222.537381,-26208.169922,332025.53125)\"> <stop offset=\"0.06\" style=\"stop-color:rgb(0%,71.372549%,74.117647%);stop-opacity:1;\"/> <stop offset=\"0.89\" style=\"stop-color:rgb(0%,28.627451%,36.078431%);stop-opacity:1;\"/> </radialGradient> <radialGradient id=\"lg-sharepoint-radial6\" gradientUnits=\"userSpaceOnUse\" cx=\"-686.070007\" cy=\"864.409973\" fx=\"-686.070007\" fy=\"864.409973\" r=\"0.9\" gradientTransform=\"matrix(0.000000000000009539,155.789993,177.619995,-0.000000000000010876,-153439.140625,107241.640625)\"> <stop offset=\"0.57\" style=\"stop-color:rgb(11.764706%,52.156863%,50.588235%);stop-opacity:0;\"/> <stop offset=\"0.97\" style=\"stop-color:rgb(11.764706%,79.607843%,90.196078%);stop-opacity:0.6;\"/> </radialGradient> </defs> <g id=\"lg-sharepoint-surface1\"> <path style=\" stroke:none;fill-rule:nonzero;fill:url(#lg-sharepoint-linear0);\" d=\"M 187.789062 300 C 270.761719 300 338.019531 232.839844 338.019531 150 C 338.019531 67.160156 270.75 0 187.789062 0 C 104.828125 0 37.558594 67.160156 37.558594 150 C 37.558594 232.839844 104.820312 300 187.789062 300 Z M 187.789062 300 \"/> <path style=\" stroke:none;fill-rule:nonzero;fill:url(#lg-sharepoint-radial0);\" d=\"M 187.789062 300 C 270.761719 300 338.019531 232.839844 338.019531 150 C 338.019531 67.160156 270.75 0 187.789062 0 C 104.828125 0 37.558594 67.160156 37.558594 150 C 37.558594 232.839844 104.820312 300 187.789062 300 Z M 187.789062 300 \"/> <path style=\" stroke:none;fill-rule:nonzero;fill:url(#lg-sharepoint-radial1);\" d=\"M 187.789062 300 C 270.761719 300 338.019531 232.839844 338.019531 150 C 338.019531 67.160156 270.75 0 187.789062 0 C 104.828125 0 37.558594 67.160156 37.558594 150 C 37.558594 232.839844 104.820312 300 187.789062 300 Z M 187.789062 300 \"/> <path style=\" stroke:none;fill-rule:nonzero;fill:url(#lg-sharepoint-radial2);\" d=\"M 187.789062 300 C 270.761719 300 338.019531 232.839844 338.019531 150 C 338.019531 67.160156 270.75 0 187.789062 0 C 104.828125 0 37.558594 67.160156 37.558594 150 C 37.558594 232.839844 104.820312 300 187.789062 300 Z M 187.789062 300 \"/> <path style=\" stroke:none;fill-rule:nonzero;fill:url(#lg-sharepoint-linear1);\" d=\"M 324.808594 400 C 393.949219 400 450 344.039062 450 275 C 450 205.960938 393.949219 150 324.808594 150 C 255.671875 150 199.621094 205.960938 199.621094 275 C 199.621094 344.039062 255.671875 400 324.808594 400 Z M 324.808594 400 \"/> <path style=\" stroke:none;fill-rule:nonzero;fill:url(#lg-sharepoint-radial3);\" d=\"M 324.808594 400 C 393.949219 400 450 344.039062 450 275 C 450 205.960938 393.949219 150 324.808594 150 C 255.671875 150 199.621094 205.960938 199.621094 275 C 199.621094 344.039062 255.671875 400 324.808594 400 Z M 324.808594 400 \"/> <path style=\" stroke:none;fill-rule:nonzero;fill:url(#lg-sharepoint-radial4);\" d=\"M 324.808594 400 C 393.949219 400 450 344.039062 450 275 C 450 205.960938 393.949219 150 324.808594 150 C 255.671875 150 199.621094 205.960938 199.621094 275 C 199.621094 344.039062 255.671875 400 324.808594 400 Z M 324.808594 400 \"/> <path style=\" stroke:none;fill-rule:nonzero;fill:url(#lg-sharepoint-linear2);\" d=\"M 206.558594 500 C 265.328125 500 312.96875 452.429688 312.96875 393.75 C 312.96875 335.070312 265.328125 287.5 206.558594 287.5 C 147.789062 287.5 100.148438 335.070312 100.148438 393.75 C 100.148438 452.429688 147.789062 500 206.558594 500 Z M 206.558594 500 \"/> <path style=\" stroke:none;fill-rule:nonzero;fill:url(#lg-sharepoint-linear3);\" d=\"M 206.558594 500 C 265.328125 500 312.96875 452.429688 312.96875 393.75 C 312.96875 335.070312 265.328125 287.5 206.558594 287.5 C 147.789062 287.5 100.148438 335.070312 100.148438 393.75 C 100.148438 452.429688 147.789062 500 206.558594 500 Z M 206.558594 500 \"/> <path style=\" stroke:none;fill-rule:nonzero;fill:url(#lg-sharepoint-radial5);\" d=\"M 40.660156 237.5 L 159.640625 237.5 C 182.097656 237.5 200.300781 255.703125 200.300781 278.160156 L 200.300781 396.839844 C 200.300781 419.296875 182.097656 437.5 159.640625 437.5 L 40.660156 437.5 C 18.203125 437.5 0 419.296875 0 396.839844 L 0 278.160156 C 0 255.703125 18.203125 237.5 40.660156 237.5 Z M 40.660156 237.5 \"/> <path style=\" stroke:none;fill-rule:nonzero;fill:url(#lg-sharepoint-radial6);\" d=\"M 40.660156 237.5 L 159.640625 237.5 C 182.097656 237.5 200.300781 255.703125 200.300781 278.160156 L 200.300781 396.839844 C 200.300781 419.296875 182.097656 437.5 159.640625 437.5 L 40.660156 437.5 C 18.203125 437.5 0 419.296875 0 396.839844 L 0 278.160156 C 0 255.703125 18.203125 237.5 40.660156 237.5 Z M 40.660156 237.5 \"/> <path style=\" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;\" d=\"M 57 372.148438 L 78.71875 360.828125 C 81.171875 365.769531 84.359375 369.410156 88.300781 371.75 C 92.289062 374.089844 96.660156 375.261719 101.390625 375.261719 C 106.660156 375.261719 110.679688 374.199219 113.441406 372.070312 C 116.210938 369.890625 117.589844 366.621094 117.589844 362.269531 C 117.589844 358.871094 116.261719 356 113.601562 353.660156 C 110.941406 351.269531 106.230469 349.460938 99.46875 348.238281 C 86.589844 345.898438 77.21875 341.808594 71.371094 335.960938 C 65.570312 330.109375 62.671875 322.828125 62.671875 314.121094 C 62.671875 303.28125 66.5 294.621094 74.171875 288.128906 C 81.828125 281.648438 91.949219 278.410156 104.511719 278.410156 C 112.96875 278.410156 120.421875 280.140625 126.859375 283.589844 C 133.300781 287.039062 138.410156 291.988281 142.191406 298.421875 L 120.960938 309.339844 C 118.621094 305.730469 116.089844 303.121094 113.378906 301.53125 C 110.660156 299.878906 107.261719 299.058594 103.160156 299.058594 C 98.261719 299.058594 94.539062 300.121094 91.980469 302.25 C 89.480469 304.378906 88.230469 307.140625 88.230469 310.539062 C 88.230469 313.460938 89.429688 316.039062 91.820312 318.269531 C 94.269531 320.449219 99.160156 322.230469 106.511719 323.609375 C 118.859375 325.949219 128.070312 330.199219 134.128906 336.371094 C 140.25 342.480469 143.308594 350.210938 143.308594 359.570312 C 143.308594 370.941406 139.660156 379.949219 132.371094 386.589844 C 125.078125 393.230469 114.671875 396.550781 101.160156 396.550781 C 91.371094 396.550781 82.53125 394.421875 74.660156 390.171875 C 66.839844 385.871094 60.960938 379.859375 57.019531 372.148438 Z M 57 372.148438 \"/> </g>"
+ },
+ "powerautomate": {
+  "viewBox": "0 0 96 96",
+  "body": "<g fill=\"none\"> <defs> <filter id=\"lg-powerautomate-filter0_f\"> <feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"/> <feBlend mode=\"normal\" in=\"SourceGraphic\" in2=\"BackgroundImageFix\" result=\"shape\"/> <feGaussianBlur stdDeviation=\"0.4\" result=\"effect1_foregroundBlur\"/> </filter> <filter id=\"lg-powerautomate-filter1_f\"> <feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"/> <feBlend mode=\"normal\" in=\"SourceGraphic\" in2=\"BackgroundImageFix\" result=\"shape\"/> <feGaussianBlur stdDeviation=\"4\" result=\"effect1_foregroundBlur\"/> </filter> <linearGradient id=\"lg-powerautomate-paint0_linear\" x1=\"43\" y1=\"55\" x2=\"29\" y2=\"10\" gradientUnits=\"userSpaceOnUse\"> <stop stop-color=\"#0D36A5\"/> <stop offset=\"1\" stop-color=\"#1152D4\"/> </linearGradient> <linearGradient id=\"lg-powerautomate-paint1_linear\" x1=\"46\" y1=\"10\" x2=\"46\" y2=\"86\" gradientUnits=\"userSpaceOnUse\"> <stop stop-color=\"#84CAFF\"/> <stop offset=\"1\" stop-color=\"#61B1FB\"/> </linearGradient> <linearGradient id=\"lg-powerautomate-paint2_linear\" x1=\"37.5\" y1=\"10\" x2=\"37.5\" y2=\"86\" gradientUnits=\"userSpaceOnUse\"> <stop stop-color=\"#3B90F5\"/> <stop offset=\"1\" stop-color=\"#2A78EE\"/> </linearGradient> <clipPath id=\"lg-powerautomate-clip0\"> <rect width=\"96\" height=\"96\" fill=\"white\"/> </clipPath> <clipPath id=\"lg-powerautomate-clip1\"> <rect width=\"96\" height=\"96\" fill=\"white\"/> </clipPath> </defs> <g clip-path=\"url(#lg-powerautomate-clip0)\"> <g clip-path=\"url(#lg-powerautomate-clip1)\"> <mask id=\"lg-powerautomate-mask0\" mask-type=\"alpha\" maskUnits=\"userSpaceOnUse\" x=\"-1\" y=\"10\" width=\"97\" height=\"76\"> <path d=\"M61.2116 10C62.3496 10 63.4337 10.4847 64.1925 11.3328L94.6136 45.3328C95.9723 46.8514 95.9723 49.1486 94.6136 50.6672L64.1925 84.6672C63.4337 85.5153 62.3496 86 61.2116 86H3.94634C0.488777 86 -1.34012 81.9095 0.965366 79.3328L29 48L0.965366 16.6672C-1.34012 14.0905 0.488777 10 3.94634 10H61.2116Z\" fill=\"white\"/> </mask> <g mask=\"url(#lg-powerautomate-mask0)\"> <path d=\"M63 10L29 48L-5 10H63Z\" fill=\"url(#lg-powerautomate-paint0_linear)\"/> <g filter=\"url(#lg-powerautomate-filter0_f)\"> <path d=\"M63 10.4L-5 86.4H63L97 48.4L63 10.4Z\" fill=\"black\" fill-opacity=\"0.24\"/> </g> <g filter=\"url(#lg-powerautomate-filter1_f)\"> <path d=\"M63 12L-5 88H63L97 50L63 12Z\" fill=\"black\" fill-opacity=\"0.32\"/> </g> <path d=\"M-5 86L63 10L97 48L63 86H-5Z\" fill=\"url(#lg-powerautomate-paint1_linear)\"/> <path d=\"M-5 86L63 10L80 29L29 86H-5Z\" fill=\"url(#lg-powerautomate-paint2_linear)\"/> </g> </g> </g> </g>"
+ },
+ "copilot": {
+  "viewBox": "0 0 1322.9 1147.5",
+  "body": "<g fill=\"currentColor\"> <path d=\"m711.19 265.2c-27.333 0-46.933 3.07-58.8 9.33 27.067-80.267 47.6-210.13 168-210.13 114.93 0 108.4 138.27 157.87 200.8zm107.33 112.93c-35.467 125.2-70 251.2-110.13 375.33-12.133 36.4-45.733 61.6-84 61.6h-136.27c9.3333-14 16.8-28.933 21.467-45.733 35.467-125.07 70-251.07 110.13-375.33 12.133-36.4 45.733-61.6 84-61.6h136.27c-9.3333 14-16.8 28.934-21.467 45.734m-316.13 704.8c-114.93 0-108.4-138.13-157.87-200.67h267.07c27.467 0 47.067-3.07 58.8-9.33-27.067 80.266-47.6 210-168 210m777.47-758.93h0.93c-32.667-38.266-82.267-57.866-146.67-57.866h-36.4c-34.533-2.8-65.333-26.134-76.533-58.8l-36.4-103.6c-21.463-61.737-80.263-103.74-145.73-103.74h-475.07c-175.6 0-251.2 225.07-292.27 361.33-38.267 127.07-126 341.73-24.267 462.13 46.667 55.067 116.67 57.867 183.07 57.867 34.533 2.8 65.333 26.133 76.533 58.8l36.4 103.6c21.467 61.733 80.267 103.73 145.6 103.73h475.2c175.47 0 251.07-225.07 292.27-361.33 30.8-100.8 68.133-224.93 66.267-324.8 0-50.534-11.2-100-42.933-137.33\"/> </g>"
  }
 };
 
@@ -519,7 +714,7 @@ window.Logos = {
   'use strict';
 
   const SVG_NS = 'http://www.w3.org/2000/svg';
-  const STYLE_KEYS = ['flow', 'integration', 'enrich', 'human', 'ok', 'deny', 'feedback', 'stream'];
+  const STYLE_KEYS = ['flow', 'integration', 'enrich', 'human', 'ok', 'deny', 'feedback', 'stream', 'stop'];
   const ARROW_LEN = 10;
 
   function el(name, attrs, children) {
@@ -895,7 +1090,22 @@ window.Logos = {
     }
 
     /* ---- public controls ------------------------------------------------ */
+    /* Swap the step list (scenario change). Cancels any outstanding animation. */
+    setSteps(steps) {
+      this._killTimeline();
+      this.steps = steps;
+      this.overview();
+    }
+    /* A step with `gate` pauses after completing until the presenter takes the simulated action. */
+    resolveGate() {
+      if (this.mode !== 'gated') return;
+      const resume = this._resumeMode === 'playing';
+      this.mode = resume ? 'playing' : 'stepping';
+      if (this.index < this.steps.length - 1) this.goTo(this.index + 1, resume ? { auto: true } : { fast: true });
+      else { this.mode = 'paused'; this._emit(); }
+    }
     play() {
+      if (this.mode === 'gated') { this._resumeMode = 'playing'; this.resolveGate(); return; }
       if (this.mode === 'playing') return;
       if (this.index >= this.steps.length - 1 && this.tl && this.tl.time >= this.tl.duration) {
         this.replay(); return;
@@ -915,9 +1125,11 @@ window.Logos = {
     toggle() { this.mode === 'playing' ? this.pause() : this.play(); }
     replay() { this.overview(); this.mode = 'playing'; this.goTo(0, { auto: true }); }
     next() {
+      if (this.mode === 'gated') { this.resolveGate(); return; }
       if (this.index >= this.steps.length - 1) { if (this.tl) this.tl.finish(); this.mode = 'paused'; this._emit(); return; }
       this.mode = 'stepping'; this.goTo(this.index + 1, { fast: true });
     }
+    atEnd() { return this.index >= this.steps.length - 1 && this.mode !== 'playing' && this.mode !== 'gated' && (!this.tl || this.tl.time >= this.tl.duration); }
     prev() {
       if (this.index <= 0) { this.overview(); return; }
       this.mode = 'stepping'; this.goTo(this.index - 1, { fast: true });
@@ -958,6 +1170,10 @@ window.Logos = {
       const tl = this._buildTimeline(step, opts.fast ? 0.55 : 1);
       this.tl = tl;
       tl.onComplete = () => {
+        if (step.gate && this.mode !== 'gated') {
+          /* hold here until an explicit simulated review action */
+          this._resumeMode = this.mode; this.mode = 'gated'; this._emit(); return;
+        }
         if (this.mode === 'playing') {
           if (i < this.steps.length - 1) {
             this._holdTimer = setTimeout(() => { this._holdTimer = null; if (this.mode === 'playing') this.goTo(i + 1, { auto: true }); }, this.holdAfter * 1000);
@@ -1076,6 +1292,7 @@ window.Logos = {
       });
       const stage = this.index >= 0 ? this.steps[this.index].stage : null;
       this.root.querySelectorAll('.wf-col').forEach(c => c.classList.toggle('active', c.dataset.stage === stage));
+      this.onChange && this.onChange(this.index);
     }
     goTo(i, opts) {
       this._clear();
@@ -1109,16 +1326,18 @@ window.Logos = {
 
 /* ---- src/js/deck.js ---- */
 /* =============================================================================
-   Deck shell — projects register themselves; each project becomes three pages
-   (cover / architecture / workflow). Handles page navigation and transitions,
-   stage scaling, the shared control bar, inspector, help and keyboard.
+   Deck shell — projects register themselves and declare their pages
+   (default: cover / architecture / workflow). Handles page navigation and
+   transitions, stage scaling, the shared control bar, inspector, help, keys.
+   Extra page types register through Deck.pageRenderers (see pages.js).
    ========================================================================== */
 (function (global) {
   'use strict';
 
   const STAGE_W = 1920, STAGE_H = 1080;
+  const DEFAULT_PAGES = ['cover', 'architecture', 'workflow'];
   const projects = [];
-  const Deck = { registerProject(def) { projects.push(def); projects.sort((a, b) => a.index - b.index); }, projects, pages: [], current: 0 };
+  const Deck = { registerProject(def) { projects.push(def); projects.sort((a, b) => a.index - b.index); }, projects, pages: [], current: 0, pageRenderers: {} };
 
   const h = (tag, cls, html) => { const n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; };
   const uiIcon = name => `<svg class="ui-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${global.Icons.ui[name]}</svg>`;
@@ -1163,7 +1382,7 @@ window.Logos = {
         <button class="ctl ctl-sm" data-act="replay" title="Replay (R)">${uiIcon('replay')}</button>
         <button class="ctl ctl-sm" data-act="overview" title="Overview (Esc)">${uiIcon('overview')}</button>
       </div>
-      <div class="bar-caption"><div class="cap-head"><span class="cap-step">Overview</span><span class="cap-title"></span></div><p class="cap-text">${opts.overviewText}</p></div>`
+      <div class="bar-caption"><div class="cap-head"><span class="cap-step">Overview</span><span class="cap-title"></span></div><p class="cap-text"></p></div>`
       : `<div class="bar-hint">${opts.hint || ''}</div>`}
       <div class="bar-tools">
         <button class="ctl ctl-sm" data-act="help" title="Keyboard shortcuts (?)">${uiIcon('help')}</button>
@@ -1172,18 +1391,27 @@ window.Logos = {
     return bar;
   }
 
-  /* wires a player to its bar (captions, pills, button labels) */
-  function bindBar(bar, player, def, stages, overviewText, playLabel) {
+  /* wires a player to its bar (captions, pills, button labels, review gates) */
+  function bindBar(bar, player, stages, opts) {
     const capStep = bar.querySelector('.cap-step'), capTitle = bar.querySelector('.cap-title'), capText = bar.querySelector('.cap-text');
     const playBtn = bar.querySelector('.ctl-play');
     const pills = Array.from(bar.querySelectorAll('.stage-pill'));
+    const overviewText = () => typeof opts.overviewText === 'function' ? opts.overviewText() : opts.overviewText;
     player.ui = {
       onState(st) {
-        if (st.step) { capStep.textContent = `Step ${pad2(st.index + 1)} / ${pad2(st.total)}`; capTitle.textContent = st.step.title; capText.textContent = st.step.caption; }
-        else { capStep.textContent = 'Overview'; capTitle.textContent = ''; capText.textContent = overviewText; }
-        const playing = st.mode === 'playing';
-        const atEnd = st.index >= st.total - 1 && !playing && (!player.tl || player.tl.time >= player.tl.duration);
-        playBtn.innerHTML = `${uiIcon(playing ? 'pause' : 'play')}<span class="ctl-label">${playing ? 'Pause' : (st.index < 0 ? playLabel : (atEnd ? 'Replay' : 'Resume'))}</span>`;
+        const gated = st.mode === 'gated', playing = st.mode === 'playing';
+        bar.classList.toggle('is-gated', gated);
+        if (gated) {
+          const g = st.step.gate;
+          capStep.textContent = `Step ${pad2(st.index + 1)} / ${pad2(st.total)} · awaiting review`;
+          capTitle.textContent = st.step.title;
+          capText.innerHTML = `<button class="ctl ctl-gate" data-act="gate">${uiIcon('check')}<span>${g.action}</span></button><span class="gate-hint">${g.hint}</span>`;
+        } else if (st.step) {
+          capStep.textContent = `Step ${pad2(st.index + 1)} / ${pad2(st.total)}`; capTitle.textContent = st.step.title; capText.textContent = st.step.caption;
+        } else { capStep.textContent = 'Overview'; capTitle.textContent = ''; capText.textContent = overviewText(); }
+        const atEnd = player.atEnd ? player.atEnd() : (st.index >= st.total - 1 && !playing);
+        const label = gated ? 'Continue after review' : playing ? 'Pause' : (st.index < 0 ? opts.playLabel : (atEnd ? 'Replay' : 'Resume'));
+        playBtn.innerHTML = `${uiIcon(playing ? 'pause' : 'play')}<span class="ctl-label">${label}</span>`;
         bar.classList.toggle('is-playing', playing);
         const curIdx = st.step ? stages.findIndex(s => s.id === st.step.stage) : -1;
         pills.forEach(p => {
@@ -1208,14 +1436,14 @@ window.Logos = {
       <div class="help-card">
         <div class="help-head"><h2>Presenter controls</h2><button class="ctl ctl-sm" data-act="help" title="Close">✕</button></div>
         <dl>
-          <dt>→ &nbsp;←</dt><dd>Next / previous step; at the end (or start) of a page, moves to the next / previous page</dd>
+          <dt>→ &nbsp;←</dt><dd>Next / previous step, tab or component; at the end (or start) of a page, moves to the next / previous page</dd>
           <dt>PgDn &nbsp;PgUp</dt><dd>Next / previous page</dd>
-          <dt>Space</dt><dd>Play / pause the current page's animation</dd>
+          <dt>Space</dt><dd>Play / pause the current page's animation; confirms a simulated review action when playback is waiting</dd>
           <dt>R</dt><dd>Replay from the start</dd>
-          <dt>Esc &nbsp;O</dt><dd>Return to full overview</dd>
+          <dt>Esc &nbsp;O</dt><dd>Return to full overview / close panels</dd>
           <dt>1 – 9 &nbsp;Home &nbsp;End</dt><dd>Jump to step</dd>
           <dt>F</dt><dd>Toggle full screen</dd>
-          <dt>Click</dt><dd>Pin / unpin a component inspector (architecture pages)</dd>
+          <dt>Click &nbsp;Enter</dt><dd>Pin / unpin a component inspector (architecture pages)</dd>
         </dl>
         <label class="help-toggle"><input type="checkbox" class="rm-toggle"> Reduce motion <small>(auto-detected from system preference)</small></label>
       </div>`;
@@ -1233,6 +1461,7 @@ window.Logos = {
         <span class="eyebrow rise"><i class="eyebrow-dash"></i>Project ${pad2(project.index)} of ${pad2(projects.length)}</span>
         <h1 class="cover-title rise">${project.title}</h1>
         <p class="cover-sub rise">${project.subtitle}</p>
+        ${P.scopeNote ? `<span class="scope-note rise">${P.scopeNote}</span>` : ''}
         <p class="cover-direction rise">${P.direction || ''}</p>
       </div>
       <div class="cover-right">
@@ -1257,22 +1486,38 @@ window.Logos = {
     slide.appendChild(header(project, page, total, true));
     const wrap = h('section', 'arch-wrap');
     const head = h('div', 'arch-head');
-    head.innerHTML = `<span class="eyebrow"><i class="eyebrow-dash"></i>Proposed agentic architecture</span>
-      <span class="arch-flow">${def.diagram.stages.map(s => s.title).join(' <i>→</i> ')}</span>`;
+    const scenarios = def.scenarios || null;
+    head.innerHTML = `<span class="eyebrow"><i class="eyebrow-dash"></i>Proposed ${scenarios ? 'architecture · interactive scenarios' : 'agentic architecture'}</span>
+      ${scenarios
+        ? `<div class="scn" role="tablist" aria-label="Scenario"><span class="scn-label">Scenario</span>${scenarios.map((s, i) => `<button class="scn-btn${i === 0 ? ' active' : ''}" role="tab" aria-selected="${i === 0}" data-scn="${i}" title="${s.title}">${s.short}</button>`).join('')}</div>`
+        : `<span class="arch-flow">${def.diagram.stages.map(s => s.title).join(' <i>→</i> ')}</span>`}`;
     wrap.appendChild(head);
     const canvas = h('div', 'arch-canvas');
     wrap.appendChild(canvas);
     slide.appendChild(wrap);
-    const bar = controlBar({ player: true, stages: def.diagram.stages, overviewText: OVERVIEW_TEXT.architecture, playLabel: 'Play Workflow' });
+    const bar = controlBar({ player: true, stages: def.diagram.stages, playLabel: 'Play Workflow' });
     slide.appendChild(bar);
     const pop = h('div', 'inspector'); pop.setAttribute('role', 'dialog'); pop.hidden = true; canvas.appendChild(pop);
 
     const arch = global.Architecture.render(canvas, def.diagram);
-    const player = new global.Trace.TracePlayer(arch, def.trace, null);
-    bindBar(bar, player, def, def.diagram.stages, OVERVIEW_TEXT.architecture, 'Play Workflow');
+    let scn = 0;
+    const player = new global.Trace.TracePlayer(arch, scenarios ? scenarios[0].steps : def.trace, null);
+    bindBar(bar, player, def.diagram.stages, {
+      playLabel: scenarios ? 'Play Scenario' : 'Play Workflow',
+      overviewText: () => scenarios ? `${scenarios[scn].title} — ${scenarios[scn].description}` : OVERVIEW_TEXT.architecture
+    });
+    if (scenarios) {
+      head.addEventListener('click', e => {
+        const b = e.target.closest('.scn-btn'); if (!b) return;
+        scn = Number(b.dataset.scn);
+        head.querySelectorAll('.scn-btn').forEach(x => { const on = x === b; x.classList.toggle('active', on); x.setAttribute('aria-selected', on); });
+        closeInspector();
+        player.setSteps(scenarios[scn].steps);   // cancels any running timeline, resets diagram
+      });
+    }
 
     /* inspector */
-    const kindLabel = { agent: 'AI agent', external: 'External system', data: 'Data / output', human: 'Human decision', ok: 'Outcome', deny: 'Outcome', input: 'Input', infra: 'Infrastructure', product: 'Enterprise system', proposed: 'Proposed capability', process: 'Operational step' };
+    const kindLabel = { agent: 'AI agent', external: 'External system', data: 'Data / output', human: 'Human decision', ok: 'Outcome', deny: 'Outcome', input: 'Input', infra: 'Infrastructure', product: 'Enterprise system', proposed: 'Proposed capability', process: 'Workflow component', stop: 'Terminal outcome', config: 'Configuration' };
     const nodeName = id => arch.nodesById[id].lines.join(' ');
     let pinned = null, hoverTimer = null;
     function showInspector(id) {
@@ -1280,7 +1525,8 @@ window.Logos = {
       const li = list => list.map(x => `<li><i class="dot dot-${x.via}"></i>${x.who}${x.bi ? ' <small>↔</small>' : ''}</li>`).join('') || '<li class="none">—</li>';
       pop.innerHTML = `
         <div class="insp-head"><span class="insp-kind kind-${n.kind}">${kindLabel[n.kind] || n.kind}</span><span class="insp-stage">${stage.num} · ${stage.title}</span></div>
-        <h3>${nodeName(id)}</h3><p>${n.role}</p>
+        <h3>${nodeName(id)}</h3>${n.platform ? `<span class="insp-platform">${n.platform}</span>` : ''}<p>${n.role}</p>
+        ${n.detail ? `<ul class="insp-detail">${n.detail.map(d => `<li>${d}</li>`).join('')}</ul>` : ''}
         <div class="insp-cols">
           <div><h4>Receives from</h4><ul>${li(a.in.map(e => ({ who: nodeName(e.from), via: e.style, bi: e.bidirectional })))}</ul></div>
           <div><h4>Sends to</h4><ul>${li(a.out.map(e => ({ who: nodeName(e.to), via: e.style, bi: e.bidirectional })))}</ul></div>
@@ -1307,6 +1553,8 @@ window.Logos = {
     }
     arch.svg.addEventListener('mouseover', e => { const g = e.target.closest('.node'); if (!g || pinned) return; clearTimeout(hoverTimer); hoverTimer = setTimeout(() => showInspector(g.dataset.id), 90); });
     arch.svg.addEventListener('mouseout', e => { const g = e.target.closest('.node'); if (!g || pinned) return; if (e.relatedTarget && g.contains(e.relatedTarget)) return; clearTimeout(hoverTimer); closeInspector(); });
+    arch.svg.addEventListener('focusin', e => { const g = e.target.closest('.node'); if (g && !pinned) showInspector(g.dataset.id); });
+    arch.svg.addEventListener('focusout', e => { const g = e.target.closest('.node'); if (g && !pinned) closeInspector(); });
     arch.svg.addEventListener('click', e => {
       const g = e.target.closest('.node');
       if (!g) { closeInspector(); return; }
@@ -1316,40 +1564,46 @@ window.Logos = {
     arch.svg.addEventListener('keydown', e => { const g = e.target.closest('.node'); if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); e.stopPropagation(); g.dispatchEvent(new MouseEvent('click', { bubbles: true })); } });
     document.addEventListener('click', e => { if (pinned && !e.target.closest('.arch-canvas')) closeInspector(); });
 
-    return { el: slide, type: 'architecture', project, player, arch, closeInspector, hasPinned: () => !!pinned };
+    return { el: slide, type: 'architecture', project, player, arch, closeInspector, hasPinned: () => !!pinned, onLeave: closeInspector };
   }
 
   /* ---- page: workflow (text) --------------------------------------------- */
   function renderWorkflow(project, page, total) {
     const def = project;
+    const steps = def.workflow ? def.workflow.steps : def.trace;
     const slide = h('section', 'slide slide-wf');
     slide.appendChild(header(project, page, total, true));
     const wf = h('section', 'wf');
     const stages = def.diagram.stages;
-    let n = 0;
     wf.innerHTML = `
       <div class="wf-head"><span class="eyebrow"><i class="eyebrow-dash"></i>Workflow · step by step</span>
-        <h2>${def.workflowTitle || 'How one cycle moves through the system'}</h2></div>
+        <h2>${(def.workflow && def.workflow.title) || def.workflowTitle || 'How one cycle moves through the system'}</h2></div>
       <div class="wf-cols cols-${stages.length}">
         ${stages.map(s => `
           <div class="wf-col" data-stage="${s.id}">
             <div class="wf-col-head"><b>${s.num}</b><span>${s.title}</span></div>
             <ol class="wf-list">
-              ${def.trace.map((st, i) => st.stage === s.id ? `<li class="wf-step" data-i="${i}"><span class="wf-num">${pad2(i + 1)}</span><div><h4>${st.title}</h4><p>${st.caption}</p></div></li>` : '').join('')}
+              ${steps.map((st, i) => st.stage === s.id ? `<li class="wf-step" data-i="${i}" tabindex="0"><span class="wf-num">${pad2(i + 1)}</span><div><h4>${st.title}</h4>${st.tag ? `<span class="wf-tag">${st.tag}</span>` : ''}<p>${st.caption}</p></div></li>` : '').join('')}
             </ol>
           </div>`).join('')}
       </div>`;
     slide.appendChild(wf);
-    const bar = controlBar({ player: true, stages, overviewText: OVERVIEW_TEXT.workflow, playLabel: 'Play Steps' });
+    const bar = controlBar({ player: true, stages, playLabel: 'Play Steps' });
     slide.appendChild(bar);
-    /* steps are in DOM order per column; map blocks back to trace order */
     const blocks = Array.from(wf.querySelectorAll('.wf-step')).sort((a, b) => a.dataset.i - b.dataset.i);
-    const player = new global.Workflow.WorkflowPlayer(wf, def.trace, null);
+    const player = new global.Workflow.WorkflowPlayer(wf, steps, null);
     player.blocks = blocks;
-    bindBar(bar, player, def, stages, OVERVIEW_TEXT.workflow, 'Play Steps');
-    blocks.forEach(b => b.addEventListener('click', () => { player.mode = 'stepping'; player.goTo(Number(b.dataset.i)); }));
+    bindBar(bar, player, stages, { overviewText: OVERVIEW_TEXT.workflow, playLabel: 'Play Steps' });
+    const pick = b => { player.mode = 'stepping'; player.goTo(Number(b.dataset.i)); };
+    blocks.forEach(b => {
+      b.addEventListener('click', () => pick(b));
+      b.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); pick(b); } });
+    });
     return { el: slide, type: 'workflow', project, player };
   }
+
+  Object.assign(Deck.pageRenderers, { cover: renderCover, architecture: renderArchitecture, workflow: renderWorkflow });
+  Deck.ui = { h, uiIcon, pad2, header, controlBar, bindBar };
 
   /* ---- navigation --------------------------------------------------------- */
   function show(i, dir) {
@@ -1357,12 +1611,13 @@ window.Logos = {
     if (i < 0 || i >= pages.length || i === Deck.current && pages[i].el.classList.contains('is-active')) return;
     const from = pages[Deck.current], to = pages[i];
     if (from.player && from.player.mode === 'playing') from.player.pause();
-    if (from.closeInspector) from.closeInspector();
+    if (from.onLeave) from.onLeave();
     dir = dir || (i > Deck.current ? 1 : -1);
     pages.forEach(p => p.el.classList.remove('is-active', 'is-before', 'is-after', 'entered'));
     pages.forEach((p, k) => p.el.classList.add(k < i ? 'is-before' : k > i ? 'is-after' : 'is-active'));
     Deck.current = i;
     requestAnimationFrame(() => requestAnimationFrame(() => to.el.classList.add('entered')));
+    if (to.onEnter) to.onEnter();
     document.title = `${to.project.title} · ${pad2(i + 1)}/${pad2(pages.length)}`;
   }
   const next = () => show(Deck.current + 1, 1);
@@ -1372,13 +1627,13 @@ window.Logos = {
   document.addEventListener('DOMContentLoaded', () => {
     const stage = document.querySelector('.stage'), root = document.querySelector('.slides');
     fitStage(stage); global.addEventListener('resize', () => fitStage(stage));
-    const total = projects.length * 3;
+    const total = projects.reduce((n, p) => n + (p.pages || DEFAULT_PAGES).length, 0);
     let page = 0;
-    projects.forEach(p => {
-      Deck.pages.push(renderCover(p, ++page, total));
-      Deck.pages.push(renderArchitecture(p, ++page, total));
-      Deck.pages.push(renderWorkflow(p, ++page, total));
-    });
+    projects.forEach(p => (p.pages || DEFAULT_PAGES).forEach(type => {
+      const render = Deck.pageRenderers[type];
+      if (!render) { console.error('Unknown page type', type); return; }
+      Deck.pages.push(render(p, ++page, total));
+    }));
     Deck.pages.forEach(p => root.appendChild(p.el));
     const help = helpOverlay(); root.appendChild(help);
 
@@ -1394,6 +1649,7 @@ window.Logos = {
       prev: () => cur().player && cur().player.prev(),
       next: () => cur().player && cur().player.next(),
       replay: () => cur().player && cur().player.replay(),
+      gate: () => cur().player && cur().player.resolveGate && cur().player.resolveGate(),
       overview: () => { const p = cur(); p.player && p.player.overview(); p.closeInspector && p.closeInspector(); },
       help: () => { help.hidden = !help.hidden; },
       fullscreen: () => { document.fullscreenElement ? document.exitFullscreen() : (document.documentElement.requestFullscreen && document.documentElement.requestFullscreen()); }
@@ -1404,11 +1660,12 @@ window.Logos = {
     });
     help.addEventListener('click', e => { if (e.target === help) help.hidden = true; });
 
-    const playerAtEnd = p => !p.player || (p.player.index >= p.player.steps.length - 1 && p.player.mode !== 'playing' && (!p.player.tl || p.player.tl.time >= p.player.tl.duration));
+    const playerAtEnd = p => !p.player || (p.player.atEnd ? p.player.atEnd() : p.player.index >= p.player.steps.length - 1);
     document.addEventListener('keydown', e => {
       if (e.target.matches('input, textarea') || e.metaKey || e.ctrlKey || e.altKey) return;
       const k = e.key, p = cur();
       if (!help.hidden && k !== '?' && k !== 'Escape') return;
+      if (p.onKey && p.onKey(e)) { e.preventDefault(); return; }   // page-specific keys (tabs, selections, panels)
       switch (k) {
         case ' ': e.preventDefault(); actions.toggle(); break;
         case 'ArrowRight': case 'ArrowDown': e.preventDefault(); playerAtEnd(p) ? next() : p.player.next(); break;
@@ -1436,6 +1693,213 @@ window.Logos = {
 
   Deck.show = show; Deck.next = next; Deck.prev = prev;
   global.Deck = Deck;
+})(window);
+
+/* ---- src/js/pages.js ---- */
+/* =============================================================================
+   Additional page types: component explorer, example outputs, MVP scope.
+   Data-driven and project-agnostic; registered on Deck.pageRenderers.
+   ========================================================================== */
+(function (global) {
+  'use strict';
+  const Deck = global.Deck;
+  const { h, uiIcon, pad2, header, controlBar } = Deck.ui;
+
+  /* ---- page: component responsibilities ---------------------------------- */
+  function renderComponents(project, page, total) {
+    const C = project.components;
+    const slide = h('section', 'slide slide-comp');
+    slide.appendChild(header(project, page, total, true));
+    const sec = h('section', 'comp');
+    sec.innerHTML = `
+      <div class="comp-head"><span class="eyebrow"><i class="eyebrow-dash"></i>Component responsibilities</span><h2>${C.title}</h2></div>
+      <div class="comp-body">
+        <ol class="comp-list" role="tablist" aria-label="Components">
+          ${C.items.map((c, i) => `<li><button class="comp-item" role="tab" data-i="${i}" aria-selected="false"><span class="comp-num">${pad2(i + 1)}</span><span class="comp-text"><b>${c.name}</b><span>${c.blurb}</span><small>${c.platform}</small></span></button></li>`).join('')}
+        </ol>
+        <div class="comp-detail" role="tabpanel" aria-live="polite"></div>
+      </div>`;
+    slide.appendChild(sec);
+    slide.appendChild(controlBar({ hint: `<b>↑</b> <b>↓</b> or click to select a component · <b>→</b> continues` }));
+    const items = Array.from(sec.querySelectorAll('.comp-item')), detail = sec.querySelector('.comp-detail');
+    let sel = -1;
+    function select(i, focus) {
+      sel = Math.max(0, Math.min(C.items.length - 1, i));
+      items.forEach((b, k) => { b.classList.toggle('active', k === sel); b.setAttribute('aria-selected', k === sel); });
+      const c = C.items[sel];
+      detail.classList.remove('in');
+      detail.innerHTML = `
+        <div class="cd-head"><span class="cd-num">${pad2(sel + 1)} / ${pad2(C.items.length)}</span><span class="cd-platform">${c.platform}</span></div>
+        <h3>${c.name}</h3>
+        <p class="cd-blurb">${c.blurb}</p>
+        <div class="cd-grid">
+          <div class="cd-block"><h4>Inputs</h4><p>${c.inputs}</p></div>
+          <div class="cd-block"><h4>Responsibility</h4><p>${c.responsibility}</p></div>
+          <div class="cd-block"><h4>Outputs</h4><p>${c.outputs}</p></div>
+          <div class="cd-block cd-boundary"><h4>Boundary</h4><p>${c.boundary}</p></div>
+        </div>`;
+      requestAnimationFrame(() => detail.classList.add('in'));
+      if (focus) items[sel].focus();
+    }
+    items.forEach(b => b.addEventListener('click', () => select(Number(b.dataset.i))));
+    select(0);
+    return {
+      el: slide, type: 'components', project, player: null,
+      onKey(e) {
+        switch (e.key) {
+          case 'ArrowDown': select(sel + 1, true); return true;
+          case 'ArrowUp': select(sel - 1, true); return true;
+          case 'ArrowRight': if (sel < C.items.length - 1) { select(sel + 1); return true; } return false;
+          case 'ArrowLeft': if (sel > 0) { select(sel - 1); return true; } return false;
+          case 'Home': select(0); return true;
+          case 'End': select(C.items.length - 1); return true;
+        }
+        if (/^[1-9]$/.test(e.key) && Number(e.key) <= C.items.length) { select(Number(e.key) - 1); return true; }
+        return false;
+      }
+    };
+  }
+
+  /* ---- page: example outputs ---------------------------------------------- */
+  function renderExamples(project, page, total) {
+    const X = project.example, A = X.announcement;
+    const slide = h('section', 'slide slide-ex');
+    slide.appendChild(header(project, page, total, true));
+    const sec = h('section', 'ex');
+    const tabs = [{ id: 'teams', label: 'Teams Alert' }, { id: 'record', label: 'Repository Record' }, { id: 'copilot', label: 'Copilot Answer' }];
+    const srcChip = (label, cls) => `<button class="src-chip ${cls || ''}" data-ev="open" title="Open local demo evidence">${uiIcon('link')}<span>${label}</span></button>`;
+    const kv = rows => rows.map(r => `<div class="kv"><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join('');
+
+    const teamsView = `
+      <div class="teams">
+        <div class="teams-chan"><b>${X.teams.channel}</b><span>${X.teams.audienceNote}</span></div>
+        <div class="teams-msg">
+          <div class="teams-avatar">OI</div>
+          <div class="teams-body">
+            <div class="teams-meta"><b>${X.teams.sender}</b><span class="teams-bot">APP</span><time>${X.teams.posted}</time></div>
+            <div class="teams-card">
+              <div class="tc-top"><span class="tc-cat">${A.category}</span><span class="tc-sev">Vendor-stated severity · ${A.severity}</span></div>
+              <h3>${X.teams.title}</h3>
+              <p>${A.summary}</p>
+              <dl class="tc-facts">${kv([['Vendor', A.vendor], ['Product', A.product], ['Affected version (vendor)', A.affected], ['Fixed version (vendor)', A.fixed], ['Status', A.reviewStatus], ['Internal deployment impact', A.internalImpact]])}</dl>
+              <div class="tc-actions">${srcChip('Source reference · ' + A.sourceShort)}<button class="src-chip" data-tab="record">${uiIcon('clipboard')}<span>Repository record · ${A.id}</span></button></div>
+              <div class="tc-foot">Audience: ${A.audience} · Repository ref ${A.id} · <em>Demo: no message was sent</em></div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+
+    const recordView = `
+      <div class="record">
+        <div class="rec-head"><span class="rec-id">${A.id}</span><h3>${X.teams.title}</h3><span class="rec-state">${A.reviewStatus}</span></div>
+        <div class="rec-grid">
+          <section><h4>Identity</h4><dl>${kv([['Announcement ID', A.id], ['Vendor', A.vendor], ['Product', A.product], ['Category', A.category], ['Revision', X.record.revision]])}</dl></section>
+          <section><h4>Source evidence</h4><dl>${kv([['Source reference', srcChip(A.sourceShort, 'inline')], ['Source identity', X.record.sourceIdentity], ['Published by source', X.record.sourcePublished], ['Detected', X.record.detected]])}</dl></section>
+          <section><h4>Analysis</h4><dl>${kv([['Summary', A.summary], ['Vendor-stated severity', A.severity], ['Affected / fixed (vendor)', `${A.affected} → ${A.fixed}`], ['Internal deployment impact', A.internalImpact]])}</dl></section>
+          <section><h4>Governance & delivery</h4><dl>${kv([['Review decision', X.record.reviewDecision], ['Assigned audience', A.audience], ['Published', X.record.published], ['Notification status', X.record.notification]])}</dl></section>
+        </div>
+        <div class="rec-foot">Illustrative timestamps (UTC) · ${X.record.trailNote}</div>
+      </div>`;
+
+    const copilotView = `
+      <div class="chat">
+        <div class="chat-head"><b>${X.copilot.agentName}</b><span>${X.copilot.scopeNote}</span></div>
+        ${X.copilot.turns.map(t => `
+          <div class="turn turn-user"><div class="bubble">${t.q}</div></div>
+          <div class="turn turn-bot"><div class="bot-avatar">C</div><div class="bubble">
+            <p>${t.a}</p>
+            <div class="chat-src">${t.source ? srcChip(t.source) : `<span class="src-chip muted">${uiIcon('stop')}<span>${t.noSource}</span></span>`}</div>
+            ${t.note ? `<small class="chat-note">${t.note}</small>` : ''}
+          </div></div>`).join('')}
+      </div>`;
+
+    sec.innerHTML = `
+      <div class="ex-head">
+        <div><span class="eyebrow"><i class="eyebrow-dash"></i>Example outputs</span><h2>${X.title}</h2></div>
+        <span class="demo-banner">${X.banner}</span>
+      </div>
+      <div class="ex-tabs" role="tablist">${tabs.map((t, i) => `<button class="ex-tab${i === 0 ? ' active' : ''}" role="tab" aria-selected="${i === 0}" data-tab="${t.id}">${t.label}</button>`).join('')}</div>
+      <div class="ex-body">
+        <div class="ex-views">
+          <div class="ex-view active" data-view="teams">${teamsView}</div>
+          <div class="ex-view" data-view="record">${recordView}</div>
+          <div class="ex-view" data-view="copilot">${copilotView}</div>
+        </div>
+        <aside class="ex-facts">
+          <h4>Shared announcement facts</h4>
+          <p>All three views render the same illustrative record.</p>
+          <dl>${kv([['Vendor', A.vendor], ['Product', A.product], ['Announcement ID', A.id], ['Category', A.category], ['Vendor-stated severity', A.severity], ['Affected → fixed (vendor)', `${A.affected} → ${A.fixed}`], ['Assigned audience', A.audience], ['Review status', A.reviewStatus], ['Internal deployment impact', A.internalImpact]])}</dl>
+        </aside>
+        <aside class="evidence" hidden>
+          <div class="ev-head"><span class="eyebrow"><i class="eyebrow-dash"></i>Source evidence · local demo</span><button class="ctl ctl-sm" data-ev="close" title="Close (Esc)">${uiIcon('close')}</button></div>
+          <h3>${A.id} · ${A.vendor} · ${A.product}</h3>
+          <dl>${kv([['Source identifier', `<code>${A.sourceUrl}</code>`], ['Source identity', X.record.sourceIdentity], ['Published by source', X.record.sourcePublished], ['Detected', X.record.detected], ['Content version', X.record.contentVersion], ['Captured statement', `“${X.evidence.captured}”`]])}</dl>
+          <p class="ev-note">${X.evidence.note}</p>
+        </aside>
+      </div>`;
+    slide.appendChild(sec);
+    slide.appendChild(controlBar({ hint: `<b>→</b> <b>←</b> switch view · click a source reference to open the local demo evidence` }));
+
+    const tabBtns = Array.from(sec.querySelectorAll('.ex-tab')), views = Array.from(sec.querySelectorAll('.ex-view')), ev = sec.querySelector('.evidence');
+    let tab = 0;
+    const closeEv = () => { ev.hidden = true; };
+    function setTab(i) {
+      tab = Math.max(0, Math.min(tabs.length - 1, i));
+      tabBtns.forEach((b, k) => { b.classList.toggle('active', k === tab); b.setAttribute('aria-selected', k === tab); });
+      views.forEach((v, k) => v.classList.toggle('active', k === tab));
+      closeEv();
+    }
+    sec.addEventListener('click', e => {
+      const t = e.target.closest('[data-tab]'); if (t) { setTab(tabs.findIndex(x => x.id === t.dataset.tab)); return; }
+      const b = e.target.closest('[data-ev]'); if (!b) return;
+      if (b.dataset.ev === 'open') { ev.hidden = false; ev.querySelector('[data-ev="close"]').focus(); }
+      else closeEv();
+    });
+    return {
+      el: slide, type: 'examples', project, player: null, onLeave: closeEv,
+      onKey(e) {
+        if (e.key === 'Escape' && !ev.hidden) { closeEv(); return true; }
+        if (e.key === 'ArrowRight' && tab < tabs.length - 1) { setTab(tab + 1); return true; }
+        if (e.key === 'ArrowLeft' && tab > 0) { setTab(tab - 1); return true; }
+        if (/^[1-3]$/.test(e.key)) { setTab(Number(e.key) - 1); return true; }
+        return false;
+      }
+    };
+  }
+
+  /* ---- page: MVP scope & decision ------------------------------------------ */
+  function renderScope(project, page, total) {
+    const S = project.scope;
+    const slide = h('section', 'slide slide-scope');
+    slide.appendChild(header(project, page, total, true));
+    const sec = h('section', 'scope');
+    sec.innerHTML = `
+      <div class="scope-head rise"><span class="eyebrow"><i class="eyebrow-dash"></i>MVP scope &amp; management decision</span><h2>${S.title}</h2></div>
+      <div class="scope-grid">
+        <div class="scope-col rise">
+          <h3><b>01</b> Scope</h3>
+          <ul class="scope-list">${S.scope.map(s => `<li>${uiIcon('check')}<span>${s}</span></li>`).join('')}</ul>
+          <p class="scope-mvp">${S.mvpNote}</p>
+        </div>
+        <div class="scope-col rise">
+          <h3><b>02</b> Success evidence</h3>
+          <dl class="scope-measures">${S.measures.map(m => `<div><dt>${m.name}</dt><dd>${m.text}</dd></div>`).join('')}</dl>
+          <p class="scope-note-line">${S.measuresNote}</p>
+        </div>
+        <div class="scope-col rise">
+          <h3><b>03</b> Approval requested</h3>
+          <p class="scope-ask">${S.ask}</p>
+          <p class="scope-review">${S.reviews}</p>
+        </div>
+      </div>
+      <div class="scope-boundary rise"><span class="eyebrow"><i class="eyebrow-dash"></i>Scope boundary</span><p>${S.boundary}</p></div>`;
+    slide.appendChild(sec);
+    slide.appendChild(controlBar({ hint: `End of the presentation · <b>PgUp</b> to go back · <b>Home</b> on an architecture page restarts its trace` }));
+    slide.querySelectorAll('.rise').forEach((el, i) => el.style.setProperty('--i', i));
+    return { el: slide, type: 'scope', project, player: null };
+  }
+
+  Object.assign(Deck.pageRenderers, { components: renderComponents, examples: renderExamples, scope: renderScope });
 })(window);
 
 /* ---- src/js/projects/endpoint-elevated-approval.js ---- */
@@ -1798,6 +2262,341 @@ window.Logos = {
         caption: 'The updated status feeds the next collection cycle, so subsequent analysis and reports reflect the current state. No self-retraining or policy change is implied.',
         nodes: ['collection'], edges: ['e-status-coll'] }
     ]
+  });
+})(window.Deck);
+
+/* ---- src/js/projects/oem-intelligence-agent.js ---- */
+/* =============================================================================
+   Project 03 — OEM Intelligence Agent
+   Pure data: cover, architecture (lanes / nodes / edges), interactive
+   scenarios, text workflow, component explorer, example outputs, MVP scope.
+   Shared facts (component names, statuses, the illustrative announcement)
+   are defined once here and rendered by every page.
+   ========================================================================== */
+(function (Deck) {
+  'use strict';
+
+  const NODE_W = 172, NODE_H = 76;
+  const COL = { A: 28, B: 256, C: 488, D: 724, E: 956, F: 1192, G: 1424, H: 1660 };
+  const ROW = { r1: 120, r2: 248, r3: 376, r4: 504, r5: 632 };
+  const RAIL = 700;
+  const node = (id, col, row, spec) => Object.assign({ id, x: COL[col], y: ROW[row] - NODE_H / 2, w: NODE_W, h: NODE_H }, spec);
+
+  /* ---- shared facts ------------------------------------------------------ */
+  const STATUS = {
+    approved: 'Approved for publication',
+    pending: 'Pending review',
+    withheld: 'Publication withheld',
+    duplicate: 'Duplicate · observation recorded'
+  };
+  const announcement = {
+    vendor: 'OEM A', product: 'Gateway Suite', id: 'DEMO-104',
+    category: 'Security advisory', severity: 'High', affected: '8.4', fixed: '8.4.2',
+    audience: 'STS Pilot Group', reviewStatus: STATUS.approved, internalImpact: 'Not assessed',
+    sourceUrl: 'https://oem-a.example/advisories/DEMO-104', sourceShort: 'oem-a.example/advisories/DEMO-104',
+    summary: 'OEM A reports an issue affecting Gateway Suite 8.4 and identifies version 8.4.2 as the fixed version. Internal deployment impact has not been assessed.'
+  };
+
+  /* ---- reusable trace steps ---------------------------------------------- */
+  const S = {
+    monitor: { stage: 's1', title: 'Monitor approved sources', nodes: ['registry', 'sources'], edges: ['e-registry-sources'],
+      caption: 'On the configured schedule, the Collection Workflow consults the approved source registry. Only listed feeds, APIs and mailboxes are monitored; there is no open web browsing.' },
+    capture: { stage: 's1', title: 'Capture source evidence', nodes: ['collect'], edges: ['e-sources-collect'],
+      caption: 'A candidate announcement is collected with its source identity, source URL, publication time where stated, and detection time.' },
+    detectNew: { stage: 's2', title: 'Detect: new announcement', nodes: ['detect'], edges: ['e-collect-detect', 'e-detect-repo'],
+      caption: 'Metadata is normalised and compared with existing records by stable source identifier, normalised source identity and content version. No match: a new announcement continues to analysis.' },
+    detectDup: { stage: 's2', title: 'Detect: unchanged duplicate', nodes: ['detect'], edges: ['e-collect-detect', 'e-detect-repo'],
+      caption: 'Same stable identifier, same normalised identity, same content version as an existing record. This is an unchanged duplicate, not a new announcement. Title matching alone is never relied on.' },
+    detectRev: { stage: 's2', title: 'Detect: material revision', nodes: ['detect'], edges: ['e-collect-detect', 'e-detect-repo'],
+      caption: 'The stable identifier matches an existing announcement but the content version differs. This is a material revision: it continues as an update to the existing record and is not suppressed as a duplicate.' },
+    analyse: { stage: 's2', title: 'Generate structured intelligence', nodes: ['analysis'], edges: ['e-detect-analysis'],
+      caption: 'The approved AI capability produces a concise factual summary, a category, vendor and product tags, source-stated severity (or “Not stated”) and potential relevance to configured STS ownership.' },
+    analyseHigh: { stage: 's2', title: 'Generate structured intelligence', nodes: ['analysis'], edges: ['e-detect-analysis'],
+      caption: 'Summary, category and tags are produced. Source-stated severity: High. Source severity is kept separate from internal review priority and is never invented when the source states none.' },
+    analyseRev: { stage: 's2', title: 'Re-analyse the revision', nodes: ['analysis'], edges: ['e-detect-analysis'],
+      caption: 'The changed content is re-analysed. The summary and classification are regenerated; the record keeps its identity and gains a new version.' },
+    gateRoutine: { stage: 's3', title: 'Routing gate: routine', nodes: ['gate'], edges: ['e-analysis-gate', 'e-gate-repo'],
+      caption: 'Approved rules check source completeness, review requirements and configured vendor, product and domain ownership. Routine and sufficiently supported: it proceeds under approved publication rules without a reviewer.' },
+    gateRev: { stage: 's3', title: 'Routing gate: applicable rules', nodes: ['gate'], edges: ['e-analysis-gate', 'e-gate-repo'],
+      caption: 'Publication rules apply to the revision as to any announcement. A routine, well-supported update proceeds; a high-impact change would route to a reviewer.' },
+    gateReview: { stage: 's3', title: 'Routing gate: review required', nodes: ['gate', 'review'], edges: ['e-analysis-gate', 'e-gate-repo', 'e-gate-review'],
+      caption: 'High-impact: the gate routes the item to a designated reviewer and records it as pending review. Nothing has been published yet.' },
+    gateHold: { stage: 's3', title: 'Routing gate: hold for review', nodes: ['gate', 'review'], edges: ['e-analysis-gate', 'e-gate-repo', 'e-gate-review'],
+      caption: 'Required source evidence is incomplete, or no configured owner matches the vendor, product or domain. The item is held for review and recorded as pending. It is not published broadly by default.' },
+    persist: { stage: 's4', title: 'Persist published state', nodes: ['publish', 'repo'], edges: ['e-gate-publish', 'e-publish-repo'],
+      caption: 'Publish & Notify writes the approved publication state to the repository first, so the record exists before anyone is alerted.' },
+    persistRev: { stage: 's4', title: 'Persist the updated record', nodes: ['publish', 'repo'], edges: ['e-gate-publish', 'e-publish-repo'],
+      caption: 'The revision is stored as a new version of the existing record. The earlier version and its source evidence are retained.' },
+    alert: { stage: 's4', title: 'Targeted Teams alert', nodes: ['teams'], edges: ['e-publish-teams'],
+      caption: 'Then the targeted notification reaches the configured pilot audience with category, product, source link and publication status. Delivery status is recorded.' },
+    alertRev: { stage: 's4', title: 'Update alert', nodes: ['teams'], edges: ['e-publish-teams'],
+      caption: 'An update notification, marked as a revision of the earlier announcement, goes to the same configured audience.' },
+    search: { stage: 's5', title: 'Searchable afterwards', nodes: ['copilot', 'users'], edges: ['e-repo-copilot', 'e-users-copilot'],
+      caption: 'Separately, and only when someone asks, authorized users query published records through Copilot and receive source-referenced answers. A subsequent user interaction, not an ingestion stage.' }
+  };
+
+  const scenarios = [
+    { id: 'routine', short: 'New routine', title: 'New routine announcement',
+      description: 'collection → detection → analysis → publication rules → repository → targeted alert.',
+      steps: [S.monitor, S.capture, S.detectNew, S.analyse, S.gateRoutine, S.persist, S.alert, S.search] },
+    { id: 'duplicate', short: 'Unchanged duplicate', title: 'Unchanged duplicate',
+      description: 'collection → detection → duplicate recorded → stop. No AI re-analysis and no new publication alert.',
+      steps: [S.monitor, S.capture, S.detectDup,
+        { stage: 's2', title: 'Duplicate recorded · stop', nodes: ['dup'], edges: ['e-detect-dup'],
+          caption: 'The observation is recorded against the existing announcement and processing stops. No AI re-analysis, no new publication and no audience alert.' }] },
+    { id: 'revision', short: 'Material revision', title: 'Material revision',
+      description: 'existing identity, changed content → re-analysis → applicable review gate → updated record and update alert.',
+      steps: [S.monitor, S.capture, S.detectRev, S.analyseRev, S.gateRev, S.persistRev, S.alertRev] },
+    { id: 'high', short: 'High-impact advisory', title: 'High-impact advisory',
+      description: 'analysis → review required → reviewer notification → pause until an explicit simulated review action.',
+      steps: [S.monitor, S.capture, S.detectNew, S.analyseHigh, S.gateReview,
+        { stage: 's3', title: 'Reviewer notified · paused', nodes: ['teams'], edges: ['e-review-teams'],
+          caption: 'A designated-reviewer notification is sent through Teams. This is not the audience alert. Playback waits for the reviewer’s decision.',
+          gate: { action: 'Reviewer approves publication', hint: 'Simulated action · approves publication only, never a production change' } },
+        { stage: 's3', title: 'Approved for publication', nodes: ['publish'], edges: ['e-review-publish'],
+          caption: 'The reviewer approves, or edits and approves. Approval to publish is not approval to install, change or accept risk. Withholding instead would record a reason and send no audience alert.' },
+        { stage: 's4', title: 'Persist, then alert', nodes: ['repo', 'teams'], edges: ['e-publish-repo', 'e-publish-teams'],
+          caption: `The published state is persisted first; then the targeted alert is delivered with status “${STATUS.approved}”.` }] },
+    { id: 'hold', short: 'Insufficient evidence', title: 'Insufficient evidence or unmapped owner',
+      description: 'held for review with the missing evidence or routing configuration explained. Not published broadly by default.',
+      steps: [S.monitor, S.capture, S.detectNew,
+        { stage: 's2', title: 'Generate structured intelligence', nodes: ['analysis'], edges: ['e-detect-analysis'],
+          caption: 'The summary is produced, but the source states no severity (“Not stated”) and the product cannot be matched to any configured STS ownership.' },
+        S.gateHold,
+        { stage: 's3', title: 'Reviewer notified · held', nodes: ['teams'], edges: ['e-review-teams'],
+          caption: 'The designated reviewer is notified of a held item and what is missing: the evidence gap or the ownership rule that needs configuring. No pilot-audience alert is sent.',
+          gate: { action: 'Reviewer withholds publication', hint: 'Simulated action · a reason is recorded, the item stays traceable' } },
+        { stage: 's3', title: 'Withheld with recorded reason', nodes: ['withheld'], edges: ['e-review-withheld'],
+          caption: `Publication is withheld and the reason is recorded in the repository (status “${STATUS.withheld}”). The item is visible in the authorized reviewer view only; ordinary users and Copilot answers do not see it as published knowledge.` }] }
+  ];
+
+  Deck.registerProject({
+    id: 'oem-intelligence-agent',
+    index: 3,
+    title: 'OEM Intelligence Agent',
+    subtitle: 'Architecture & Intelligence Workflow',
+    pages: ['cover', 'architecture', 'workflow', 'components', 'examples', 'scope'],
+
+    problem: {
+      eyebrow: 'The challenge today',
+      statement: 'OEM updates are scattered across vendor channels, making it difficult to identify what changed, why it matters, and which team should review it.',
+      issues: [
+        { title: 'Fragmented information', text: 'Releases, advisories, and lifecycle changes arrive through different sources and formats.' },
+        { title: 'Manual monitoring', text: 'Coverage depends on individual subscriptions, availability, and repeated portal checks.' },
+        { title: 'Untargeted notifications', text: 'Important updates can be missed while generic alerts create unnecessary noise.' }
+      ],
+      direction: 'Proposed direction: approved-source monitoring, evidence-backed summaries, controlled review, targeted notifications, and searchable history.',
+      scopeNote: 'Proposed MVP · 3–5 OEMs · One STS pilot group'
+    },
+
+    diagram: {
+      viewBox: { w: 1856, h: 740 },
+      laneY: 8, laneH: 716,
+      stages: [
+        { id: 's1', num: '01', title: 'Source Intake',         x: 12,   w: 204 },
+        { id: 's2', num: '02', title: 'Detection & Analysis',  x: 240,  w: 436, desc: 'New, revised or unchanged duplicate' },
+        { id: 's3', num: '03', title: 'Governance & Routing',  x: 708,  w: 436, desc: 'Rules first, then reviewers' },
+        { id: 's4', num: '04', title: 'Publication & Alerts',  x: 1176, w: 436, desc: 'Persist the record, then notify' },
+        { id: 's5', num: '05', title: 'Search & History',      x: 1644, w: 204 }
+      ],
+      nodes: [
+        node('registry', 'A', 'r1', { kind: 'config', icon: 'clipboard', eyebrow: 'Configuration', lines: ['Source', 'Registry'], stage: 's1', platform: 'SharePoint list (proposed)',
+          role: 'The approved source registry: which feeds, APIs and mailboxes may be monitored, for which vendor, and who owns them. Collection never goes beyond this list.',
+          detail: ['Reference component, maintained by source owners', 'No unrestricted web browsing is implied'] }),
+        node('sources', 'A', 'r2', { kind: 'external', icon: 'rss', eyebrow: 'Approved only', lines: ['Approved', 'OEM Sources'], stage: 's1', platform: 'Vendor portals, RSS, APIs, email',
+          role: 'Trusted vendor channels listed in the registry: RSS feeds, APIs, vendor emails and other supported sources for product releases, feature announcements, security advisories and lifecycle updates.',
+          detail: ['Specific OEMs are not yet selected (3–5 planned for the MVP)'] }),
+        node('collect', 'A', 'r3', { kind: 'process', icon: 'inbox', eyebrow: 'Power Automate', lines: ['Collection', 'Workflow'], stage: 's1', platform: 'Power Automate · approved connectors',
+          role: 'Runs on a configured schedule (on-demand runs are possible) and collects candidate announcements, retaining source identity, source URL, publication time when available and detection time.',
+          detail: ['Scheduler, connectors and storage are proposed, not yet integrated'] }),
+
+        node('detect', 'B', 'r3', { kind: 'process', icon: 'compare', eyebrow: 'Workflow logic', lines: ['Normalize', '& Detect'], stage: 's2', platform: 'Power Automate',
+          role: 'Normalises metadata and compares the candidate against existing records. Three outcomes: new announcement, material revision of an existing announcement, or unchanged duplicate.',
+          detail: ['Stable source identifiers where available', 'Normalised source identity and content/version comparison as supporting mechanisms', 'Title matching alone is not treated as reliable'] }),
+        node('analysis', 'C', 'r3', { kind: 'agent', icon: 'sparkles', eyebrow: 'Approved AI', lines: ['Intelligence', 'Analysis'], stage: 's2', platform: 'Approved AI capability',
+          role: 'Produces a concise factual summary, category, vendor and product tags, source-stated severity where available, and potential relevance to configured STS ownership.',
+          detail: ['Missing severity stays “Not stated” — no invented score', 'Source-stated severity is separate from internal review priority', 'Does not establish which internal installations are affected'] }),
+        node('dup', 'C', 'r5', { kind: 'stop', icon: 'stop', eyebrow: 'No alert', lines: ['Duplicate', 'Recorded'], stage: 's2', platform: 'Repository observation',
+          role: `Terminal outcome for an unchanged duplicate: the observation is recorded against the existing announcement and processing stops (status “${STATUS.duplicate}”). No AI re-analysis, no publication, no audience alert.` }),
+
+        node('gate', 'D', 'r3', { kind: 'process', icon: 'scale', eyebrow: 'Approved rules', lines: ['Review &', 'Routing Gate'], stage: 's3', platform: 'Workflow rules · ownership configuration',
+          role: 'Checks source completeness, review requirements and configured vendor/product/domain ownership. Routine, sufficiently supported items proceed under approved publication rules; high-impact, ambiguous, low-confidence or unmapped items require reviewer attention.',
+          detail: ['Records the pending-review state in the repository', 'Triggers a designated-reviewer notification for items awaiting review'] }),
+        node('review', 'E', 'r2', { kind: 'human', icon: 'usercheck', eyebrow: 'Reviewer', lines: ['Human', 'Review'], stage: 's3', platform: 'Designated reviewer',
+          role: 'A designated reviewer can approve publication, edit and approve, or withhold publication with a recorded reason. A real branch from the gate — not a mandatory step for every routine announcement.',
+          detail: ['Approval to publish is not approval to make a production change', 'Held and pending items are visible in the authorized reviewer view only'] }),
+        node('withheld', 'E', 'r1', { kind: 'deny', icon: 'x', eyebrow: 'With reason', lines: ['Publication', 'Withheld'], stage: 's3', platform: 'Repository state',
+          role: `Terminal outcome when the reviewer withholds publication (status “${STATUS.withheld}”). The reason is recorded; no audience alert is sent; the record stays traceable.` }),
+
+        node('publish', 'F', 'r3', { kind: 'process', icon: 'send', eyebrow: 'Power Automate', lines: ['Publish', '& Notify'], stage: 's4', platform: 'Power Automate',
+          role: 'Persists the approved publication state in the repository first, then delivers the targeted Teams notification and records its delivery status.',
+          detail: ['Sequence: ① persist the published record, ② send the audience alert', 'Does not install patches or change configurations'] }),
+        node('teams', 'G', 'r2', { kind: 'product', logo: 'teams', eyebrow: 'Targeted alert', lines: ['Microsoft', 'Teams'], stage: 's4', platform: 'Microsoft Teams',
+          role: 'Routes the summary to the configured pilot audience with category, relevant product, source link and review/publication status. Also carries the separate designated-reviewer notification for items awaiting review.',
+          detail: ['Audience alert and reviewer notification are distinct messages'] }),
+
+        node('users', 'H', 'r1', { kind: 'input', icon: 'user', eyebrow: 'Pilot group', lines: ['Authorized', 'Users'], stage: 's5', platform: 'STS pilot group · reviewers',
+          role: 'Members of the pilot audience and designated reviewers who search stored announcements and ask source-grounded questions.' }),
+        node('copilot', 'H', 'r2', { kind: 'product', logo: 'copilot', eyebrow: 'Copilot Studio', lines: ['Copilot Query', 'Experience'], stage: 's5', platform: 'Copilot Studio',
+          role: 'Reads authorized repository content to answer questions with source references. A separate query path, not a stage of the ingestion pipeline.',
+          detail: ['Ordinary answers use published records only', 'Pending-review content appears only in an explicitly authorized reviewer view', 'Answers state when no published source establishes a fact'] }),
+        node('repo', 'H', 'r3', { kind: 'product', logo: 'sharepoint', eyebrow: 'SharePoint', lines: ['OEM Release', 'Repository'], stage: 's5', platform: 'SharePoint',
+          role: 'Stores announcement identity, versions, source evidence, summaries, classifications, review state and notification history.',
+          detail: ['Populated throughout the cycle, not only at the end', 'Candidate, pending-review, withheld, published and failed-processing states remain traceable'] })
+      ],
+
+      edges: [
+        { id: 'e-registry-sources', from: 'registry', to: 'sources', style: 'enrich', route: 'v', label: 'approved list', labelSide: 'right' },
+        { id: 'e-sources-collect',  from: 'sources', to: 'collect', style: 'stream', route: 'v', label: 'candidates', labelSide: 'right' },
+        { id: 'e-collect-detect',   from: 'collect', to: 'detect',  style: 'flow',   route: 'h' },
+        { id: 'e-detect-analysis',  from: 'detect',  to: 'analysis', style: 'flow',  route: 'h' },
+        { id: 'e-detect-dup',       from: 'detect',  to: 'dup',     style: 'stop',   route: 's', fromDy: 12, label: 'unchanged', labelAt: 0.5, labelDy: 14 },
+        { id: 'e-analysis-gate',    from: 'analysis', to: 'gate',   style: 'flow',   route: 'h' },
+        { id: 'e-gate-publish',     from: 'gate',    to: 'publish', style: 'flow',   route: 'h', label: 'routine · rules met', labelAt: 0.5, labelDy: -10 },
+        { id: 'e-gate-review',      from: 'gate',    to: 'review',  style: 'human',  route: 's', fromDy: -12, label: 'review required', labelAt: 0.42, labelDy: -10 },
+        { id: 'e-review-publish',   from: 'review',  to: 'publish', style: 'human',  route: 's', fromDy: 12, toDy: -12, label: 'approve · edit', labelAt: 0.5, labelDy: 14 },
+        { id: 'e-review-withheld',  from: 'review',  to: 'withheld', style: 'deny',  route: 'v', label: 'withhold · reason', labelSide: 'right' },
+        { id: 'e-review-teams',     from: 'review',  to: 'teams',   style: 'human',  route: 'h', fromDy: -12, toDy: -12, label: 'reviewer notification', labelAt: 0.5, labelDy: -9 },
+        { id: 'e-publish-repo',     from: 'publish', to: 'repo',    style: 'flow',   route: 'h', label: '① persist published state', labelAt: 0.5, labelDy: -10 },
+        { id: 'e-publish-teams',    from: 'publish', to: 'teams',   style: 'flow',   route: 's', fromDy: -12, toDy: 12, label: '② targeted alert', labelAt: 0.5, labelDy: 15 },
+        { id: 'e-repo-copilot',     from: 'repo',    to: 'copilot', style: 'enrich', route: 'v', label: 'published records', labelSide: 'left' },
+        { id: 'e-users-copilot',    from: 'users',   to: 'copilot', style: 'integration', route: 'v', bidirectional: true, label: 'question · answer', labelSide: 'left' },
+        { id: 'e-detect-repo',      from: 'detect',  to: 'repo',    style: 'feedback', route: 'rail', railY: RAIL, label: 'compare · candidate & observation records', labelX: 560, labelY: RAIL - 12 },
+        { id: 'e-gate-repo',        from: 'gate',    to: 'repo',    style: 'feedback', route: 'rail', railY: RAIL, label: 'pending-review & routing state', labelX: 1270, labelY: RAIL - 12 }
+      ],
+
+      legend: {
+        x: 28, y: 470,
+        items: [
+          { style: 'flow',        text: 'Publication path' },
+          { style: 'stream',      text: 'Source intake' },
+          { style: 'enrich',      text: 'Reference · retrieval' },
+          { style: 'human',       text: 'Human review · reviewer notice', bi: false },
+          { style: 'deny',        text: 'Withheld publication' },
+          { style: 'stop',        text: 'Duplicate · stop' },
+          { style: 'integration', text: 'Question · answer' },
+          { style: 'feedback',    text: 'Operational history' }
+        ]
+      }
+    },
+
+    scenarios,
+    trace: scenarios[0].steps,
+
+    workflow: {
+      title: 'How one announcement moves through the system',
+      steps: [
+        { stage: 's1', title: 'Monitor approved sources', caption: 'Run the configured collection schedule against the approved source registry.' },
+        { stage: 's1', title: 'Capture source evidence', caption: 'Collect announcement content and retain its origin and timestamps.' },
+        { stage: 's2', title: 'Detect new or changed content', caption: 'Separate new announcements and material revisions from unchanged duplicates.' },
+        { stage: 's2', title: 'Generate structured intelligence', caption: 'Create a factual summary, category, product/domain tags, and source-stated severity.' },
+        { stage: 's3', title: 'Evaluate relevance and review requirements', caption: 'Apply configured ownership and publication rules.' },
+        { stage: 's3', title: 'Resolve review when required', caption: 'A designated reviewer approves, edits, or withholds publication.' },
+        { stage: 's4', title: 'Persist and notify', caption: 'Store the approved record, then send the targeted Teams alert.' },
+        { stage: 's5', title: 'Search the published history', tag: 'Subsequent user interaction', caption: 'Users query stored updates through Copilot and receive source-linked answers — when they ask, not for every announcement.' },
+        { stage: 's5', title: 'Retain the operational trail', caption: 'Keep processing, review, version, and notification history, including unsuccessful or withheld paths.' }
+      ]
+    },
+
+    components: {
+      title: 'Six components, one controlled pipeline',
+      items: [
+        { name: 'Collection & Detection', platform: 'Power Automate · approved connectors',
+          blurb: 'Monitors approved sources, normalizes announcements, identifies duplicates and material revisions.',
+          inputs: 'Approved source registry; vendor feeds, APIs and mailboxes; existing repository records for comparison.',
+          responsibility: 'Collect candidates on schedule or on demand; retain source identity, URL and timestamps; normalise metadata; classify each candidate as new, materially revised or unchanged.',
+          outputs: 'Candidate records with evidence; revision links to existing announcements; duplicate observations recorded without a new alert.',
+          boundary: 'Collects only from registry-approved sources. Does not browse the open web, and does not rely on title matching alone to decide a duplicate.' },
+        { name: 'Intelligence Analysis', platform: 'Approved AI capability',
+          blurb: 'Summarizes source content and proposes structured classifications.',
+          inputs: 'Normalised announcement content and metadata from Collection & Detection.',
+          responsibility: 'Produce a concise factual summary, a category, vendor/product tags, source-stated severity where available, and potential relevance to configured STS ownership.',
+          outputs: 'Evidence-backed summary and proposed classification, with severity left as “Not stated” when the source gives none.',
+          boundary: 'Does not independently establish which internal installations are affected, assign an internal risk score, or decide publication.' },
+        { name: 'Review & Routing', platform: 'Workflow rules · designated reviewers',
+          blurb: 'Applies publication rules, identifies the responsible audience, and requests review when needed.',
+          inputs: 'Analysis output; configured vendor/product/domain ownership; review requirements and publication rules.',
+          responsibility: 'Check source completeness and review requirements; route routine, well-supported items to publication; hold high-impact, ambiguous, low-confidence or unmapped items for a designated reviewer, who approves, edits or withholds with a recorded reason.',
+          outputs: `Items marked “${STATUS.approved}”, “${STATUS.pending}” or “${STATUS.withheld}”; reviewer notifications for items awaiting review.`,
+          boundary: 'Review approves publication only. It does not approve production changes, risk acceptance or purchases.' },
+        { name: 'Publication & Notifications', platform: 'Power Automate · SharePoint · Teams',
+          blurb: 'Persists the approved state and delivers targeted messages with recorded delivery status.',
+          inputs: 'Approved publication decisions and the audience identified by routing.',
+          responsibility: 'Persist the published record first; then deliver the targeted Teams alert with category, product, source link and status; record delivery outcome.',
+          outputs: 'Published repository record; targeted audience alert; delivery status in the operational history.',
+          boundary: 'Informs people. It does not install patches, change production configurations or act on devices.' },
+        { name: 'Repository & History', platform: 'SharePoint',
+          blurb: 'Retains evidence, versions, review decisions, publication status, and processing records.',
+          inputs: 'Candidate observations, versions, analysis results, review decisions, publication and notification events.',
+          responsibility: 'Keep announcement identity, source evidence, summaries, classifications, review state and notification history traceable across candidate, pending-review, withheld, published and failed-processing states.',
+          outputs: 'Authoritative records for alerts, Copilot answers, audits and MVP success evidence.',
+          boundary: 'A system of record for this workflow, not a configuration-management database or an inventory of internal deployments.' },
+        { name: 'Conversational Search', platform: 'Copilot Studio',
+          blurb: 'Answers questions using authorized stored records and exposes supporting source references.',
+          inputs: 'Natural-language questions from authorized users; published repository records (reviewer-only records for authorized reviewer views).',
+          responsibility: 'Retrieve relevant stored announcements, answer with source references, and state clearly when no published source establishes a fact.',
+          outputs: 'Source-linked answers; explicit insufficient-evidence responses.',
+          boundary: 'Does not expose reviewer-only or pending-review records to ordinary users, and does not infer internal exposure that no source states.' }
+      ]
+    },
+
+    example: {
+      title: 'What stakeholders receive',
+      banner: 'Illustrative example · Not a live vendor advisory',
+      announcement,
+      teams: {
+        channel: `${announcement.audience} › OEM updates`,
+        audienceNote: 'Configured pilot audience · targeted alert',
+        sender: 'OEM Intelligence Agent (proposed)',
+        posted: 'Mon 20 Oct 2026 · 09:43 UTC · illustrative',
+        title: `${announcement.category} · ${announcement.vendor} ${announcement.product} ${announcement.affected}`
+      },
+      record: {
+        revision: 'v1 (initial publication)',
+        sourceIdentity: 'oem-a.example · advisories feed (registry entry OEM-A-ADV)',
+        sourcePublished: '2026-10-20 06:00 UTC (stated by source)',
+        detected: '2026-10-20 06:15 UTC (scheduled run)',
+        contentVersion: 'v1 · content fingerprint demo-7f3a',
+        reviewDecision: `${STATUS.approved} · designated reviewer · 2026-10-20 09:40 UTC`,
+        published: '2026-10-20 09:42 UTC',
+        notification: `Delivered to ${announcement.audience} channel · 2026-10-20 09:43 UTC`,
+        trailNote: 'candidate → pending review → approved → published → notified'
+      },
+      copilot: {
+        agentName: 'OEM Intelligence · Copilot Query Experience (proposed)',
+        scopeNote: 'Answers use published records only',
+        turns: [
+          { q: `What changed for ${announcement.vendor} this week?`,
+            a: `One approved security advisory was published for ${announcement.product}. The source identifies version ${announcement.fixed} as the fixed version. Internal deployment impact has not been assessed.`,
+            source: `${announcement.id} · ${announcement.sourceShort}` },
+          { q: 'Is our environment affected?',
+            a: 'No published source in this repository establishes whether our environment is affected.',
+            noSource: 'No supporting published source',
+            note: 'Insufficient-evidence state. Pending-review items are only visible in the authorized reviewer view.' }
+        ]
+      },
+      evidence: {
+        captured: announcement.summary,
+        note: 'Display-only demo data. Nothing was fetched from a vendor, and no message was sent. Opening this panel reveals local illustrative information only.'
+      }
+    },
+
+    scope: {
+      title: 'A controlled MVP first, then a baseline',
+      scope: ['3–5 prioritized OEMs', 'One selected STS pilot group', 'Approved-source monitoring and duplicate detection', 'AI-assisted summaries and controlled review', 'Targeted Teams notifications', 'Searchable announcement and review history'],
+      mvpNote: 'No OEM list, deployment inventory, implementation status, ROI, budget or delivery timeline has been confirmed; these are decided with the sponsor.',
+      measures: [
+        { name: 'Source reliability', text: 'Collection success and visible source failures.' },
+        { name: 'Duplicate suppression', text: 'Repeated items prevented from generating repeat alerts.' },
+        { name: 'Alert relevance', text: 'Feedback from the pilot audience and reviewers.' },
+        { name: 'Traceability', text: 'Records retaining source evidence and decision history.' },
+        { name: 'Review turnaround', text: 'Elapsed time for items requiring human review.' }
+      ],
+      measuresNote: 'Quantitative targets will be agreed after the MVP establishes a baseline.',
+      ask: 'Approve a controlled MVP, confirm the initial sources and pilot audience, enable the required platform access, and nominate a sponsor, source owners, and reviewers.',
+      reviews: 'Before production rollout: security, DLP, architecture and user-acceptance review.',
+      boundary: 'The solution informs and routes decisions. It does not install patches, change production configurations, approve risk acceptance, or purchase products.'
+    }
   });
 })(window.Deck);
 
