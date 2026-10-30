@@ -33,6 +33,9 @@
   --emerald-soft: #e6f3ec;
   --amber: #b4781f;
   --amber-soft: #f8efe0;
+  --sec: #4a4e9e;
+  --sec-soft: #ecedf7;
+  --sec-line: #c9cbe6;
   --font: "Inter", "SF Pro Text", -apple-system, "Segoe UI", system-ui, sans-serif;
   --ease: cubic-bezier(.2, .7, .2, 1);
 }
@@ -123,7 +126,7 @@ body.ready .stage { opacity: 1; }
 /* lanes */
 .lane rect { fill: var(--lane); stroke: var(--line-soft); stroke-width: 1; transition: fill .4s var(--ease), stroke .4s var(--ease); }
 .lane.active rect { fill: #ffffff; stroke: #d2d5da; }
-.lane-num { font-size: 13px; font-weight: 700; fill: var(--accent); letter-spacing: .06em; }
+.lane-num { font-size: 13px; font-weight: 700; fill: var(--accent); letter-spacing: .06em; text-transform: none; }
 .lane-title { font-size: 13px; font-weight: 600; fill: var(--ink-2); letter-spacing: .1em; text-transform: uppercase; }
 .lane-rule { stroke: var(--line-soft); stroke-width: 1; }
 .lane-desc { font-size: 11.5px; font-weight: 400; fill: var(--ink-3); }
@@ -608,6 +611,32 @@ html.reduced-motion .wf.playing .wf-step.active { transform: none; }
 .scope-boundary { margin-top: 64px; padding: 24px 30px 26px; background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 12px; }
 .scope-boundary p { margin: 10px 0 0; font-size: 18px; line-height: 1.5; font-weight: 500; }
 
+/* ============================================================================
+   Security technologies as diagram components (indigo family)
+   ========================================================================== */
+.node.kind-sectech .node-bg { stroke: var(--sec-line); stroke-dasharray: 1.5 3; }
+.kind-sectech .chip-bg { fill: var(--sec-soft); } .kind-sectech .ico { stroke: var(--sec); }
+.node.kind-sectech .node-eyebrow { fill: var(--sec); }
+.node.kind-sectech.active .node-bg { stroke-dasharray: none; stroke: var(--sec); }
+.node.kind-sectech.active .chip-bg { fill: var(--sec); } .node.kind-sectech.active .node-ring { stroke: var(--sec); }
+.node.kind-sectech.visited .node-bg { stroke: var(--sec-line); stroke-dasharray: none; }
+.insp-kind.kind-sectech { color: var(--sec); background: var(--sec-soft); }
+.edge-sec .edge-base { stroke: #b9bcdf; stroke-dasharray: 1.5 4; stroke-width: 1.75; }
+.edge-sec .edge-hi { stroke: var(--sec); stroke-dasharray: 1.5 4; stroke-width: 2.25; } .edge-sec .signal { fill: var(--sec); }
+.arch.focus .edge.related.edge-sec .edge-base { stroke: var(--sec); }
+.mk-sec path, .mk-sec-hi path { fill: none; }
+.dot-sec { background: var(--sec); }
+
+.insp-cols-1 { grid-template-columns: 1fr; }
+.insp-tech { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line-soft); }
+.insp-tech h4 { margin: 0 0 6px; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--sec); }
+.insp-tech ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.insp-tech li { font-size: 12.5px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+.insp-platform.proposed { color: var(--warm); background: var(--warm-soft); }
+.chip.has-logo .chip-bg { fill: #fff; stroke: var(--line-soft); }
+.node.active .chip.has-logo .chip-bg { fill: #fff; stroke: var(--line); }
+.insp-platform.sec { color: var(--sec); background: var(--sec-soft); }
+
 </style>
 </head>
 <body>
@@ -654,6 +683,20 @@ window.Icons = {
   bell:     '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>',
   link:     '<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>',
   calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+
+  /* security control categories (vendor-neutral) */
+  idbadge:  '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10.5" r="2.2"/><path d="M5.5 17a3.5 3.5 0 0 1 7 0"/><path d="M14.5 9.5h3.5M14.5 13.5h3.5"/>',
+  lockclock:'<rect x="3" y="11" width="11" height="9" rx="2"/><path d="M5.5 11V8a3 3 0 0 1 6 0v3"/><circle cx="18" cy="17" r="3.5"/><path d="M18 15.3V17l1.2.9"/>',
+  shieldai: '<path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m12 8 .9 2.3 2.3.9-2.3.9L12 14.4l-.9-2.3-2.3-.9 2.3-.9z"/>',
+  filelock: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><rect x="9" y="13.5" width="6" height="4.5" rx="1"/><path d="M10.5 13.5V12a1.5 1.5 0 0 1 3 0v1.5"/>',
+  dbscan:   '<ellipse cx="11" cy="5" rx="7.5" ry="2.8"/><path d="M3.5 5v6c0 1.5 3.4 2.8 7.5 2.8"/><path d="M18.5 5v4.5"/><path d="M3.5 11v6c0 1.5 3.4 2.8 7.5 2.8.6 0 1.2 0 1.8-.1"/><circle cx="17.5" cy="16.5" r="3"/><path d="m19.7 18.7 2.3 2.3"/>',
+  lockkey:  '<rect x="3.5" y="11" width="17" height="10" rx="2"/><path d="M7.5 11V7.5a4.5 4.5 0 0 1 9 0V11"/><circle cx="12" cy="15.5" r="1.4"/><path d="M12 17v1.8"/>',
+  pulse:    '<path d="M3 12h4l2.5-6.5L14 19l2.5-7H21"/>',
+  plug:     '<path d="M9 2.5v5M15 2.5v5"/><path d="M6 7.5h12v4a6 6 0 0 1-12 0z"/><path d="M12 17.5v4"/>',
+  rosette:  '<path d="m12 3 2.1 1.5 2.6-.2.8 2.5 2.2 1.4-.9 2.5.9 2.5-2.2 1.4-.8 2.5-2.6-.2L12 21l-2.1-1.5-2.6.2-.8-2.5-2.2-1.4.9-2.5-.9-2.5 2.2-1.4.8-2.5 2.6.2z"/><path d="m9 12 2 2 4-4"/>',
+  userscheck:'<circle cx="8" cy="8" r="3.2"/><path d="M2 19a6 6 0 0 1 12 0"/><path d="m15.5 10.5 2 2 4-4"/><path d="M15.5 19a4.5 4.5 0 0 1 3.2-4.3"/>',
+  globelock:'<circle cx="10.5" cy="12" r="7.5"/><path d="M3 12h15M10.5 4.5a11.5 11.5 0 0 1 0 15M10.5 4.5a11.5 11.5 0 0 0 0 15"/><rect x="15" y="15" width="7" height="6" rx="1" fill="var(--lane,#fafaf9)"/><path d="M16.5 15v-1.3a2 2 0 0 1 4 0V15"/>',
+  radar:    '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/><path d="m12 12 6.4-6.4"/>',
 
   /* UI icons */
   ui: {
@@ -702,6 +745,18 @@ window.Logos = {
  "copilot": {
   "viewBox": "0 0 1322.9 1147.5",
   "body": "<g fill=\"currentColor\"> <path d=\"m711.19 265.2c-27.333 0-46.933 3.07-58.8 9.33 27.067-80.267 47.6-210.13 168-210.13 114.93 0 108.4 138.27 157.87 200.8zm107.33 112.93c-35.467 125.2-70 251.2-110.13 375.33-12.133 36.4-45.733 61.6-84 61.6h-136.27c9.3333-14 16.8-28.933 21.467-45.733 35.467-125.07 70-251.07 110.13-375.33 12.133-36.4 45.733-61.6 84-61.6h136.27c-9.3333 14-16.8 28.934-21.467 45.734m-316.13 704.8c-114.93 0-108.4-138.13-157.87-200.67h267.07c27.467 0 47.067-3.07 58.8-9.33-27.067 80.266-47.6 210-168 210m777.47-758.93h0.93c-32.667-38.266-82.267-57.866-146.67-57.866h-36.4c-34.533-2.8-65.333-26.134-76.533-58.8l-36.4-103.6c-21.463-61.737-80.263-103.74-145.73-103.74h-475.07c-175.6 0-251.2 225.07-292.27 361.33-38.267 127.07-126 341.73-24.267 462.13 46.667 55.067 116.67 57.867 183.07 57.867 34.533 2.8 65.333 26.133 76.533 58.8l36.4 103.6c21.467 61.733 80.267 103.73 145.6 103.73h475.2c175.47 0 251.07-225.07 292.27-361.33 30.8-100.8 68.133-224.93 66.267-324.8 0-50.534-11.2-100-42.933-137.33\"/> </g>"
+ },
+ "azure": {
+  "viewBox": "0 0 96 96",
+  "body": "<defs> <linearGradient id=\"lg-azure-e399c19f-b68f-429d-b176-18c2117ff73c\" x1=\"-1032.172\" x2=\"-1059.213\" y1=\"145.312\" y2=\"65.426\" gradientTransform=\"matrix(1 0 0 -1 1075 158)\" gradientUnits=\"userSpaceOnUse\"> <stop offset=\"0\" stop-color=\"#114a8b\"/> <stop offset=\"1\" stop-color=\"#0669bc\"/> </linearGradient> <linearGradient id=\"lg-azure-ac2a6fc2-ca48-4327-9a3c-d4dcc3256e15\" x1=\"-1023.725\" x2=\"-1029.98\" y1=\"108.083\" y2=\"105.968\" gradientTransform=\"matrix(1 0 0 -1 1075 158)\" gradientUnits=\"userSpaceOnUse\"> <stop offset=\"0\" stop-opacity=\".3\"/> <stop offset=\".071\" stop-opacity=\".2\"/> <stop offset=\".321\" stop-opacity=\".1\"/> <stop offset=\".623\" stop-opacity=\".05\"/> <stop offset=\"1\" stop-opacity=\"0\"/> </linearGradient> <linearGradient id=\"lg-azure-a7fee970-a784-4bb1-af8d-63d18e5f7db9\" x1=\"-1027.165\" x2=\"-997.482\" y1=\"147.642\" y2=\"68.561\" gradientTransform=\"matrix(1 0 0 -1 1075 158)\" gradientUnits=\"userSpaceOnUse\"> <stop offset=\"0\" stop-color=\"#3ccbf4\"/> <stop offset=\"1\" stop-color=\"#2892df\"/> </linearGradient> </defs> <path fill=\"url(#lg-azure-e399c19f-b68f-429d-b176-18c2117ff73c)\" d=\"M33.338 6.544h26.038l-27.03 80.087a4.152 4.152 0 0 1-3.933 2.824H8.149a4.145 4.145 0 0 1-3.928-5.47L29.404 9.368a4.152 4.152 0 0 1 3.934-2.825z\"/> <path fill=\"#0078d4\" d=\"M71.175 60.261h-41.29a1.911 1.911 0 0 0-1.305 3.309l26.532 24.764a4.171 4.171 0 0 0 2.846 1.121h23.38z\"/> <path fill=\"url(#lg-azure-ac2a6fc2-ca48-4327-9a3c-d4dcc3256e15)\" d=\"M33.338 6.544a4.118 4.118 0 0 0-3.943 2.879L4.252 83.917a4.14 4.14 0 0 0 3.908 5.538h20.787a4.443 4.443 0 0 0 3.41-2.9l5.014-14.777 17.91 16.705a4.237 4.237 0 0 0 2.666.972H81.24L71.024 60.261l-29.781.007L59.47 6.544z\"/> <path fill=\"url(#lg-azure-a7fee970-a784-4bb1-af8d-63d18e5f7db9)\" d=\"M66.595 9.364a4.145 4.145 0 0 0-3.928-2.82H33.648a4.146 4.146 0 0 1 3.928 2.82l25.184 74.62a4.146 4.146 0 0 1-3.928 5.472h29.02a4.146 4.146 0 0 0 3.927-5.472z\"/>"
+ },
+ "powerbi": {
+  "viewBox": "0 0 630 630",
+  "body": "<defs> <linearGradient x1=\"50%\" y1=\"0%\" x2=\"50%\" y2=\"100%\" id=\"lg-powerbi-linearGradient-1\"> <stop stop-color=\"#EBBB14\" offset=\"0%\"></stop> <stop stop-color=\"#B25400\" offset=\"100%\"></stop> </linearGradient> <linearGradient x1=\"50%\" y1=\"0%\" x2=\"50%\" y2=\"100%\" id=\"lg-powerbi-linearGradient-2\"> <stop stop-color=\"#F9E583\" offset=\"0%\"></stop> <stop stop-color=\"#DE9800\" offset=\"100%\"></stop> </linearGradient> <path d=\"M346,604 L346,630 L320,630 L153,630 C138.640597,630 127,618.359403 127,604 L127,183 C127,168.640597 138.640597,157 153,157 L320,157 C334.359403,157 346,168.640597 346,183 L346,604 Z\" id=\"lg-powerbi-path-3\"></path> <filter x=\"-9.1%\" y=\"-6.3%\" width=\"136.5%\" height=\"116.9%\" filterUnits=\"objectBoundingBox\" id=\"lg-powerbi-filter-4\"> <feOffset dx=\"20\" dy=\"10\" in=\"SourceAlpha\" result=\"shadowOffsetOuter1\"></feOffset> <feGaussianBlur stdDeviation=\"10\" in=\"shadowOffsetOuter1\" result=\"shadowBlurOuter1\"></feGaussianBlur> <feColorMatrix values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.0530211976 0\" type=\"matrix\" in=\"shadowBlurOuter1\"></feColorMatrix> </filter> <linearGradient x1=\"50%\" y1=\"0%\" x2=\"50%\" y2=\"100%\" id=\"lg-powerbi-linearGradient-5\"> <stop stop-color=\"#F9E68B\" offset=\"0%\"></stop> <stop stop-color=\"#F3CD32\" offset=\"100%\"></stop> </linearGradient> </defs> <g id=\"lg-powerbi-PBI-Logo\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\"> <g id=\"lg-powerbi-Group\" transform=\"translate(77.500000, 0.000000)\"> <rect id=\"lg-powerbi-Rectangle\" fill=\"url(#lg-powerbi-linearGradient-1)\" x=\"256\" y=\"0\" width=\"219\" height=\"630\" rx=\"26\"></rect> <g id=\"lg-powerbi-Combined-Shape\"> <use fill=\"black\" fill-opacity=\"1\" filter=\"url(#lg-powerbi-filter-4)\" xlink:href=\"#lg-powerbi-path-3\"></use> <use fill=\"url(#lg-powerbi-linearGradient-2)\" fill-rule=\"evenodd\" xlink:href=\"#lg-powerbi-path-3\"></use> </g> <path d=\"M219,604 L219,630 L193,630 L26,630 C11.6405965,630 1.75851975e-15,618.359403 0,604 L0,341 C-1.75851975e-15,326.640597 11.6405965,315 26,315 L193,315 C207.359403,315 219,326.640597 219,341 L219,604 Z\" id=\"lg-powerbi-Combined-Shape\" fill=\"url(#lg-powerbi-linearGradient-5)\"></path> </g> </g>"
+ },
+ "entra": {
+  "viewBox": "0 0 18 18",
+  "body": "<path d=\"m3.802,14.032c.388.242,1.033.511,1.715.511.621,0,1.198-.18,1.676-.487,0,0,.001,0,.002-.001l1.805-1.128v4.073c-.286,0-.574-.078-.824-.234l-4.374-2.734Z\" fill=\"#225086\"/> <path d=\"m7.853,1.507L.353,9.967c-.579.654-.428,1.642.323,2.111,0,0,2.776,1.735,3.126,1.954.388.242,1.033.511,1.715.511.621,0,1.198-.18,1.676-.487,0,0,.001,0,.002-.001l1.805-1.128-4.364-2.728,4.365-4.924V1s0,0,0,0c-.424,0-.847.169-1.147.507Z\" fill=\"#6df\"/> <polygon points=\"4.636 10.199 4.688 10.231 9 12.927 9.001 12.927 9.001 12.927 9.001 5.276 9 5.275 4.636 10.199\" fill=\"#cbf8ff\"/> <path d=\"m17.324,12.078c.751-.469.902-1.457.323-2.111l-4.921-5.551c-.397-.185-.842-.291-1.313-.291-.925,0-1.752.399-2.302,1.026l-.109.123h0s4.364,4.924,4.364,4.924h0s0,0,0,0l-4.365,2.728v4.073c.287,0,.573-.078.823-.234l7.5-4.688Z\" fill=\"#074793\"/> <path d=\"m9.001,1v4.275s.109-.123.109-.123c.55-.627,1.377-1.026,2.302-1.026.472,0,.916.107,1.313.291l-2.579-2.909c-.299-.338-.723-.507-1.146-.507Z\" fill=\"#0294e4\"/> <polygon points=\"13.365 10.199 13.365 10.199 13.365 10.199 9.001 5.276 9.001 12.926 13.365 10.199\" fill=\"#96bcc2\"/>"
  }
 };
 
@@ -714,7 +769,7 @@ window.Logos = {
   'use strict';
 
   const SVG_NS = 'http://www.w3.org/2000/svg';
-  const STYLE_KEYS = ['flow', 'integration', 'enrich', 'human', 'ok', 'deny', 'feedback', 'stream', 'stop'];
+  const STYLE_KEYS = ['flow', 'integration', 'enrich', 'human', 'ok', 'deny', 'feedback', 'stream', 'stop', 'sec'];
   const ARROW_LEN = 10;
 
   function el(name, attrs, children) {
@@ -763,6 +818,7 @@ window.Logos = {
      the arrowhead length so the marker tip touches the node border exactly. */
   function routeEdge(e, A, B) {
     const bi = !!e.bidirectional;
+    const ARROW_LEN = e.style === 'sec' ? 0 : 10;   // association lines have no arrowhead
     let p1, p2, d, pts;
     switch (e.route) {
       case 'h': {
@@ -840,11 +896,12 @@ window.Logos = {
       g.appendChild(el('rect', { x: s.x, y: ly, width: s.w, height: lh, rx: 12 }));
       if (s.titleAlign === 'right') {
         /* title block anchored to the lane's right edge (keeps the left header band clear for connectors) */
-        const tt = text(s.x + s.w - 18, ly + 34, s.title, 'lane-title', { 'text-anchor': 'end' });
-        g.appendChild(tt);
-        const tnum = text(0, ly + 34, s.num, 'lane-num', { 'text-anchor': 'end' });
-        g.appendChild(tnum);
-        requestAnimationFrame(() => { try { tnum.setAttribute('x', s.x + s.w - 18 - tt.getComputedTextLength() - 10); } catch (e) {} });
+        /* number and title in one right-anchored text so no width measurement is needed
+           (measuring while the slide is hidden or before the font swaps in misplaces the number) */
+        const tt = el('text', { x: s.x + s.w - 18, y: ly + 34, class: 'lane-title', 'text-anchor': 'end' });
+        const tn = el('tspan', { class: 'lane-num' }); tn.textContent = s.num;
+        const ts = el('tspan', { dx: 10 }); ts.textContent = s.title;
+        tt.appendChild(tn); tt.appendChild(ts); g.appendChild(tt);
         if (s.desc) g.appendChild(text(s.x + s.w - 18, ly + 56, s.desc, 'lane-desc', { 'text-anchor': 'end' }));
       } else {
         g.appendChild(text(s.x + 18, ly + 34, s.num, 'lane-num'));
@@ -853,7 +910,7 @@ window.Logos = {
         if (s.desc && s.descInline) g.appendChild(text(s.x + s.w - 18, ly + 34, s.desc, 'lane-desc', { 'text-anchor': 'end' }));
         else if (s.desc) g.appendChild(text(s.x + 18, ly + 72, s.desc, 'lane-desc'));
       }
-      if (s.note) g.appendChild(text(s.x + 18, ly + lh - 14, s.note, 'lane-note'));
+      if (s.note) g.appendChild(text(s.x + 18, s.noteTop ? ly + 56 : ly + lh - 14, s.note, 'lane-note'));
       lanes.appendChild(g);
     });
     svg.appendChild(lanes);
@@ -907,11 +964,18 @@ window.Logos = {
       /* icon chip */
       const chip = el('g', { class: 'chip', transform: 'translate(12 20)' });
       chip.appendChild(el('rect', { x: 0, y: 0, width: 36, height: 36, rx: 9, class: 'chip-bg' }));
-      if (n.logo && global.Logos && global.Logos[n.logo]) {
-        const L = global.Logos[n.logo];
-        const lg = el('svg', { x: 4, y: 4, width: 28, height: 28, viewBox: L.viewBox, class: 'logo', preserveAspectRatio: 'xMidYMid meet' });
-        lg.innerHTML = L.body;
-        chip.appendChild(lg);
+      const logoKeys = (n.logos || (n.logo ? [n.logo] : [])).filter(k => global.Logos && global.Logos[k]);
+      if (logoKeys.length) {
+        chip.classList.add('has-logo');
+        /* one logo fills the chip; two or more share it in a row (exact products named by the card) */
+        const size = logoKeys.length === 1 ? 28 : 15, gap = 2;
+        const total = logoKeys.length * size + (logoKeys.length - 1) * gap;
+        logoKeys.forEach((k, i) => {
+          const L = global.Logos[k];
+          const lg = el('svg', { x: (36 - total) / 2 + i * (size + gap), y: (36 - size) / 2, width: size, height: size, viewBox: L.viewBox, class: 'logo', preserveAspectRatio: 'xMidYMid meet' });
+          lg.innerHTML = L.body;
+          chip.appendChild(lg);
+        });
       } else {
         const ico = el('g', { class: 'ico', transform: 'translate(7 7) scale(0.92)', fill: 'none', 'stroke-width': 1.75, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
         ico.innerHTML = global.Icons[n.icon] || '';
@@ -1189,11 +1253,12 @@ window.Logos = {
       const arch = this.arch;
       const tl = new Timeline();
       const dur = L => Math.min(1.5, Math.max(0.55, L * 0.0038)) * speed;
-      const arrival = {};   // edge id -> time the forward signal reaches its target
+      const arrival = {}, startAt = {};   // edge id -> signal departure / arrival times
 
       const traceEdge = (id, start, alt) => {
         const E = arch.edges[id];
         const d = dur(E.length);
+        startAt[id] = start;
         tl.call(start, () => { arch.resetEdge(id); E.g.classList.add('tracing'); E.dot.style.opacity = 1; });
         tl.add(start, d, p => arch.setEdgeProgress(id, p), {
           onEnd: () => { E.dot.style.opacity = 0; E.hi.classList.add('drawn'); E.g.classList.add('traced'); if (alt) E.g.classList.add('alt'); }
@@ -1242,7 +1307,12 @@ window.Logos = {
               const d = arch.edges[eid].def;
               return d.to === id || (d.bidirectional && d.from === id);
             });
-            if (!inbound.length) { activate([id], t - 0.05); return; }
+            if (!inbound.length) {
+              /* a node that only sends in this step (e.g. a security technology) lights as its signal departs */
+              const outbound = groups.flat().filter(eid => arch.edges[eid].def.from === id);
+              activate([id], outbound.length ? Math.min(...outbound.map(eid => startAt[eid])) : t - 0.05);
+              return;
+            }
             /* a node reached by a bidirectional exchange lights when the first signal lands */
             activate([id], Math.min(...inbound.map(eid => arrival[eid])) - 0.02);
           });
@@ -1409,6 +1479,7 @@ window.Logos = {
         } else if (st.step) {
           capStep.textContent = `Step ${pad2(st.index + 1)} / ${pad2(st.total)}`; capTitle.textContent = st.step.title; capText.textContent = st.step.caption;
         } else { capStep.textContent = 'Overview'; capTitle.textContent = ''; capText.textContent = overviewText(); }
+
         const atEnd = player.atEnd ? player.atEnd() : (st.index >= st.total - 1 && !playing);
         const label = gated ? 'Continue after review' : playing ? 'Pause' : (st.index < 0 ? opts.playLabel : (atEnd ? 'Replay' : 'Resume'));
         playBtn.innerHTML = `${uiIcon(playing ? 'pause' : 'play')}<span class="ctl-label">${label}</span>`;
@@ -1488,9 +1559,11 @@ window.Logos = {
     const head = h('div', 'arch-head');
     const scenarios = def.scenarios || null;
     head.innerHTML = `<span class="eyebrow"><i class="eyebrow-dash"></i>Proposed ${scenarios ? 'architecture · interactive scenarios' : 'agentic architecture'}</span>
+      <span class="arch-head-right">
       ${scenarios
         ? `<div class="scn" role="tablist" aria-label="Scenario"><span class="scn-label">Scenario</span>${scenarios.map((s, i) => `<button class="scn-btn${i === 0 ? ' active' : ''}" role="tab" aria-selected="${i === 0}" data-scn="${i}" title="${s.title}">${s.short}</button>`).join('')}</div>`
-        : `<span class="arch-flow">${def.diagram.stages.map(s => s.title).join(' <i>→</i> ')}</span>`}`;
+        : `<span class="arch-flow">${def.diagram.stages.map(s => s.title).join(' <i>→</i> ')}</span>`}
+      </span>`;
     wrap.appendChild(head);
     const canvas = h('div', 'arch-canvas');
     wrap.appendChild(canvas);
@@ -1517,7 +1590,7 @@ window.Logos = {
     }
 
     /* inspector */
-    const kindLabel = { agent: 'AI agent', external: 'External system', data: 'Data / output', human: 'Human decision', ok: 'Outcome', deny: 'Outcome', input: 'Input', infra: 'Infrastructure', product: 'Enterprise system', proposed: 'Proposed capability', process: 'Workflow component', stop: 'Terminal outcome', config: 'Configuration' };
+    const kindLabel = { agent: 'AI agent', external: 'External system', data: 'Data / output', human: 'Human decision', ok: 'Outcome', deny: 'Outcome', input: 'Input', infra: 'Infrastructure', product: 'Enterprise system', proposed: 'Proposed capability', process: 'Workflow component', stop: 'Terminal outcome', config: 'Configuration', sectech: 'Security technology' };
     const nodeName = id => arch.nodesById[id].lines.join(' ');
     let pinned = null, hoverTimer = null;
     function showInspector(id) {
@@ -1525,12 +1598,15 @@ window.Logos = {
       const li = list => list.map(x => `<li><i class="dot dot-${x.via}"></i>${x.who}${x.bi ? ' <small>↔</small>' : ''}</li>`).join('') || '<li class="none">—</li>';
       pop.innerHTML = `
         <div class="insp-head"><span class="insp-kind kind-${n.kind}">${kindLabel[n.kind] || n.kind}</span><span class="insp-stage">${stage.num} · ${stage.title}</span></div>
-        <h3>${nodeName(id)}</h3>${n.platform ? `<span class="insp-platform">${n.platform}</span>` : ''}<p>${n.role}</p>
+        <h3>${nodeName(id)}</h3>${n.platform ? `<span class="insp-platform${n.kind === 'sectech' ? ' sec' : (/^Proposed|to be confirmed/i.test(n.platform) ? ' proposed' : '')}">${n.platform}</span>` : ''}<p>${n.role}</p>
         ${n.detail ? `<ul class="insp-detail">${n.detail.map(d => `<li>${d}</li>`).join('')}</ul>` : ''}
-        <div class="insp-cols">
-          <div><h4>Receives from</h4><ul>${li(a.in.map(e => ({ who: nodeName(e.from), via: e.style, bi: e.bidirectional })))}</ul></div>
-          <div><h4>Sends to</h4><ul>${li(a.out.map(e => ({ who: nodeName(e.to), via: e.style, bi: e.bidirectional })))}</ul></div>
-        </div>`;
+        ${n.kind === 'sectech'
+          ? `<div class="insp-cols insp-cols-1"><div><h4>Applies to</h4><ul>${li(a.out.map(e => ({ who: nodeName(e.to), via: e.style })).concat(a.in.map(e => ({ who: nodeName(e.from), via: e.style }))))}</ul></div></div>`
+          : `<div class="insp-cols">
+          <div><h4>Receives from</h4><ul>${li(a.in.filter(e => e.style !== 'sec').map(e => ({ who: nodeName(e.from), via: e.style, bi: e.bidirectional })))}</ul></div>
+          <div><h4>Sends to</h4><ul>${li(a.out.filter(e => e.style !== 'sec').map(e => ({ who: nodeName(e.to), via: e.style, bi: e.bidirectional })))}</ul></div>
+        </div>
+        ${(() => { const sec = a.in.filter(e => e.style === 'sec').map(e => e.from).concat(a.out.filter(e => e.style === 'sec').map(e => e.to)); return sec.length ? `<div class="insp-tech"><h4>Security technologies</h4><ul>${sec.map(id => `<li><i class="dot dot-sec"></i>${nodeName(id)}</li>`).join('')}</ul></div>` : ''; })()}`}`;
       pop.hidden = false;
       const vb = def.diagram.viewBox, cw = canvas.clientWidth, ch = canvas.clientHeight;
       const s = Math.min(cw / vb.w, ch / vb.h), ox = (cw - vb.w * s) / 2, oy = (ch - vb.h * s) / 2;
@@ -1934,72 +2010,80 @@ window.Logos = {
     subtitle: 'Agentic Architecture & Decision Workflow',
 
     problem: {
-      eyebrow: 'The challenge today',
-      statement: 'Elevated access decisions depend on individual judgment rather than consistent, risk-informed evaluation.',
+      eyebrow: 'The business problem',
+      statement: 'Privileged access to endpoints is decided by individual judgment, at the speed of people, with exposure the business cannot see or compare.',
+      support: 'Every elevated-access request is approved by hand, argued in prose and judged differently by each approver. The result is slower delivery, uneven risk across the estate and no consistent, defensible record of why access was granted.',
       issues: [
-        {
-          title: 'Manual approval dependency',
-          text: 'Every request waits on human review and sign-off, creating a people-dependent decision process.'
-        },
-        {
-          title: 'Justification over risk',
-          text: 'Decisions lean on the written justification rather than objective, consistently applied risk criteria.'
-        },
-        {
-          title: 'Inconsistent human judgment',
-          text: 'Each approver applies their own judgment, so comparable requests receive different answers.'
-        }
+        { title: 'People-dependent decisions', text: 'Every request waits for an approver. Throughput, response time and after-hours coverage depend on individual availability rather than on policy.' },
+        { title: 'Justification instead of evidence', text: 'Outcomes turn on how convincingly a request is written, not on the device\'s state, the requester\'s role or the policy that applies.' },
+        { title: 'Inconsistent exposure and accountability', text: 'Comparable requests receive different answers. Exposure varies by approver, and there is no uniform, auditable record of the rationale.' }
       ],
-      direction: 'Proposed direction: coordinated policy evaluation, tool-assisted context, structured triage, human oversight and documented outcomes.'
+      direction: 'Proposed direction: coordinated agents gather policy and endpoint evidence, triage every request against the same standard, keep people in control of the exceptions, execute approved access on a time-bound basis and document every outcome.'
     },
 
     diagram: {
       viewBox: { w: 1856, h: 712 },
       stages: [
-        { id: 's1', num: '01', title: 'Request Intake',        x: 12,   w: 204, desc: 'A request is raised and queued' },
-        { id: 's2', num: '02', title: 'Agent Orchestration',   x: 240,  w: 436, desc: 'Policy rules and tool findings' },
+        { id: 's1', num: '01', title: 'Request Intake',        x: 12,   w: 204 },
+        { id: 's2', num: '02', title: 'Agent Orchestration',   x: 240,  w: 436, desc: 'Policy & tool facts', descInline: true },
         { id: 's3', num: '03', title: 'Context & Decisioning', x: 708,  w: 436, desc: 'Context is assembled and triaged with human oversight' },
-        { id: 's4', num: '04', title: 'Action & Outcomes',     x: 1176, w: 436, desc: 'Controlled execution to exactly one outcome' },
-        { id: 's5', num: '05', title: 'Record Feedback',       x: 1644, w: 204, desc: 'Outcomes are documented' }
+        { id: 's4', num: '04', title: 'Action & Outcomes',     x: 1176, w: 436, desc: 'One outcome per request', descInline: true },
+        { id: 's5', num: '05', title: 'Record Feedback',       x: 1644, w: 204 }
       ],
       laneY: 8,
       laneH: 690,
 
       nodes: [
-        node('access', 'A', 'r2', { kind: 'input', icon: 'key', eyebrow: 'Input', lines: ['Access', 'Request'], stage: 's1',
+        node('access', 'A', 'r2', { platform: 'Request form or ITSM self-service portal · to be confirmed', kind: 'input', icon: 'key', eyebrow: 'Request portal', lines: ['Access', 'Request'], stage: 's1',
           role: 'An elevated endpoint access request raised by a user or device owner. This is the trigger for the workflow.' }),
-        node('queue', 'A', 'r3', { kind: 'infra', icon: 'cloud', eyebrow: 'Queue', lines: ['Cloud', 'Queue'], stage: 's1',
+        node('queue', 'A', 'r3', { logo: 'azure', platform: 'Proposed · Azure Service Bus or Storage Queue (Microsoft-aligned estate) · to be confirmed', kind: 'infra', icon: 'cloud', eyebrow: 'Azure queue', lines: ['Cloud', 'Queue'], stage: 's1',
           role: 'Buffers incoming requests so they are processed in order and nothing is lost before the agents pick them up.' }),
 
-        node('orch', 'B', 'r3', { kind: 'agent', icon: 'hub', eyebrow: 'Coordination', lines: ['Orchestrator', 'Agent'], stage: 's2',
+        node('orch', 'B', 'r3', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'hub', eyebrow: 'Coordination', lines: ['Orchestrator', 'Agent'], stage: 's2',
           role: 'Takes a request from the queue and coordinates the Policy Agent, the Tool Agent and the assembly of Context.' }),
-        node('orgpolicy', 'C', 'r1', { kind: 'external', icon: 'landmark', eyebrow: 'Policy source', lines: ['Organization', 'Policy'], stage: 's2',
+        node('orgpolicy', 'C', 'r1', { logo: 'sharepoint', platform: 'Proposed · policy library in SharePoint, versioned and owned by policy owners', kind: 'external', icon: 'landmark', eyebrow: 'SharePoint', lines: ['Organization', 'Policy'], stage: 's2',
           role: 'The organisation’s access and security policies. Consulted by the Policy Agent; results flow back.' }),
-        node('policy', 'C', 'r2', { kind: 'agent', icon: 'shield', eyebrow: 'Governance', lines: ['Policy', 'Agent'], stage: 's2',
+        node('policy', 'C', 'r2', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'shield', eyebrow: 'Governance', lines: ['Policy', 'Agent'], stage: 's2',
           role: 'Evaluates the request against Organization Policy and returns the applicable rules and constraints.' }),
-        node('tool', 'C', 'r4', { kind: 'agent', icon: 'wrench', eyebrow: 'Integration', lines: ['Tool', 'Agent'], stage: 's2',
+        node('tool', 'C', 'r4', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'wrench', eyebrow: 'Integration', lines: ['Tool', 'Agent'], stage: 's2',
           role: 'Queries Vendor Tools for facts about the endpoint and requester, and returns the findings.' }),
-        node('vendor', 'C', 'r5', { kind: 'external', icon: 'layers', eyebrow: 'External', lines: ['Vendor', 'Tools'], stage: 's2',
-          role: 'Third-party tooling the Tool Agent integrates with. No specific vendor is assumed by this architecture.' }),
+        node('vendor', 'C', 'r5', { logos: ['intune', 'mde'], platform: 'Microsoft Intune and Microsoft Defender for Endpoint (the estate\'s endpoint tools) · directory lookups via Microsoft Entra ID (proposed)', kind: 'external', icon: 'layers', eyebrow: 'Intune · Defender', lines: ['Vendor', 'Tools'], stage: 's2',
+          role: 'The endpoint tools the Tool Agent queries for device facts: Microsoft Intune for compliance, configuration and ownership, Microsoft Defender for Endpoint for sensor health, protection status and risk signals. Directory attributes of the requester would come from Microsoft Entra ID.' }),
 
-        node('context', 'D', 'r3', { kind: 'data', icon: 'files', eyebrow: 'Assembled', lines: ['Context'], stage: 's3',
+        node('context', 'D', 'r3', { platform: 'Proposed · working context held by the agent runtime, not a separate store', kind: 'data', icon: 'files', eyebrow: 'Assembled', lines: ['Context'], stage: 's3',
           role: 'The consolidated picture of the request: coordinated by the Orchestrator and enriched with retrieved information from the RAG Agent.' }),
-        node('rag', 'D', 'r4', { kind: 'agent', icon: 'book', eyebrow: 'Retrieval', lines: ['RAG', 'Agent'], stage: 's3',
+        node('rag', 'D', 'r4', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'book', eyebrow: 'Retrieval', lines: ['RAG', 'Agent'], stage: 's3',
           role: 'Retrieves relevant information, including documented records of earlier decisions, and provides it to Context.' }),
-        node('hil', 'E', 'r2', { kind: 'human', icon: 'user', eyebrow: 'Human review', lines: ['Human in', 'the Loop'], stage: 's3',
+        node('hil', 'E', 'r2', { platform: 'Proposed · Microsoft Teams approval card to the designated reviewer', kind: 'human', icon: 'user', eyebrow: 'Teams approval', lines: ['Human in', 'the Loop'], stage: 's3',
           role: 'A human reviewer connected to triage who can intervene where appropriate before a decision is final.' }),
-        node('triage', 'E', 'r3', { kind: 'agent', icon: 'scale', eyebrow: 'Decisioning', lines: ['Triage', 'Agent'], stage: 's3',
+        node('triage', 'E', 'r3', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'scale', eyebrow: 'Decisioning', lines: ['Triage', 'Agent'], stage: 's3',
           role: 'Responsible for decisioning. Weighs the assembled Context and routes to human review where appropriate.' }),
 
-        node('action', 'F', 'r3', { kind: 'agent', icon: 'play', eyebrow: 'Execution', lines: ['Action', 'Agent'], stage: 's4',
+        node('action', 'F', 'r3', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'play', eyebrow: 'Execution', lines: ['Action', 'Agent'], stage: 's4',
           role: 'Carries out the decision in a controlled way. Every request resolves to exactly one outcome.' }),
         node('granted', 'G', 'r2', { kind: 'ok', icon: 'check', eyebrow: 'Outcome A', lines: ['Approval', 'Granted'], stage: 's4',
           role: 'The elevated access is granted.' }),
         node('denied', 'G', 'r4', { kind: 'deny', icon: 'x', eyebrow: 'Outcome B', lines: ['Approval', 'Denied'], stage: 's4',
           role: 'The elevated access is denied.' }),
 
-        node('record', 'H', 'r3', { kind: 'data', icon: 'filecheck', eyebrow: 'Documented', lines: ['Record', 'Update'], stage: 's5',
-          role: 'Writes the outcome and its rationale to the record. Documented outcomes are made available to the retrieval side.' })
+        node('record', 'H', 'r3', { logo: 'sharepoint', platform: 'Proposed · SharePoint record library (decision, evidence, rationale, actor)', kind: 'data', icon: 'filecheck', eyebrow: 'SharePoint', lines: ['Record', 'Update'], stage: 's5',
+          role: 'Writes the outcome and its rationale to the record. Documented outcomes are made available to the retrieval side.' }),
+
+        /* security technologies */
+        node('iam', 'A', 'r1', { kind: 'sectech', icon: 'idbadge', eyebrow: 'Security · IAM', lines: ['Identity &', 'Access Mgmt'], stage: 's1', platform: 'Security technology category · product selected in security review',
+          role: 'Identity and access management for the request path: the requester and device are authenticated and authorised before a request is accepted, and every agent runs under its own scoped service identity.', detail: ['Authenticates people, services and agents with role- and attribute-based, least-privilege access', 'Each agent holds its own scoped identity; reviewers use strong authentication and conditional access', 'Protects against identity and privilege abuse and over-permissioned access'] }),
+        node('grd', 'B', 'r1', { kind: 'sectech', icon: 'shieldai', eyebrow: 'Security · AI', lines: ['AI Guardrail', 'Enforcement'], stage: 's2', platform: 'Security technology category · product selected in security review',
+          role: 'Guardrail enforcement around every model call made by the agents: request justifications and retrieved text are treated as data, never as instructions; Policy and Triage outputs must cite the clause and context they rely on.', detail: ['Separates instructions from data and screens every prompt for injection', 'Validates outputs: decisions and summaries must cite their source and may not invent facts or scores', 'Bounds task scope and keeps tool use within a deny-by-default allow-list'] }),
+        node('apigw', 'B', 'r5', { kind: 'sectech', icon: 'plug', eyebrow: 'Security · API', lines: ['API Security', 'Gateway'], stage: 's2', platform: 'Security technology category · product selected in security review',
+          role: 'API security gateway between the Tool Agent and the endpoint tools: only allow-listed, read-only calls with scoped credentials reach Intune and Defender for Endpoint.', detail: ['Allow-listed, authenticated connectors with credentials held in a vault', 'Schema and input validation, rate limiting and sandboxed execution', 'Protects against connector abuse and uncontrolled outbound calls'] }),
+        node('dlp', 'D', 'r2', { kind: 'sectech', icon: 'filelock', eyebrow: 'Security · DLP', lines: ['Data Loss', 'Prevention'], stage: 's3', platform: 'Security technology category · product selected in security review',
+          role: 'Data loss prevention on the assembled Context: sensitive requester and device attributes are masked before they reach any model or record, and nothing leaves the decision boundary except the decision and its rationale.', detail: ['Policies on what may flow between connectors, prompts, outputs and notifications', 'Masks or blocks sensitive content before it leaves its boundary', 'Restricts delivery to the intended audience'] }),
+        node('pam', 'F', 'r1', { kind: 'sectech', icon: 'lockclock', eyebrow: 'Security · PAM', lines: ['Privileged', 'Access Mgmt'], stage: 's4', platform: 'Security technology category · product selected in security review',
+          role: 'Privileged access management behind the Action Agent: the elevation it executes is granted just-in-time, time-bound and scoped to the approved endpoint and task, recorded and revoked automatically.', detail: ['Just-in-time, time-bound, task-scoped elevation instead of standing privilege', 'Approved and recorded privileged sessions with automatic revocation', 'Protects against misuse of elevated rights and lateral movement'] }),
+        node('siem', 'F', 'r4', { kind: 'sectech', icon: 'pulse', eyebrow: 'Security · SIEM', lines: ['Audit Logging', '& SIEM'], stage: 's4', platform: 'Security technology category · product selected in security review',
+          role: 'Audit logging and security monitoring fed by the Action Agent and the rest of the workflow: every dispatch, lookup, triage rationale, human decision and elevation becomes tamper-evident evidence with anomaly alerting.', detail: ['Tamper-evident log of every decision, tool call, approval and outcome', 'Forwarded to the security operations platform with anomaly alerting', 'Evidence for audit, investigations and the review of agent behaviour'] }),
+        node('dspm', 'H', 'r1', { kind: 'sectech', icon: 'dbscan', eyebrow: 'Security · DSPM', lines: ['Data Security', 'Posture Mgmt'], stage: 's5', platform: 'Security technology category · product selected in security review',
+          role: 'Data security posture management over the record library and policy store: records are classified and labelled, access exposure is reviewed continuously and retrieval is trimmed to the acting identity.', detail: ['Discovers, classifies and labels the data in the stores the agents use', 'Reviews access exposure continuously', 'Trims retrieval and record access to the acting identity'] })
       ],
 
       /* Connector conventions (see legend):
@@ -2026,7 +2110,15 @@ window.Logos = {
         { id: 'e-granted-record', from: 'granted', to: 'record',  style: 'ok',     route: 's', toDy: -12 },
         { id: 'e-denied-record',  from: 'denied',  to: 'record',  style: 'deny',   route: 's', toDy: 12 },
         { id: 'e-record-rag',     from: 'record',  to: 'rag',     style: 'feedback', route: 'rail', railY: ROW.r5,
-          label: 'documented outcomes available for retrieval', labelX: 1280, labelY: ROW.r5 - 12 }
+          label: 'documented outcomes available for retrieval', labelX: 1000, labelY: ROW.r5 - 12 },
+        /* security technology associations */
+        { id: 'e-iam-access',   from: 'iam',   to: 'access',  style: 'sec', route: 'v' },
+        { id: 'e-grd-orch',     from: 'grd',   to: 'orch',    style: 'sec', route: 'v' },
+        { id: 'e-apigw-vendor', from: 'apigw', to: 'vendor',  style: 'sec', route: 'h' },
+        { id: 'e-dlp-context',  from: 'dlp',   to: 'context', style: 'sec', route: 'v' },
+        { id: 'e-pam-action',   from: 'pam',   to: 'action',  style: 'sec', route: 'v' },
+        { id: 'e-action-siem',  from: 'action', to: 'siem',   style: 'sec', route: 'v' },
+        { id: 'e-dspm-record',  from: 'dspm',  to: 'record',  style: 'sec', route: 'v' }
       ],
 
       /* Static annotations drawn on the canvas */
@@ -2043,7 +2135,8 @@ window.Logos = {
           { style: 'human',       text: 'Human review' },
           { style: 'ok',          text: 'Outcome · granted' },
           { style: 'deny',        text: 'Outcome · denied' },
-          { style: 'feedback',    text: 'Record feedback' }
+          { style: 'feedback',    text: 'Record feedback' },
+          { style: 'sec',         text: 'Security technology' }
         ]
       }
     },
@@ -2054,23 +2147,23 @@ window.Logos = {
        alt    – edges presented as mutually exclusive alternatives (traced one after another) */
     trace: [
       { stage: 's1', title: 'Access Request',
-        caption: 'An elevated endpoint access request is raised. This is the only input to the workflow.',
-        nodes: ['access'] },
+        caption: 'An elevated endpoint access request is raised. Requester and device identity are verified before it is accepted.',
+        nodes: ['access', 'iam'], edges: ['e-iam-access'] },
       { stage: 's1', title: 'Cloud Queue',
         caption: 'The request is placed on the cloud queue, where it waits to be processed in order.',
         nodes: ['queue'], edges: ['e-access-queue'] },
       { stage: 's2', title: 'Orchestrator Agent',
         caption: 'The Orchestrator Agent takes the request from the queue and coordinates the evaluation.',
-        nodes: ['orch'], edges: ['e-queue-orch'] },
+        nodes: ['orch', 'grd'], edges: ['e-queue-orch', 'e-grd-orch'] },
       { stage: 's2', title: 'Orchestration',
         caption: 'The Orchestrator dispatches the Policy Agent and the Tool Agent in parallel.',
         nodes: ['policy', 'tool'], edges: [['e-orch-policy', 'e-orch-tool']] },
       { stage: 's2', title: 'Policy & tool integrations',
         caption: 'The Policy Agent consults Organization Policy; the Tool Agent queries Vendor Tools. Both exchanges are bidirectional.',
-        nodes: ['orgpolicy', 'vendor'], edges: [['e-policy-org', 'e-tool-vendor']] },
+        nodes: ['orgpolicy', 'vendor', 'apigw'], edges: [['e-policy-org', 'e-tool-vendor', 'e-apigw-vendor']] },
       { stage: 's3', title: 'Context assembly',
         caption: 'The Orchestrator assembles Context, and the RAG Agent enriches it with retrieved information.',
-        nodes: ['context', 'rag'], edges: [['e-orch-context', 'e-rag-context']] },
+        nodes: ['context', 'rag', 'dlp'], edges: [['e-orch-context', 'e-rag-context', 'e-dlp-context']] },
       { stage: 's3', title: 'Triage Agent',
         caption: 'The assembled Context flows into the Triage Agent, which is responsible for decisioning.',
         nodes: ['triage'], edges: ['e-context-triage'] },
@@ -2079,13 +2172,13 @@ window.Logos = {
         nodes: ['hil'], edges: ['e-triage-hil'] },
       { stage: 's4', title: 'Action Agent',
         caption: 'The decision proceeds to the Action Agent for controlled execution.',
-        nodes: ['action'], edges: ['e-triage-action'] },
+        nodes: ['action', 'pam', 'siem'], edges: ['e-triage-action', ['e-pam-action', 'e-action-siem']] },
       { stage: 's4', title: 'Two possible outcomes',
         caption: 'A request is either granted or denied, never both. Both branches are shown here as alternatives.',
         nodes: ['granted', 'denied'], alt: ['e-action-granted', 'e-action-denied'] },
       { stage: 's5', title: 'Record Update',
         caption: 'Whichever outcome applies, it is documented with its rationale in the record.',
-        nodes: ['record'], edges: [['e-granted-record', 'e-denied-record']] },
+        nodes: ['record', 'dspm'], edges: [['e-granted-record', 'e-denied-record', 'e-dspm-record']] },
       { stage: 's5', title: 'Record feedback',
         caption: 'Documented outcomes are available to the RAG Agent, so future evaluations can retrieve them.',
         nodes: ['rag'], edges: ['e-record-rag'] }
@@ -2117,36 +2210,32 @@ window.Logos = {
     subtitle: 'Agentic Compliance Intelligence & Automated Remediation',
 
     problem: {
-      eyebrow: 'The challenge today',
+      eyebrow: 'The business problem',
       statement: 'Fragmented security data. Manual reporting. Delayed remediation.',
-      support: 'Endpoint compliance monitoring relies on manual data consolidation and inconsistent assessments, delaying risk identification and increasing operational effort across a large device estate.',
+      support: 'Compliance visibility across more than 140,000 endpoints and servers depends on people pulling data from separate consoles, reconciling it by hand and chasing remediation one ticket at a time. Leadership sees the estate days late, and skilled teams spend their week producing the view instead of acting on it.',
       metrics: [
-        { value: '140K+',    label: 'devices and servers in scope' },
-        { value: '~97%',     label: 'approximate reported compliance', note: 'stakeholder estimate' },
-        { value: '16–20 hrs', label: 'weekly manual reporting effort', note: 'four recurring reports, ~4 hrs each' },
-        { value: '5 min',    label: 'target for selected on-demand insights', note: 'aspiration, not an achieved result' }
+        { value: '140K+',     label: 'endpoints and servers in scope' },
+        { value: '~97%',      label: 'reported compliance', note: 'stakeholder estimate, not independently validated' },
+        { value: '16–20 hrs', label: 'of expert time on manual reporting every week', note: 'four recurring reports, ~4 hrs each' },
+        { value: '5 min',     label: 'target to answer a priority question', note: 'aspiration · today it takes 1–2 hours' }
       ],
       issues: [
-        { title: 'Fragmented compliance visibility',
-          text: 'Security and device-management data sit in Microsoft Defender for Endpoint, Microsoft Intune and other operational sources. Teams consolidate it by hand to see compliance and device health.' },
-        { title: 'Manual reporting overhead',
-          text: 'Multiple exports, lookups and comparisons go into every report, consuming an estimated 16–20 hours a week and introducing avoidable human error.' },
-        { title: 'Slow risk identification',
-          text: 'Around 5,000–6,000 devices may need attention at any time, and the population shifts between reporting periods. On-demand analysis takes one to two hours today.' },
-        { title: 'Remediation coordination',
-          text: 'Not every noncompliant device needs the same treatment. Low-risk workstation issues may suit automation; server changes need change requests and management approval.' }
+        { title: 'Fragmented visibility', text: 'Security and device-management data live in separate consoles. No single view tells leadership which devices matter today.' },
+        { title: 'Reporting consumes the experts', text: 'Four recurring reports absorb 16–20 hours of skilled effort each week, and repeated exports and lookups introduce avoidable error.' },
+        { title: 'Risk is identified late', text: 'Around 5,000–6,000 devices may need attention at any time and the population shifts weekly, yet an on-demand answer takes one to two hours.' },
+        { title: 'Remediation is uneven', text: 'Low-risk workstation fixes wait in the same queue as server changes that rightly require change control and management approval.' }
       ],
-      direction: 'Proposed direction: consolidated collection, agent-led analysis and prioritization, scheduled and on-demand reporting, and controlled remediation with human approval where required.'
+      direction: 'Proposed direction: agents that consolidate the estate view, analyse and prioritise findings, deliver scheduled and on-demand insight in minutes, and remediate eligible low-risk issues under approval, with servers staying under change control.'
     },
 
     diagram: {
       viewBox: { w: 1856, h: 762 },
       stages: [
         { id: 's1', num: '01', title: 'Enterprise Data Sources',   x: 12,   w: 432, y: 16,  h: 506, desc: 'Telemetry from ~140K+ devices and servers' },
-        { id: 's2', num: '02', title: 'Agentic Intelligence Pipeline', x: 472, w: 908, y: 206, h: 148, desc: 'Scheduled collection · on-demand requests', descInline: true },
+        { id: 's2', num: '02', title: 'Agentic Intelligence Pipeline', x: 472, w: 908, y: 96, h: 258, desc: 'Scheduled collection · on-demand requests', descInline: true },
         { id: 's3', num: '03', title: 'Reporting',                 x: 1408, w: 440, y: 16,  h: 338, desc: 'Scheduled and on-demand insights' },
-        { id: 's4', num: '04', title: 'Controlled Remediation',    x: 1176, w: 672, y: 372, h: 338, titleAlign: 'right', desc: 'Servers require change control & manager approval',
-          note: 'Eligible low-risk workstation issues only · failed or unresolved attempts are reported, never assumed fixed' }
+        { id: 's4', num: '04', title: 'Controlled Remediation',    x: 940, w: 908, y: 372, h: 338, titleAlign: 'right', desc: 'Servers require change control & manager approval',
+          note: 'Eligible low-risk workstation issues only · failures are reported', noteTop: true }
       ],
 
       nodes: [
@@ -2159,32 +2248,48 @@ window.Logos = {
         node('addl', 'B', 'r3', { kind: 'external', icon: 'database', eyebrow: 'Unconfirmed', lines: ['Operational', 'Context'], stage: 's1',
           role: 'Device operational status and other asset information, where available. A third source (possibly a CMDB) was mentioned but is not confirmed; it is shown dashed and is not an established integration.' }),
 
-        node('collection', 'C', 'r2', { kind: 'agent', icon: 'inbox', eyebrow: 'Collection', lines: ['Collection', 'Agent'], stage: 's2',
+        node('collection', 'C', 'r2', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'inbox', eyebrow: 'Collection', lines: ['Collection', 'Agent'], stage: 's2',
           role: 'Periodically collects available endpoint and compliance information, consolidates it across the integrated systems and prepares structured data for analysis. Supports on-demand requests.' }),
-        node('orch', 'D', 'r2', { kind: 'agent', icon: 'hub', eyebrow: 'Coordination', lines: ['Orchestrator', 'Agent'], stage: 's2',
+        node('orch', 'D', 'r2', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'hub', eyebrow: 'Coordination', lines: ['Orchestrator', 'Agent'], stage: 's2',
           role: 'The coordination hub: manages the workflow between collection, analysis, prioritization and reporting, and routes findings into reporting and remediation.' }),
-        node('analysis', 'E', 'r2', { kind: 'agent', icon: 'search', eyebrow: 'Analysis', lines: ['Analysis', 'Agent'], stage: 's2',
+        node('analysis', 'E', 'r2', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'search', eyebrow: 'Analysis', lines: ['Analysis', 'Agent'], stage: 's2',
           role: 'Identifies compliance gaps from sensor health, antivirus, device status and other indicators; correlates device information and flags inconsistencies, e.g. a device that looks noncompliant in one system while its operational condition needs investigation.' }),
-        node('prior', 'F', 'r2', { kind: 'agent', icon: 'filter', eyebrow: 'Prioritization', lines: ['Prioritization', 'Agent'], stage: 's2',
+        node('prior', 'F', 'r2', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'filter', eyebrow: 'Prioritization', lines: ['Prioritization', 'Agent'], stage: 's2',
           role: 'Organises findings using available risk and operational context, separates routine compliance findings from potentially urgent security concerns, and routes results to reporting and proposed remediation. No numerical scoring method is assumed.' }),
 
-        node('reporting', 'G', 'r1', { kind: 'agent', icon: 'filetext', eyebrow: 'Reporting', lines: ['Reporting', 'Agent'], stage: 's3',
+        node('reporting', 'G', 'r1', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'filetext', eyebrow: 'Reporting', lines: ['Reporting', 'Agent'], stage: 's3',
           role: 'Generates compliance and device-health summaries for scheduled daily, weekly or monthly reports and targeted on-demand reports, including prioritized findings and remediation status.' }),
-        node('reports', 'H', 'r1', { kind: 'data', icon: 'chart', eyebrow: 'Insights', lines: ['Compliance', 'Reports'], stage: 's3',
+        node('reports', 'H', 'r1', { logo: 'powerbi', platform: 'Proposed · Power BI reports and dashboards over a SharePoint report library · to be confirmed', kind: 'data', icon: 'chart', eyebrow: 'Power BI', lines: ['Compliance', 'Reports'], stage: 's3',
           role: 'Reports and compliance insights ready for consumption on a schedule or on demand.' }),
-        node('rag', 'H', 'r2', { kind: 'proposed', icon: 'message', eyebrow: 'Proposed', lines: ['RAG Report', 'Assistant'], stage: 's3',
+        node('rag', 'H', 'r2', { logo: 'copilot', platform: 'Proposed enhancement · Copilot Studio assistant over the published reports', kind: 'proposed', icon: 'message', eyebrow: 'Copilot Studio', lines: ['RAG Report', 'Assistant'], stage: 's3',
           role: 'A proposed enhancement, not an established requirement: a retrieval-augmented chatbot that would let users query available reports and supporting knowledge in natural language.' }),
 
         node('assess', 'G', 'r3', { kind: 'process', icon: 'scale', eyebrow: 'Eligibility', lines: ['Remediation', 'Assessment'], stage: 's4',
           role: 'Assesses whether a prioritized finding is eligible for remediation and at what risk. Low-risk workstation issues may be automation candidates; higher-risk issues stay under human validation and established controls.' }),
-        node('approval', 'H', 'r3', { kind: 'human', icon: 'usercheck', eyebrow: 'Where required', lines: ['Human', 'Approval'], stage: 's4',
+        node('approval', 'H', 'r3', { platform: 'Proposed · Microsoft Teams approval card; server changes also raise a change request', kind: 'human', icon: 'usercheck', eyebrow: 'Teams approval', lines: ['Human', 'Approval'], stage: 's4',
           role: 'Required human approval before remediation. Server changes follow change-control procedures and need server manager approval; the system never modifies critical servers without authorization.' }),
-        node('remed', 'H', 'r4', { kind: 'agent', icon: 'wrench', eyebrow: 'Authorized', lines: ['Remediation', 'Agent'], stage: 's4',
+        node('remed', 'G', 'r4', { platform: 'Proposed · agent runtime driving Intune remediation scripts and Defender response actions under approval', kind: 'agent', icon: 'wrench', eyebrow: 'Authorized', lines: ['Remediation', 'Agent'], stage: 's4',
           role: 'Carries out authorized remediation for eligible issues. The stakeholder’s 50–70% workstation remediation figure is an exploratory ambition, not a verified target.' }),
-        node('verify', 'G', 'r4', { kind: 'process', icon: 'shieldcheck', eyebrow: 'Verification', lines: ['Verify', 'Device State'], stage: 's4',
+        node('verify', 'F', 'r4', { kind: 'process', icon: 'shieldcheck', eyebrow: 'Verification', lines: ['Verify', 'Device State'], stage: 's4',
           role: 'Verifies the resulting device state where possible. Failed or unresolved attempts are reported rather than treated as successful.' }),
-        node('status', 'F', 'r4', { kind: 'data', icon: 'filecheck', eyebrow: 'Recorded', lines: ['Status', 'Update'], stage: 's4',
-          role: 'Records the outcome and makes the updated information available to subsequent collection, analysis and reporting cycles.' })
+        node('status', 'E', 'r4', { logo: 'sharepoint', platform: 'Proposed · SharePoint / Dataverse status record · to be confirmed', kind: 'data', icon: 'filecheck', eyebrow: 'SharePoint', lines: ['Status', 'Update'], stage: 's4',
+          role: 'Records the outcome and makes the updated information available to subsequent collection, analysis and reporting cycles.' }),
+
+        /* security technologies */
+        node('iam', 'A', 'r1', { kind: 'sectech', icon: 'idbadge', eyebrow: 'Security · IAM', lines: ['Identity &', 'Access Mgmt'], stage: 's1', platform: 'Security technology category · product selected in security review',
+          role: 'Identity and access management for the enterprise tools: read-only, least-privilege service identities for Defender for Endpoint and Intune, scoped identities for every agent, and authenticated users whose permissions trim the reports and answers they can see.', detail: ['Authenticates people, services and agents with role- and attribute-based, least-privilege access', 'Each agent holds its own scoped identity; reviewers use strong authentication and conditional access', 'Protects against identity and privilege abuse and over-permissioned access'] }),
+        node('apigw', 'C', 'r2', { y: 162, kind: 'sectech', icon: 'plug', eyebrow: 'Security · API', lines: ['API Security', 'Gateway'], stage: 's2', platform: 'Security technology category · product selected in security review',
+          role: 'API security gateway for the Collection Agent: allow-listed connectors to the enterprise tools, vault-held credentials, schema validation and rate limiting.', detail: ['Allow-listed, authenticated connectors with credentials held in a vault', 'Schema and input validation, rate limiting and sandboxed execution', 'Protects against connector abuse and uncontrolled outbound calls'] }),
+        node('siem', 'D', 'r2', { y: 162, kind: 'sectech', icon: 'pulse', eyebrow: 'Security · SIEM', lines: ['Audit Logging', '& SIEM'], stage: 's2', platform: 'Security technology category · product selected in security review',
+          role: 'Audit logging and security monitoring fed by the Orchestrator: every collection run, finding, prioritisation, approval, remediation attempt and verification result is logged and forwarded to the security operations platform, including failed or unresolved attempts.', detail: ['Tamper-evident log of every decision, tool call, approval and outcome', 'Forwarded to the security operations platform with anomaly alerting', 'Evidence for audit, investigations and the review of agent behaviour'] }),
+        node('grd', 'E', 'r2', { y: 162, kind: 'sectech', icon: 'shieldai', eyebrow: 'Security · AI', lines: ['AI Guardrail', 'Enforcement'], stage: 's2', platform: 'Security technology category · product selected in security review',
+          role: 'Guardrail enforcement for the Analysis and Prioritization agents: outputs must reference the source signal, no device state or score is invented, task scope is bounded and tool use is allow-listed.', detail: ['Separates instructions from data and screens every prompt for injection', 'Validates outputs: decisions and summaries must cite their source and may not invent facts or scores', 'Bounds task scope and keeps tool use within a deny-by-default allow-list'] }),
+        node('dlp', 'G', 'r2', { kind: 'sectech', icon: 'filelock', eyebrow: 'Security · DLP', lines: ['Data Loss', 'Prevention'], stage: 's3', platform: 'Security technology category · product selected in security review',
+          role: 'Data loss prevention on reports and assistant answers: device and user identifiers carry sensitivity labels, distribution is limited to the intended audience and content is masked before it is shared.', detail: ['Policies on what may flow between connectors, prompts, outputs and notifications', 'Masks or blocks sensitive content before it leaves its boundary', 'Restricts delivery to the intended audience'] }),
+        node('dspm', 'E', 'r3', { kind: 'sectech', icon: 'dbscan', eyebrow: 'Security · DSPM', lines: ['Data Security', 'Posture Mgmt'], stage: 's4', platform: 'Security technology category · product selected in security review',
+          role: 'Data security posture management over collected device data, reports and status records: discovery, classification and labelling on arrival, with access exposure reviewed continuously.', detail: ['Discovers, classifies and labels the data in the stores the agents use', 'Reviews access exposure continuously', 'Trims retrieval and record access to the acting identity'] }),
+        node('pam', 'H', 'r4', { kind: 'sectech', icon: 'lockclock', eyebrow: 'Security · PAM', lines: ['Privileged', 'Access Mgmt'], stage: 's4', platform: 'Security technology category · product selected in security review',
+          role: 'Privileged access management for the Remediation Agent: just-in-time, time-bound privileged sessions scoped to the approved devices and allow-listed actions, recorded and revoked automatically.', detail: ['Just-in-time, time-bound, task-scoped elevation instead of standing privilege', 'Approved and recorded privileged sessions with automatic revocation', 'Protects against misuse of elevated rights and lateral movement'] })
       ],
 
       edges: [
@@ -2202,11 +2307,20 @@ window.Logos = {
         { id: 'e-reporting-reports', from: 'reporting', to: 'reports', style: 'flow', route: 'h' },
         { id: 'e-reports-rag',   from: 'reports', to: 'rag',   style: 'enrich', route: 'v', label: 'natural-language queries', labelSide: 'left' },
         { id: 'e-assess-approval', from: 'assess', to: 'approval', style: 'flow', route: 'h' },
-        { id: 'e-approval-remed', from: 'approval', to: 'remed', style: 'human', route: 'v', label: 'authorizes', labelSide: 'left' },
+        { id: 'e-approval-remed', from: 'approval', to: 'remed', style: 'human', route: 's', fromDy: 12, toDy: -12, label: 'authorizes', labelAt: 0.5, labelDy: 16 },
         { id: 'e-remed-verify',  from: 'remed',  to: 'verify', style: 'flow', route: 'h' },
         { id: 'e-verify-status', from: 'verify', to: 'status', style: 'flow', route: 'h' },
         { id: 'e-status-coll',   from: 'status', to: 'collection', style: 'feedback', route: 'rail', railY: RAIL,
-          label: 'updated device and compliance state informs the next collection cycle', labelX: 940, labelY: RAIL - 12 }
+          label: 'updated state informs the next collection cycle', labelX: 760, labelY: RAIL - 12 },
+        /* security technology associations */
+        { id: 'e-iam-mde',       from: 'iam',   to: 'mde',        style: 'sec', route: 'h' },
+        { id: 'e-apigw-coll',    from: 'apigw', to: 'collection', style: 'sec', route: 'v' },
+        { id: 'e-siem-orch',     from: 'siem',  to: 'orch',       style: 'sec', route: 'v' },
+        { id: 'e-grd-analysis',  from: 'grd',   to: 'analysis',   style: 'sec', route: 'v' },
+        { id: 'e-dlp-reporting', from: 'dlp',   to: 'reporting',  style: 'sec', route: 'v' },
+        { id: 'e-dlp-rag',       from: 'dlp',   to: 'rag',        style: 'sec', route: 'h' },
+        { id: 'e-dspm-status',   from: 'dspm',  to: 'status',     style: 'sec', route: 'v' },
+        { id: 'e-pam-remed',     from: 'pam',   to: 'remed',      style: 'sec', route: 'h' }
       ],
 
       legend: {
@@ -2216,7 +2330,8 @@ window.Logos = {
           { style: 'stream',   text: 'Enterprise data stream' },
           { style: 'enrich',   text: 'Unconfirmed · proposed' },
           { style: 'human',    text: 'Human approval', bi: false },
-          { style: 'feedback', text: 'Status feedback' }
+          { style: 'feedback', text: 'Status feedback' },
+          { style: 'sec',      text: 'Security technology' }
         ]
       }
     },
@@ -2227,16 +2342,16 @@ window.Logos = {
         nodes: ['estate'] },
       { stage: 's1', title: 'Enterprise data sources',
         caption: 'Devices report into Microsoft Defender for Endpoint and Microsoft Intune. A third operational source is possible but unconfirmed, so it is shown dotted.',
-        nodes: ['mde', 'intune', 'addl'], edges: [['e-estate-mde', 'e-estate-intune', 'e-estate-addl']] },
+        nodes: ['mde', 'intune', 'addl', 'iam'], edges: [['e-estate-mde', 'e-estate-intune', 'e-estate-addl', 'e-iam-mde']] },
       { stage: 's2', title: 'Collection',
         caption: 'Distinct information streams converge on the Collection Agent, which consolidates them into structured data on a schedule or on demand.',
-        nodes: ['collection'], edges: [['e-mde-coll', 'e-intune-coll', 'e-addl-coll']] },
+        nodes: ['collection', 'apigw'], edges: [['e-mde-coll', 'e-intune-coll', 'e-addl-coll', 'e-apigw-coll']] },
       { stage: 's2', title: 'Orchestration',
         caption: 'The Orchestrator Agent takes the consolidated data and coordinates the analysis, prioritization and reporting workflow.',
-        nodes: ['orch'], edges: ['e-coll-orch'] },
+        nodes: ['orch', 'siem'], edges: ['e-coll-orch', 'e-siem-orch'] },
       { stage: 's2', title: 'Analysis',
         caption: 'The Analysis Agent identifies compliance gaps and correlates device information. A device can look noncompliant in one system while its operational condition needs investigation.',
-        nodes: ['analysis'], edges: ['e-orch-analysis'] },
+        nodes: ['analysis', 'grd'], edges: ['e-orch-analysis', 'e-grd-analysis'] },
       { stage: 's2', title: 'Prioritization',
         caption: 'Findings are organised by available risk and operational context, separating routine compliance items from potentially urgent security concerns.',
         nodes: ['prior'], edges: ['e-analysis-prior'] },
@@ -2245,19 +2360,19 @@ window.Logos = {
         nodes: ['reporting', 'assess'], edges: [['e-prior-reporting', 'e-prior-assess']] },
       { stage: 's3', title: 'Compliance reports',
         caption: 'The Reporting Agent generates compliance and device-health summaries, available as scheduled daily, weekly or monthly reports and targeted on-demand reports.',
-        nodes: ['reports'], edges: ['e-reporting-reports'] },
+        nodes: ['reports', 'dlp'], edges: ['e-reporting-reports', 'e-dlp-reporting'] },
       { stage: 's3', title: 'Proposed report assistant',
         caption: 'A proposed enhancement: a RAG-powered assistant that would let users query reports and supporting knowledge in natural language. Not an established requirement.',
-        nodes: ['rag'], edges: ['e-reports-rag'] },
+        nodes: ['rag'], edges: ['e-reports-rag', 'e-dlp-rag'] },
       { stage: 's4', title: 'Eligibility and approval',
         caption: 'Each candidate is assessed for automation suitability and risk. Human approval is required where appropriate; server changes always go through change control and server manager approval.',
         nodes: ['approval'], edges: ['e-assess-approval'] },
       { stage: 's4', title: 'Authorized remediation',
         caption: 'For an eligible, approved example such as a low-risk workstation issue, the Remediation Agent carries out the authorized change.',
-        nodes: ['remed'], edges: ['e-approval-remed'] },
+        nodes: ['remed', 'pam'], edges: ['e-approval-remed', 'e-pam-remed'] },
       { stage: 's4', title: 'Verification and status',
         caption: 'The resulting device state is verified where possible and recorded. Failed or unresolved attempts are reported, not treated as fixed.',
-        nodes: ['verify', 'status'], edges: ['e-remed-verify', 'e-verify-status'] },
+        nodes: ['verify', 'status', 'dspm'], edges: ['e-remed-verify', 'e-verify-status', 'e-dspm-status'] },
       { stage: 's4', title: 'Next cycle',
         caption: 'The updated status feeds the next collection cycle, so subsequent analysis and reports reflect the current state. No self-retraining or policy change is implied.',
         nodes: ['collection'], edges: ['e-status-coll'] }
@@ -2301,37 +2416,37 @@ window.Logos = {
   const S = {
     monitor: { stage: 's1', title: 'Monitor approved sources', nodes: ['registry', 'sources'], edges: ['e-registry-sources'],
       caption: 'On the configured schedule, the Collection Workflow consults the approved source registry. Only listed feeds, APIs and mailboxes are monitored; there is no open web browsing.' },
-    capture: { stage: 's1', title: 'Capture source evidence', nodes: ['collect'], edges: ['e-sources-collect'],
+    capture: { stage: 's1', title: 'Capture source evidence', nodes: ['collect', 'csg'], edges: [['e-sources-collect', 'e-csg-sources']],
       caption: 'A candidate announcement is collected with its source identity, source URL, publication time where stated, and detection time.' },
-    detectNew: { stage: 's2', title: 'Detect: new announcement', nodes: ['detect'], edges: ['e-collect-detect', 'e-detect-repo'],
+    detectNew: { stage: 's2', title: 'Detect: new announcement', nodes: ['detect'], edges: [['e-collect-detect', 'e-csg-detect'], 'e-detect-repo'],
       caption: 'Metadata is normalised and compared with existing records by stable source identifier, normalised source identity and content version. No match: a new announcement continues to analysis.' },
-    detectDup: { stage: 's2', title: 'Detect: unchanged duplicate', nodes: ['detect'], edges: ['e-collect-detect', 'e-detect-repo'],
+    detectDup: { stage: 's2', title: 'Detect: unchanged duplicate', nodes: ['detect'], edges: [['e-collect-detect', 'e-csg-detect'], 'e-detect-repo'],
       caption: 'Same stable identifier, same normalised identity, same content version as an existing record. This is an unchanged duplicate, not a new announcement. Title matching alone is never relied on.' },
-    detectRev: { stage: 's2', title: 'Detect: material revision', nodes: ['detect'], edges: ['e-collect-detect', 'e-detect-repo'],
+    detectRev: { stage: 's2', title: 'Detect: material revision', nodes: ['detect'], edges: [['e-collect-detect', 'e-csg-detect'], 'e-detect-repo'],
       caption: 'The stable identifier matches an existing announcement but the content version differs. This is a material revision: it continues as an update to the existing record and is not suppressed as a duplicate.' },
-    analyse: { stage: 's2', title: 'Generate structured intelligence', nodes: ['analysis'], edges: ['e-detect-analysis'],
+    analyse: { stage: 's2', title: 'Generate structured intelligence', nodes: ['analysis', 'grd'], edges: [['e-detect-analysis', 'e-grd-analysis']],
       caption: 'The approved AI capability produces a concise factual summary, a category, vendor and product tags, source-stated severity (or “Not stated”) and potential relevance to configured STS ownership.' },
-    analyseHigh: { stage: 's2', title: 'Generate structured intelligence', nodes: ['analysis'], edges: ['e-detect-analysis'],
+    analyseHigh: { stage: 's2', title: 'Generate structured intelligence', nodes: ['analysis', 'grd'], edges: [['e-detect-analysis', 'e-grd-analysis']],
       caption: 'Summary, category and tags are produced. Source-stated severity: High. Source severity is kept separate from internal review priority and is never invented when the source states none.' },
-    analyseRev: { stage: 's2', title: 'Re-analyse the revision', nodes: ['analysis'], edges: ['e-detect-analysis'],
+    analyseRev: { stage: 's2', title: 'Re-analyse the revision', nodes: ['analysis', 'grd'], edges: [['e-detect-analysis', 'e-grd-analysis']],
       caption: 'The changed content is re-analysed. The summary and classification are regenerated; the record keeps its identity and gains a new version.' },
-    gateRoutine: { stage: 's3', title: 'Routing gate: routine', nodes: ['gate'], edges: ['e-analysis-gate', 'e-gate-repo'],
+    gateRoutine: { stage: 's3', title: 'Routing gate: routine', nodes: ['gate', 'siem'], edges: ['e-analysis-gate', ['e-gate-repo', 'e-siem-gate']],
       caption: 'Approved rules check source completeness, review requirements and configured vendor, product and domain ownership. Routine and sufficiently supported: it proceeds under approved publication rules without a reviewer.' },
-    gateRev: { stage: 's3', title: 'Routing gate: applicable rules', nodes: ['gate'], edges: ['e-analysis-gate', 'e-gate-repo'],
+    gateRev: { stage: 's3', title: 'Routing gate: applicable rules', nodes: ['gate', 'siem'], edges: ['e-analysis-gate', ['e-gate-repo', 'e-siem-gate']],
       caption: 'Publication rules apply to the revision as to any announcement. A routine, well-supported update proceeds; a high-impact change would route to a reviewer.' },
-    gateReview: { stage: 's3', title: 'Routing gate: review required', nodes: ['gate', 'review'], edges: ['e-analysis-gate', 'e-gate-repo', 'e-gate-review'],
+    gateReview: { stage: 's3', title: 'Routing gate: review required', nodes: ['gate', 'review', 'siem'], edges: ['e-analysis-gate', ['e-gate-repo', 'e-siem-gate'], 'e-gate-review'],
       caption: 'High-impact: the gate routes the item to a designated reviewer and records it as pending review. Nothing has been published yet.' },
-    gateHold: { stage: 's3', title: 'Routing gate: hold for review', nodes: ['gate', 'review'], edges: ['e-analysis-gate', 'e-gate-repo', 'e-gate-review'],
+    gateHold: { stage: 's3', title: 'Routing gate: hold for review', nodes: ['gate', 'review', 'siem'], edges: ['e-analysis-gate', ['e-gate-repo', 'e-siem-gate'], 'e-gate-review'],
       caption: 'Required source evidence is incomplete, or no configured owner matches the vendor, product or domain. The item is held for review and recorded as pending. It is not published broadly by default.' },
-    persist: { stage: 's4', title: 'Persist published state', nodes: ['publish', 'repo'], edges: ['e-gate-publish', 'e-publish-repo'],
+    persist: { stage: 's4', title: 'Persist published state', nodes: ['publish', 'repo', 'dlp', 'dspm'], edges: ['e-gate-publish', ['e-publish-repo', 'e-dlp-publish', 'e-dspm-repo']],
       caption: 'Publish & Notify writes the approved publication state to the repository first, so the record exists before anyone is alerted.' },
-    persistRev: { stage: 's4', title: 'Persist the updated record', nodes: ['publish', 'repo'], edges: ['e-gate-publish', 'e-publish-repo'],
+    persistRev: { stage: 's4', title: 'Persist the updated record', nodes: ['publish', 'repo', 'dlp', 'dspm'], edges: ['e-gate-publish', ['e-publish-repo', 'e-dlp-publish', 'e-dspm-repo']],
       caption: 'The revision is stored as a new version of the existing record. The earlier version and its source evidence are retained.' },
-    alert: { stage: 's4', title: 'Targeted Teams alert', nodes: ['teams'], edges: ['e-publish-teams'],
+    alert: { stage: 's4', title: 'Targeted Teams alert', nodes: ['teams', 'iam'], edges: [['e-publish-teams', 'e-iam-teams']],
       caption: 'Then the targeted notification reaches the configured pilot audience with category, product, source link and publication status. Delivery status is recorded.' },
-    alertRev: { stage: 's4', title: 'Update alert', nodes: ['teams'], edges: ['e-publish-teams'],
+    alertRev: { stage: 's4', title: 'Update alert', nodes: ['teams', 'iam'], edges: [['e-publish-teams', 'e-iam-teams']],
       caption: 'An update notification, marked as a revision of the earlier announcement, goes to the same configured audience.' },
-    search: { stage: 's5', title: 'Searchable afterwards', nodes: ['copilot', 'users'], edges: ['e-repo-copilot', 'e-users-copilot'],
+    search: { stage: 's5', title: 'Searchable afterwards', nodes: ['copilot', 'users', 'iam'], edges: ['e-repo-copilot', ['e-users-copilot', 'e-iam-users']],
       caption: 'Separately, and only when someone asks, authorized users query published records through Copilot and receive source-referenced answers. A subsequent user interaction, not an ingestion stage.' }
   };
 
@@ -2355,12 +2470,12 @@ window.Logos = {
           gate: { action: 'Reviewer approves publication', hint: 'Simulated action · approves publication only, never a production change' } },
         { stage: 's3', title: 'Approved for publication', nodes: ['publish'], edges: ['e-review-publish'],
           caption: 'The reviewer approves, or edits and approves. Approval to publish is not approval to install, change or accept risk. Withholding instead would record a reason and send no audience alert.' },
-        { stage: 's4', title: 'Persist, then alert', nodes: ['repo', 'teams'], edges: ['e-publish-repo', 'e-publish-teams'],
+        { stage: 's4', title: 'Persist, then alert', nodes: ['repo', 'teams', 'dlp', 'dspm', 'iam'], edges: [['e-publish-repo', 'e-dlp-publish', 'e-dspm-repo'], ['e-publish-teams', 'e-iam-teams']],
           caption: `The published state is persisted first; then the targeted alert is delivered with status “${STATUS.approved}”.` }] },
     { id: 'hold', short: 'Insufficient evidence', title: 'Insufficient evidence or unmapped owner',
       description: 'held for review with the missing evidence or routing configuration explained. Not published broadly by default.',
       steps: [S.monitor, S.capture, S.detectNew,
-        { stage: 's2', title: 'Generate structured intelligence', nodes: ['analysis'], edges: ['e-detect-analysis'],
+        { stage: 's2', title: 'Generate structured intelligence', nodes: ['analysis', 'grd'], edges: [['e-detect-analysis', 'e-grd-analysis']],
           caption: 'The summary is produced, but the source states no severity (“Not stated”) and the product cannot be matched to any configured STS ownership.' },
         S.gateHold,
         { stage: 's3', title: 'Reviewer notified · held', nodes: ['teams'], edges: ['e-review-teams'],
@@ -2378,14 +2493,15 @@ window.Logos = {
     pages: ['cover', 'architecture', 'workflow', 'components', 'examples', 'scope'],
 
     problem: {
-      eyebrow: 'The challenge today',
-      statement: 'OEM updates are scattered across vendor channels, making it difficult to identify what changed, why it matters, and which team should review it.',
+      eyebrow: 'The business problem',
+      statement: 'Vendor advisories and product changes reach STS through dozens of channels. Knowing what changed, why it matters and who must act depends on an individual noticing.',
+      support: 'Security Technology Services receives releases, security advisories and lifecycle notices through portals, feeds, mailboxes and blogs. Coverage depends on who is subscribed and available, so material updates can be missed while generic alerts add noise, and no searchable record of what was reviewed or published exists.',
       issues: [
-        { title: 'Fragmented information', text: 'Releases, advisories, and lifecycle changes arrive through different sources and formats.' },
-        { title: 'Manual monitoring', text: 'Coverage depends on individual subscriptions, availability, and repeated portal checks.' },
-        { title: 'Untargeted notifications', text: 'Important updates can be missed while generic alerts create unnecessary noise.' }
+        { title: 'Fragmented intelligence', text: 'Releases, advisories and lifecycle changes arrive in different sources and formats, with no single trusted feed.' },
+        { title: 'Coverage by individual effort', text: 'Monitoring depends on personal subscriptions, availability and repeated portal checks. It does not scale and leaves gaps.' },
+        { title: 'Untargeted, unrecorded alerts', text: 'Important updates can be missed while generic alerts create noise, and there is no traceable record of what was reviewed, published or withheld.' }
       ],
-      direction: 'Proposed direction: approved-source monitoring, evidence-backed summaries, controlled review, targeted notifications, and searchable history.',
+      direction: 'Proposed direction: approved-source monitoring, evidence-backed summaries, controlled review, targeted notifications and a searchable history, delivered as a controlled MVP.',
       scopeNote: 'Proposed MVP · 3–5 OEMs · One STS pilot group'
     },
 
@@ -2400,35 +2516,35 @@ window.Logos = {
         { id: 's5', num: '05', title: 'Search & History',      x: 1644, w: 204 }
       ],
       nodes: [
-        node('registry', 'A', 'r1', { kind: 'config', icon: 'clipboard', eyebrow: 'Configuration', lines: ['Source', 'Registry'], stage: 's1', platform: 'SharePoint list (proposed)',
+        node('registry', 'A', 'r1', { logo: 'sharepoint', kind: 'config', icon: 'clipboard', eyebrow: 'SharePoint', lines: ['Source', 'Registry'], stage: 's1', platform: 'SharePoint list (proposed)',
           role: 'The approved source registry: which feeds, APIs and mailboxes may be monitored, for which vendor, and who owns them. Collection never goes beyond this list.',
           detail: ['Reference component, maintained by source owners', 'No unrestricted web browsing is implied'] }),
         node('sources', 'A', 'r2', { kind: 'external', icon: 'rss', eyebrow: 'Approved only', lines: ['Approved', 'OEM Sources'], stage: 's1', platform: 'Vendor portals, RSS, APIs, email',
           role: 'Trusted vendor channels listed in the registry: RSS feeds, APIs, vendor emails and other supported sources for product releases, feature announcements, security advisories and lifecycle updates.',
           detail: ['Specific OEMs are not yet selected (3–5 planned for the MVP)'] }),
-        node('collect', 'A', 'r3', { kind: 'process', icon: 'inbox', eyebrow: 'Power Automate', lines: ['Collection', 'Workflow'], stage: 's1', platform: 'Power Automate · approved connectors',
+        node('collect', 'A', 'r3', { logo: 'powerautomate', kind: 'process', icon: 'inbox', eyebrow: 'Power Automate', lines: ['Collection', 'Workflow'], stage: 's1', platform: 'Power Automate · approved connectors',
           role: 'Runs on a configured schedule (on-demand runs are possible) and collects candidate announcements, retaining source identity, source URL, publication time when available and detection time.',
           detail: ['Scheduler, connectors and storage are proposed, not yet integrated'] }),
 
-        node('detect', 'B', 'r3', { kind: 'process', icon: 'compare', eyebrow: 'Workflow logic', lines: ['Normalize', '& Detect'], stage: 's2', platform: 'Power Automate',
+        node('detect', 'B', 'r3', { logo: 'powerautomate', kind: 'process', icon: 'compare', eyebrow: 'Power Automate', lines: ['Normalize', '& Detect'], stage: 's2', platform: 'Power Automate',
           role: 'Normalises metadata and compares the candidate against existing records. Three outcomes: new announcement, material revision of an existing announcement, or unchanged duplicate.',
           detail: ['Stable source identifiers where available', 'Normalised source identity and content/version comparison as supporting mechanisms', 'Title matching alone is not treated as reliable'] }),
-        node('analysis', 'C', 'r3', { kind: 'agent', icon: 'sparkles', eyebrow: 'Approved AI', lines: ['Intelligence', 'Analysis'], stage: 's2', platform: 'Approved AI capability',
+        node('analysis', 'C', 'r3', { logo: 'azure', kind: 'agent', icon: 'sparkles', eyebrow: 'Azure OpenAI', lines: ['Intelligence', 'Analysis'], stage: 's2', platform: 'Proposed · Azure OpenAI through an approved connector (alternative: AI Builder) · to be confirmed',
           role: 'Produces a concise factual summary, category, vendor and product tags, source-stated severity where available, and potential relevance to configured STS ownership.',
           detail: ['Missing severity stays “Not stated” — no invented score', 'Source-stated severity is separate from internal review priority', 'Does not establish which internal installations are affected'] }),
         node('dup', 'C', 'r5', { kind: 'stop', icon: 'stop', eyebrow: 'No alert', lines: ['Duplicate', 'Recorded'], stage: 's2', platform: 'Repository observation',
           role: `Terminal outcome for an unchanged duplicate: the observation is recorded against the existing announcement and processing stops (status “${STATUS.duplicate}”). No AI re-analysis, no publication, no audience alert.` }),
 
-        node('gate', 'D', 'r3', { kind: 'process', icon: 'scale', eyebrow: 'Approved rules', lines: ['Review &', 'Routing Gate'], stage: 's3', platform: 'Workflow rules · ownership configuration',
+        node('gate', 'D', 'r3', { logo: 'powerautomate', kind: 'process', icon: 'scale', eyebrow: 'Power Automate', lines: ['Review &', 'Routing Gate'], stage: 's3', platform: 'Workflow rules · ownership configuration',
           role: 'Checks source completeness, review requirements and configured vendor/product/domain ownership. Routine, sufficiently supported items proceed under approved publication rules; high-impact, ambiguous, low-confidence or unmapped items require reviewer attention.',
           detail: ['Records the pending-review state in the repository', 'Triggers a designated-reviewer notification for items awaiting review'] }),
-        node('review', 'E', 'r2', { kind: 'human', icon: 'usercheck', eyebrow: 'Reviewer', lines: ['Human', 'Review'], stage: 's3', platform: 'Designated reviewer',
+        node('review', 'E', 'r2', { kind: 'human', icon: 'usercheck', eyebrow: 'Teams approval', lines: ['Human', 'Review'], stage: 's3', platform: 'Designated reviewer · proposed Microsoft Teams approval card',
           role: 'A designated reviewer can approve publication, edit and approve, or withhold publication with a recorded reason. A real branch from the gate — not a mandatory step for every routine announcement.',
           detail: ['Approval to publish is not approval to make a production change', 'Held and pending items are visible in the authorized reviewer view only'] }),
         node('withheld', 'E', 'r1', { kind: 'deny', icon: 'x', eyebrow: 'With reason', lines: ['Publication', 'Withheld'], stage: 's3', platform: 'Repository state',
           role: `Terminal outcome when the reviewer withholds publication (status “${STATUS.withheld}”). The reason is recorded; no audience alert is sent; the record stays traceable.` }),
 
-        node('publish', 'F', 'r3', { kind: 'process', icon: 'send', eyebrow: 'Power Automate', lines: ['Publish', '& Notify'], stage: 's4', platform: 'Power Automate',
+        node('publish', 'F', 'r3', { logo: 'powerautomate', kind: 'process', icon: 'send', eyebrow: 'Power Automate', lines: ['Publish', '& Notify'], stage: 's4', platform: 'Power Automate',
           role: 'Persists the approved publication state in the repository first, then delivers the targeted Teams notification and records its delivery status.',
           detail: ['Sequence: ① persist the published record, ② send the audience alert', 'Does not install patches or change configurations'] }),
         node('teams', 'G', 'r2', { kind: 'product', logo: 'teams', eyebrow: 'Targeted alert', lines: ['Microsoft', 'Teams'], stage: 's4', platform: 'Microsoft Teams',
@@ -2442,7 +2558,21 @@ window.Logos = {
           detail: ['Ordinary answers use published records only', 'Pending-review content appears only in an explicitly authorized reviewer view', 'Answers state when no published source establishes a fact'] }),
         node('repo', 'H', 'r3', { kind: 'product', logo: 'sharepoint', eyebrow: 'SharePoint', lines: ['OEM Release', 'Repository'], stage: 's5', platform: 'SharePoint',
           role: 'Stores announcement identity, versions, source evidence, summaries, classifications, review state and notification history.',
-          detail: ['Populated throughout the cycle, not only at the end', 'Candidate, pending-review, withheld, published and failed-processing states remain traceable'] })
+          detail: ['Populated throughout the cycle, not only at the end', 'Candidate, pending-review, withheld, published and failed-processing states remain traceable'] }),
+
+        /* security technologies */
+        node('csg', 'B', 'r2', { kind: 'sectech', icon: 'rosette', eyebrow: 'Security · Content', lines: ['Content', 'Sanitization'], stage: 's2', platform: 'Security technology category · product selected in security review',
+          role: 'Secure content gateway for inbound vendor material: authenticates feeds and senders, scans links and attachments, and removes embedded instructions or active content so that only sanitised text reaches detection and analysis.', detail: ['Feed and sender authentication; link and attachment scanning', 'Strips embedded instructions and active content before analysis', 'Protects against spoofed, poisoned or tampered inputs'] }),
+        node('grd', 'C', 'r2', { kind: 'sectech', icon: 'shieldai', eyebrow: 'Security · AI', lines: ['AI Guardrail', 'Enforcement'], stage: 's2', platform: 'Security technology category · product selected in security review',
+          role: 'Guardrail enforcement around the AI capability: vendor content is handled as untrusted data, never as instructions; prompts are screened for injection; outputs must cite the source and may not invent a severity.', detail: ['Separates instructions from data and screens every prompt for injection', 'Validates outputs: decisions and summaries must cite their source and may not invent facts or scores', 'Bounds task scope and keeps tool use within a deny-by-default allow-list'] }),
+        node('siem', 'D', 'r2', { kind: 'sectech', icon: 'pulse', eyebrow: 'Security · SIEM', lines: ['Audit Logging', '& SIEM'], stage: 's3', platform: 'Security technology category · product selected in security review',
+          role: 'Audit logging and security monitoring fed by the routing gate and the workflow: every collection run, detection outcome, routing decision, review action, publication and delivery status is logged and forwarded to the security operations platform, including withheld and failed paths.', detail: ['Tamper-evident log of every decision, tool call, approval and outcome', 'Forwarded to the security operations platform with anomaly alerting', 'Evidence for audit, investigations and the review of agent behaviour'] }),
+        node('dlp', 'F', 'r4', { kind: 'sectech', icon: 'filelock', eyebrow: 'Security · DLP', lines: ['Data Loss', 'Prevention'], stage: 's4', platform: 'Security technology category · product selected in security review',
+          role: 'Data loss prevention on outbound publication: connector data policies and notification rules keep alerts targeted to the approved audience and free of internal data.', detail: ['Policies on what may flow between connectors, prompts, outputs and notifications', 'Masks or blocks sensitive content before it leaves its boundary', 'Restricts delivery to the intended audience'] }),
+        node('iam', 'G', 'r1', { kind: 'sectech', icon: 'idbadge', eyebrow: 'Security · IAM', lines: ['Identity &', 'Access Mgmt'], stage: 's4', platform: 'Security technology category · product selected in security review',
+          role: 'Identity and access management for audiences and roles: authenticated pilot-group members, designated reviewers and source owners with conditional access; Copilot runs in the asking user\'s context so permissions trim what it can retrieve.', detail: ['Authenticates people, services and agents with role- and attribute-based, least-privilege access', 'Each agent holds its own scoped identity; reviewers use strong authentication and conditional access', 'Protects against identity and privilege abuse and over-permissioned access'] }),
+        node('dspm', 'G', 'r4', { kind: 'sectech', icon: 'dbscan', eyebrow: 'Security · DSPM', lines: ['Data Security', 'Posture Mgmt'], stage: 's4', platform: 'Security technology category · product selected in security review',
+          role: 'Data security posture management over the release repository: sensitivity labelling, access reviews and a separately permissioned reviewer scope, so pending-review material never surfaces as published knowledge.', detail: ['Discovers, classifies and labels the data in the stores the agents use', 'Reviews access exposure continuously', 'Trims retrieval and record access to the acting identity'] })
       ],
 
       edges: [
@@ -2462,7 +2592,16 @@ window.Logos = {
         { id: 'e-repo-copilot',     from: 'repo',    to: 'copilot', style: 'enrich', route: 'v', label: 'published records', labelSide: 'left' },
         { id: 'e-users-copilot',    from: 'users',   to: 'copilot', style: 'integration', route: 'v', bidirectional: true, label: 'question · answer', labelSide: 'left' },
         { id: 'e-detect-repo',      from: 'detect',  to: 'repo',    style: 'feedback', route: 'rail', railY: RAIL, label: 'compare · candidate & observation records', labelX: 560, labelY: RAIL - 12 },
-        { id: 'e-gate-repo',        from: 'gate',    to: 'repo',    style: 'feedback', route: 'rail', railY: RAIL, label: 'pending-review & routing state', labelX: 1270, labelY: RAIL - 12 }
+        { id: 'e-gate-repo',        from: 'gate',    to: 'repo',    style: 'feedback', route: 'rail', railY: RAIL, label: 'pending-review & routing state', labelX: 1270, labelY: RAIL - 12 },
+        /* security technology associations */
+        { id: 'e-csg-sources',  from: 'csg',  to: 'sources',  style: 'sec', route: 'h' },
+        { id: 'e-csg-detect',   from: 'csg',  to: 'detect',   style: 'sec', route: 'v' },
+        { id: 'e-grd-analysis', from: 'grd',  to: 'analysis', style: 'sec', route: 'v' },
+        { id: 'e-siem-gate',    from: 'siem', to: 'gate',     style: 'sec', route: 'v' },
+        { id: 'e-dlp-publish',  from: 'dlp',  to: 'publish',  style: 'sec', route: 'v' },
+        { id: 'e-iam-users',    from: 'iam',  to: 'users',    style: 'sec', route: 'h' },
+        { id: 'e-iam-teams',    from: 'iam',  to: 'teams',    style: 'sec', route: 'v' },
+        { id: 'e-dspm-repo',    from: 'dspm', to: 'repo',     style: 'sec', route: 's', toDy: 24 }
       ],
 
       legend: {
@@ -2475,7 +2614,8 @@ window.Logos = {
           { style: 'deny',        text: 'Withheld publication' },
           { style: 'stop',        text: 'Duplicate · stop' },
           { style: 'integration', text: 'Question · answer' },
-          { style: 'feedback',    text: 'Operational history' }
+          { style: 'feedback',    text: 'Operational history' },
+          { style: 'sec',         text: 'Security technology' }
         ]
       }
     },
