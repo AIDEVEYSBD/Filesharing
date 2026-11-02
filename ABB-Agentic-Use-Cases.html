@@ -637,6 +637,63 @@ html.reduced-motion .wf.playing .wf-step.active { transform: none; }
 .node.active .chip.has-logo .chip-bg { fill: #fff; stroke: var(--line); }
 .insp-platform.sec { color: var(--sec); background: var(--sec-soft); }
 
+/* ---- existing knowledge & records (process know-how, manual effort history) ---- */
+.node.kind-knowledge .node-bg { stroke: #c9c3b8; stroke-dasharray: 7 3; }
+.kind-knowledge .chip-bg { fill: var(--warm-soft); } .kind-knowledge .ico { stroke: var(--warm); }
+.node.kind-knowledge .node-eyebrow { fill: var(--warm); }
+.node.kind-knowledge.active .node-bg { stroke-dasharray: none; stroke: var(--warm); }
+.node.kind-knowledge.active .chip-bg { fill: var(--warm); } .node.kind-knowledge.active .node-ring { stroke: var(--warm); }
+.insp-kind.kind-knowledge { color: var(--warm); background: var(--warm-soft); }
+.insp-hint { display: flex; align-items: center; gap: 7px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line-soft); font-size: 11.5px; font-weight: 600; color: var(--steel); letter-spacing: .02em; }
+.insp-hint .ui-ico { width: 14px; height: 14px; }
+
+/* ---- hosting modal (PaaS components, SKUs per cloud, quantities) ---- */
+.hmodal { position: absolute; inset: 0; z-index: 12; background: rgba(27, 30, 35, .38); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(3px); animation: fade-in .2s var(--ease); }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.hm-card { width: 1240px; max-height: 980px; display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 30px 80px rgba(27, 30, 35, .28); overflow: hidden; animation: pop-in .22s var(--ease); }
+.hm-head { display: grid; grid-template-columns: 1fr auto; column-gap: 24px; align-items: start; padding: 26px 30px 18px; border-bottom: 1px solid var(--line-soft); }
+.hm-kind { display: flex; align-items: center; gap: 10px; }
+.hm-kind .insp-stage { font-size: 11.5px; }
+.hm-head h2 { margin: 10px 0 0; font-size: 28px; font-weight: 600; letter-spacing: -.02em; line-height: 1.15; }
+.hm-platform { display: inline-block; margin-top: 8px; font-size: 12.5px; font-weight: 500; color: var(--ink-3); }
+.hm-model { display: inline-flex; align-items: center; gap: 8px; margin-top: 0; padding: 7px 12px; border-radius: 8px; background: var(--steel-soft); color: var(--steel); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.hm-model .ui-ico { width: 16px; height: 16px; }
+.hm-model.m-saas { background: #f0f0ee; color: var(--ink-2); }
+.hm-model.m-people { background: var(--accent-soft); color: var(--accent); }
+.hm-model.m-none { background: var(--slate-soft); color: var(--slate); }
+.hm-model.m-ext { background: var(--warm-soft); color: var(--warm); }
+.hm-top-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.hm-body { padding: 18px 30px 8px; overflow: auto; min-height: 0; }
+.hm-summary { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ink-2); max-width: 1080px; }
+.hm-runtime { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0 0; padding: 10px 14px; border-radius: 10px; background: var(--lane); border: 1px solid var(--line-soft); font-size: 13px; line-height: 1.45; color: var(--ink-2); }
+.hm-runtime b { color: var(--ink); font-weight: 600; white-space: nowrap; }
+.hm-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; }
+.hm-bar h4 { margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.cloud-switch { display: inline-flex; padding: 3px; border-radius: 10px; background: var(--slate-soft); gap: 2px; }
+.cloud-btn { height: 32px; padding: 0 16px; border-radius: 8px; border: 0; background: transparent; color: var(--ink-3); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s var(--ease); display: inline-flex; align-items: center; gap: 8px; }
+.cloud-btn i { width: 8px; height: 8px; border-radius: 50%; background: currentColor; opacity: .5; }
+.cloud-btn:hover { color: var(--ink); }
+.cloud-btn.active { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(27, 30, 35, .12); }
+.cloud-btn.active i { opacity: 1; }
+.cloud-btn[data-cloud="azure"].active i { background: #0078d4; } .cloud-btn[data-cloud="aws"].active i { background: #ff9900; } .cloud-btn[data-cloud="gcp"].active i { background: #34a853; }
+.hm-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.hm-table th { text-align: left; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); padding: 8px 12px 8px 0; border-bottom: 1px solid var(--line); }
+.hm-table td { vertical-align: top; padding: 9px 14px 9px 0; border-bottom: 1px solid var(--line-soft); line-height: 1.4; }
+.hm-table td.c-service { width: 250px; font-weight: 600; color: var(--ink); }
+.hm-table td.c-sku { width: 420px; color: var(--ink); }
+.hm-table td.c-qty { width: 230px; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
+.hm-table td.c-note { color: var(--ink-3); font-size: 12.5px; }
+.hm-table tr.alt-head td { padding: 14px 0 6px; border-bottom: 0; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--steel); }
+.hm-table tr.alt td { background: transparent; color: var(--ink-2); }
+.hm-table tr.alt td.c-service { color: var(--ink-2); }
+.hm-table .sku-chip { display: inline-block; padding: 2px 7px; border-radius: 4px; background: var(--steel-soft); color: var(--steel); font-size: 11px; font-weight: 700; letter-spacing: .04em; margin-left: 6px; vertical-align: middle; }
+.hm-foot { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; padding: 14px 30px 20px; border-top: 1px solid var(--line-soft); background: var(--lane); }
+.hm-foot p { margin: 0; font-size: 12px; line-height: 1.45; color: var(--ink-3); }
+.hm-foot p + p { margin-top: 4px; }
+.hm-foot b { color: var(--ink-2); font-weight: 600; }
+.hm-top-right .hm-close { margin-bottom: 2px; }
+html.reduced-motion .hmodal, html.reduced-motion .hm-card { animation: none; }
+
 </style>
 </head>
 <body>
@@ -683,6 +740,9 @@ window.Icons = {
   bell:     '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>',
   link:     '<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>',
   calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  archive:  '<rect x="3" y="4" width="18" height="5" rx="1"/><path d="M4 9v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9"/><path d="M10 13h4"/>',
+  users:    '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M17.5 14a6.5 6.5 0 0 1 4 6"/>',
+  license:  '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><circle cx="11" cy="14" r="2.6"/><path d="m9.4 16.3-.9 3.7 2.5-1.4 2.5 1.4-.9-3.7"/><path d="M15.5 12.5h2.5"/>',
 
   /* security control categories (vendor-neutral) */
   idbadge:  '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10.5" r="2.2"/><path d="M5.5 17a3.5 3.5 0 0 1 7 0"/><path d="M14.5 9.5h3.5M14.5 13.5h3.5"/>',
@@ -711,6 +771,7 @@ window.Icons = {
     close:    '<path d="M18 6 6 18M6 6l12 12"/>',
     prevSlide:'<path d="m15 4-8 8 8 8"/>',
     nextSlide:'<path d="m9 4 8 8-8 8"/>',
+    server:   '<rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/>',
     help:     '<circle cx="12" cy="12" r="9.5"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7"/><circle cx="12" cy="17" r=".6"/>'
   }
 };
@@ -1413,6 +1474,8 @@ window.Logos = {
   const uiIcon = name => `<svg class="ui-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${global.Icons.ui[name]}</svg>`;
   const pad2 = n => String(n).padStart(2, '0');
   const logoSvg = key => { const L = global.Logos[key]; return `<svg class="brand-logo" viewBox="${L.viewBox}" aria-label="ABB">${L.body}</svg>`; };
+  const KIND_LABEL = { agent: 'AI agent', external: 'External system', data: 'Data / output', human: 'Human decision', ok: 'Outcome', deny: 'Outcome', input: 'Input', infra: 'Infrastructure', product: 'Enterprise system', proposed: 'Proposed capability', process: 'Workflow component', stop: 'Terminal outcome', config: 'Configuration', sectech: 'Security technology', knowledge: 'Existing knowledge & records' };
+  Deck.kindLabel = KIND_LABEL;
   const OVERVIEW_TEXT = {
     architecture: 'Full architecture. Press Play to trace one cycle end-to-end, or hover a component to inspect it.',
     workflow: 'All steps shown. Press Play to walk through them, or use ← → to step.'
@@ -1514,7 +1577,7 @@ window.Logos = {
           <dt>Esc &nbsp;O</dt><dd>Return to full overview / close panels</dd>
           <dt>1 – 9 &nbsp;Home &nbsp;End</dt><dd>Jump to step</dd>
           <dt>F</dt><dd>Toggle full screen</dd>
-          <dt>Click &nbsp;Enter</dt><dd>Pin / unpin a component inspector (architecture pages)</dd>
+          <dt>Click &nbsp;Enter</dt><dd>On a component card: hosting, SKUs per cloud and quantities (1 · 2 · 3 switch Azure / AWS / Google Cloud). On a security technology card: pin its description</dd>
         </dl>
         <label class="help-toggle"><input type="checkbox" class="rm-toggle"> Reduce motion <small>(auto-detected from system preference)</small></label>
       </div>`;
@@ -1590,7 +1653,7 @@ window.Logos = {
     }
 
     /* inspector */
-    const kindLabel = { agent: 'AI agent', external: 'External system', data: 'Data / output', human: 'Human decision', ok: 'Outcome', deny: 'Outcome', input: 'Input', infra: 'Infrastructure', product: 'Enterprise system', proposed: 'Proposed capability', process: 'Workflow component', stop: 'Terminal outcome', config: 'Configuration', sectech: 'Security technology' };
+    const kindLabel = Deck.kindLabel;
     const nodeName = id => arch.nodesById[id].lines.join(' ');
     let pinned = null, hoverTimer = null;
     function showInspector(id) {
@@ -1606,7 +1669,8 @@ window.Logos = {
           <div><h4>Receives from</h4><ul>${li(a.in.filter(e => e.style !== 'sec').map(e => ({ who: nodeName(e.from), via: e.style, bi: e.bidirectional })))}</ul></div>
           <div><h4>Sends to</h4><ul>${li(a.out.filter(e => e.style !== 'sec').map(e => ({ who: nodeName(e.to), via: e.style, bi: e.bidirectional })))}</ul></div>
         </div>
-        ${(() => { const sec = a.in.filter(e => e.style === 'sec').map(e => e.from).concat(a.out.filter(e => e.style === 'sec').map(e => e.to)); return sec.length ? `<div class="insp-tech"><h4>Security technologies</h4><ul>${sec.map(id => `<li><i class="dot dot-sec"></i>${nodeName(id)}</li>`).join('')}</ul></div>` : ''; })()}`}`;
+        ${(() => { const sec = a.in.filter(e => e.style === 'sec').map(e => e.from).concat(a.out.filter(e => e.style === 'sec').map(e => e.to)); return sec.length ? `<div class="insp-tech"><h4>Security technologies</h4><ul>${sec.map(id => `<li><i class="dot dot-sec"></i>${nodeName(id)}</li>`).join('')}</ul></div>` : ''; })()}`}
+        ${n.hosting ? `<div class="insp-hint">${uiIcon('server')}Click the card for hosting, SKUs and quantities</div>` : ''}`;
       pop.hidden = false;
       const vb = def.diagram.viewBox, cw = canvas.clientWidth, ch = canvas.clientHeight;
       const s = Math.min(cw / vb.w, ch / vb.h), ox = (cw - vb.w * s) / 2, oy = (ch - vb.h * s) / 2;
@@ -1634,6 +1698,8 @@ window.Logos = {
     arch.svg.addEventListener('click', e => {
       const g = e.target.closest('.node');
       if (!g) { closeInspector(); return; }
+      const nd = arch.nodesById[g.dataset.id];
+      if (nd.hosting && global.Deck.showHosting) { closeInspector(); global.Deck.showHosting(nd, def, arch.stageOf(nd.id)); return; }
       if (pinned === g.dataset.id) { closeInspector(); return; }
       closeInspector(); pinned = g.dataset.id; g.classList.add('pinned'); showInspector(pinned);
     });
@@ -1688,6 +1754,7 @@ window.Logos = {
     const from = pages[Deck.current], to = pages[i];
     if (from.player && from.player.mode === 'playing') from.player.pause();
     if (from.onLeave) from.onLeave();
+    if (Deck.closeHosting) Deck.closeHosting();
     dir = dir || (i > Deck.current ? 1 : -1);
     pages.forEach(p => p.el.classList.remove('is-active', 'is-before', 'is-after', 'entered'));
     pages.forEach((p, k) => p.el.classList.add(k < i ? 'is-before' : k > i ? 'is-after' : 'is-active'));
@@ -1740,6 +1807,7 @@ window.Logos = {
     document.addEventListener('keydown', e => {
       if (e.target.matches('input, textarea') || e.metaKey || e.ctrlKey || e.altKey) return;
       const k = e.key, p = cur();
+      if (Deck.hostingKey && Deck.hostingKey(e)) { e.preventDefault(); return; }   // hosting modal is open
       if (!help.hidden && k !== '?' && k !== 'Escape') return;
       if (p.onKey && p.onKey(e)) { e.preventDefault(); return; }   // page-specific keys (tabs, selections, panels)
       switch (k) {
@@ -1857,7 +1925,7 @@ window.Logos = {
               <div class="tc-top"><span class="tc-cat">${A.category}</span><span class="tc-sev">Vendor-stated severity · ${A.severity}</span></div>
               <h3>${X.teams.title}</h3>
               <p>${A.summary}</p>
-              <dl class="tc-facts">${kv([['Vendor', A.vendor], ['Product', A.product], ['Affected version (vendor)', A.affected], ['Fixed version (vendor)', A.fixed], ['Status', A.reviewStatus], ['Internal deployment impact', A.internalImpact]])}</dl>
+              <dl class="tc-facts">${kv([['Vendor', A.vendor], ['Product', A.product], ['Affected version (vendor)', A.affected], ['Fixed version (vendor)', A.fixed], ...(A.coverage ? [['Licence coverage', A.coverage]] : []), ['Status', A.reviewStatus], ['Internal deployment impact', A.internalImpact]])}</dl>
               <div class="tc-actions">${srcChip('Source reference · ' + A.sourceShort)}<button class="src-chip" data-tab="record">${uiIcon('clipboard')}<span>Repository record · ${A.id}</span></button></div>
               <div class="tc-foot">Audience: ${A.audience} · Repository ref ${A.id} · <em>Demo: no message was sent</em></div>
             </div>
@@ -1871,7 +1939,7 @@ window.Logos = {
         <div class="rec-grid">
           <section><h4>Identity</h4><dl>${kv([['Announcement ID', A.id], ['Vendor', A.vendor], ['Product', A.product], ['Category', A.category], ['Revision', X.record.revision]])}</dl></section>
           <section><h4>Source evidence</h4><dl>${kv([['Source reference', srcChip(A.sourceShort, 'inline')], ['Source identity', X.record.sourceIdentity], ['Published by source', X.record.sourcePublished], ['Detected', X.record.detected]])}</dl></section>
-          <section><h4>Analysis</h4><dl>${kv([['Summary', A.summary], ['Vendor-stated severity', A.severity], ['Affected / fixed (vendor)', `${A.affected} → ${A.fixed}`], ['Internal deployment impact', A.internalImpact]])}</dl></section>
+          <section><h4>Analysis</h4><dl>${kv([['Summary', A.summary], ['Vendor-stated severity', A.severity], ['Affected / fixed (vendor)', `${A.affected} → ${A.fixed}`], ...(A.coverage ? [['Licence coverage', A.coverage], ['Coverage basis', A.coverageBasis]] : []), ['Internal deployment impact', A.internalImpact]])}</dl></section>
           <section><h4>Governance & delivery</h4><dl>${kv([['Review decision', X.record.reviewDecision], ['Assigned audience', A.audience], ['Published', X.record.published], ['Notification status', X.record.notification]])}</dl></section>
         </div>
         <div class="rec-foot">Illustrative timestamps (UTC) · ${X.record.trailNote}</div>
@@ -1904,7 +1972,7 @@ window.Logos = {
         <aside class="ex-facts">
           <h4>Shared announcement facts</h4>
           <p>All three views render the same illustrative record.</p>
-          <dl>${kv([['Vendor', A.vendor], ['Product', A.product], ['Announcement ID', A.id], ['Category', A.category], ['Vendor-stated severity', A.severity], ['Affected → fixed (vendor)', `${A.affected} → ${A.fixed}`], ['Assigned audience', A.audience], ['Review status', A.reviewStatus], ['Internal deployment impact', A.internalImpact]])}</dl>
+          <dl>${kv([['Vendor', A.vendor], ['Product', A.product], ['Announcement ID', A.id], ['Category', A.category], ['Vendor-stated severity', A.severity], ['Affected → fixed (vendor)', `${A.affected} → ${A.fixed}`], ...(A.coverage ? [['Licence coverage', A.coverage]] : []), ['Assigned audience', A.audience], ['Review status', A.reviewStatus], ['Internal deployment impact', A.internalImpact]])}</dl>
         </aside>
         <aside class="evidence" hidden>
           <div class="ev-head"><span class="eyebrow"><i class="eyebrow-dash"></i>Source evidence · local demo</span><button class="ctl ctl-sm" data-ev="close" title="Close (Esc)">${uiIcon('close')}</button></div>
@@ -1978,6 +2046,365 @@ window.Logos = {
   Object.assign(Deck.pageRenderers, { components: renderComponents, examples: renderExamples, scope: renderScope });
 })(window);
 
+/* ---- src/js/hosting.js ---- */
+/* =============================================================================
+   Hosting catalogue + modal — how every functional component is hosted as
+   PaaS / SaaS, with the exact SKU or tier on Microsoft Azure, Amazon Web
+   Services and Google Cloud, and the quantity needed. Agents are Python.
+
+   Project files attach `hosting: Deck.hosting.<archetype>(...)` to a node; the
+   architecture page opens the modal when such a card is clicked. Security
+   technology cards are excluded (they pin their description instead).
+   SKU and tier names are the providers' published names at the time of
+   writing; no prices are shown.
+   ========================================================================== */
+(function (global) {
+  'use strict';
+  const Deck = global.Deck;
+  const { h, uiIcon } = Deck.ui;
+
+  const CLOUDS = [
+    { id: 'azure', label: 'Microsoft Azure', short: 'Azure' },
+    { id: 'aws',   label: 'Amazon Web Services', short: 'AWS' },
+    { id: 'gcp',   label: 'Google Cloud', short: 'Google Cloud' }
+  ];
+  Deck.cloud = 'azure';   // the estate is Microsoft-aligned, so Azure is the default view
+
+  const r = (service, sku, qty, note) => ({ service, sku, qty, note });
+  const each = fn => ({ azure: fn('azure'), aws: fn('aws'), gcp: fn('gcp') });
+
+  /* ---- shared per-project platform services (counted once per project) ---- */
+  const PLATFORM = {
+    azure: [
+      r('Azure Key Vault', 'Standard · per 10K operations', '1 vault · shared per project', 'Connector credentials, API keys, signing secrets; agents authenticate with managed identities'),
+      r('Azure Monitor · Application Insights', 'Pay-as-you-go · Log Analytics workspace · per GB ingested, 31-day retention', '1 workspace · shared per project', 'Traces, agent telemetry, alert rules'),
+      r('Azure Container Registry', 'Basic · 10 GB included', '1 registry · shared per project', 'Python agent container images')
+    ],
+    aws: [
+      r('AWS Secrets Manager', 'Per secret per month + per 10K API calls', '≈ 6 secrets · shared per project', 'Connector credentials and API keys; agents use IAM task roles'),
+      r('Amazon CloudWatch', 'Logs · per GB ingested + custom metrics + alarms', '1 log group per service · shared account', 'Traces, agent telemetry, alarms'),
+      r('Amazon Elastic Container Registry', 'Private repository · per GB-month', '1 repository per agent image', 'Python agent container images')
+    ],
+    gcp: [
+      r('Secret Manager', 'Per active secret version + per 10K access operations', '≈ 6 secrets · shared per project', 'Connector credentials and API keys; services use workload identities'),
+      r('Cloud Logging & Cloud Monitoring', 'Per GiB ingested · first 50 GiB per month free', '1 project · shared', 'Traces, agent telemetry, alerting policies'),
+      r('Artifact Registry', 'Standard repository · per GB-month', '1 repository · shared per project', 'Python agent container images')
+    ]
+  };
+
+  /* ---- reusable row sets ---------------------------------------------------- */
+  const LLM = {
+    azure: (model, note) => r('Azure OpenAI in Foundry Models', `${model || 'gpt-4.1'} · Data Zone Standard (EU) deployment · pay-as-you-go per 1M input / output tokens`, '1 model deployment · shared per project', note || 'Switch to Provisioned Throughput Units once volume is steady; gpt-4.1-mini for lighter steps'),
+    aws:   (model, note) => r('Amazon Bedrock', `${model || 'Anthropic Claude Sonnet (current GA)'} · On-Demand · EU cross-region inference profile · per 1M tokens`, '1 model access · shared per project', note || 'Provisioned Throughput once volume is steady; a Haiku-class model for lighter steps'),
+    gcp:   (model, note) => r('Vertex AI', `${model || 'Gemini 2.5 Pro (or current Gemini generation)'} · pay-as-you-go per 1M tokens · EU multi-region`, '1 project-level model access · shared', note || 'Gemini Flash tier for lighter steps; Provisioned Throughput once volume is steady')
+  };
+  const EMBED = {
+    azure: r('Azure OpenAI in Foundry Models', 'text-embedding-3-large · Standard deployment · per 1M tokens', '1 embedding deployment · shared', 'Embeds retrieval content and queries'),
+    aws:   r('Amazon Bedrock', 'Amazon Titan Text Embeddings V2 · On-Demand · per 1M tokens', '1 model access · shared', 'Embeds retrieval content and queries'),
+    gcp:   r('Vertex AI', 'gemini-embedding-001 · per 1K input tokens', '1 project-level model access · shared', 'Embeds retrieval content and queries')
+  };
+  const RETRIEVAL = {
+    azure: r('Azure AI Search', 'Basic tier · 1 search unit · 15 GB · vector + hybrid search', '1 service · 1 index', 'Retrieval index for policies, precedents and knowledge'),
+    aws:   r('Amazon Aurora PostgreSQL Serverless v2', 'pgvector · 0.5–2 ACU · 1 writer instance', '1 cluster · 1 database', 'Retrieval index (vector + keyword) for policies, precedents and knowledge'),
+    gcp:   r('Cloud SQL for PostgreSQL', 'Enterprise edition · 1 vCPU / 3.75 GB · pgvector', '1 instance · 1 database', 'Retrieval index (vector + keyword) for policies, precedents and knowledge')
+  };
+  const CONTAINER = {
+    azure: (min, max) => r('Azure Container Apps', 'Consumption plan · 0.5 vCPU / 1 GiB per replica · scale to zero', `1 container app · min ${min} / max ${max} replicas`, 'Runs in 1 Container Apps environment shared by all agents of this project (Python image)'),
+    aws:   (min, max) => r('Amazon ECS on AWS Fargate', 'Fargate task · 0.5 vCPU / 1 GB · Linux / ARM64 (Graviton)', `1 ECS service · min ${min} / max ${max} tasks`, 'Runs in 1 ECS cluster shared by all agents of this project; Service Connect for agent-to-agent calls'),
+    gcp:   (min, max) => r('Cloud Run', 'Services · request-based billing · 1 vCPU / 1 GiB · EU region', `1 service · min ${min} / max ${max} instances`, 'One Cloud Run service per agent; service-to-service calls authorised by IAM')
+  };
+  const SCHEDULE = {
+    azure: r('Azure Container Apps Jobs', 'Consumption · scheduled (cron) trigger · same environment', '1 job · 1 run per collection cycle', 'Starts the collection cycle; on-demand runs started manually'),
+    aws:   r('Amazon EventBridge Scheduler', 'Per 1M schedule invocations', '1 schedule', 'Starts the collection cycle; on-demand runs started manually'),
+    gcp:   r('Cloud Scheduler', 'Per job per month · first 3 jobs free', '1 job', 'Starts the collection cycle; on-demand runs started manually')
+  };
+  const OBJECT_STORE = {
+    azure: r('Azure Cosmos DB for NoSQL + Azure Blob Storage', 'Cosmos DB Serverless · per 1M RU + GB · Blob Standard Hot LRS (ZRS in production)', '1 Cosmos account · 1 container · 1 storage account', 'Structured records plus evidence files'),
+    aws:   r('Amazon DynamoDB + Amazon S3', 'DynamoDB On-demand · per 1M request units + GB · S3 Standard · per GB-month', '1 table · 1 bucket', 'Structured records plus evidence files'),
+    gcp:   r('Firestore + Cloud Storage', 'Firestore Native mode · per 100K reads / writes + GiB · Cloud Storage Standard · EU region', '1 database · 1 collection · 1 bucket', 'Structured records plus evidence files')
+  };
+  const FUNCTIONS = {
+    azure: n => r('Azure Functions', 'Flex Consumption plan · Python 3.12 · 2,048 MB instance · per execution + GB-second', n, 'Event-driven Python steps; scales to zero'),
+    aws:   n => r('AWS Lambda', 'Python 3.12 · 512 MB · arm64 · per request + GB-second', n, 'Event-driven Python steps; scales to zero'),
+    gcp:   n => r('Cloud Run functions', 'Python 3.12 · 512 MiB · per request + vCPU / GiB-second', n, 'Event-driven Python steps; scales to zero')
+  };
+  const M365 = {
+    sharepoint: (qty, note) => r('SharePoint Online', 'SharePoint Online Plan 2 · included in Microsoft 365 E3 / E5', qty, note || 'Tenant storage pool: 1 TB + 10 GB per licence'),
+    graph: (qty, perm) => r('Microsoft Graph API', `Included with Microsoft 365 · 1 Microsoft Entra app registration · ${perm || 'least-privilege application permissions'}`, qty || '1 app registration · shared per project', 'Agents read and write through Graph with their own identity'),
+    teams: qty => r('Microsoft Teams', 'Microsoft Teams Enterprise · add-on to Microsoft 365 E3 / E5 suites sold without Teams; included in suites sold with Teams', qty, 'Existing collaboration platform'),
+    approvals: qty => r('Teams Approvals', 'Included with Teams · adaptive approval card to a named reviewer, response captured with identity and time', qty, 'No separate licence for approvers'),
+    bot: () => r('Azure Bot Service (Teams channel)', 'Standard channel · no charge for Teams messages · 1 bot registration (Entra app)', '1 bot registration · shared per project', 'Required on every cloud: Teams cards from a Python service are delivered through the Teams channel of a bot registration')
+  };
+
+  const PY = 'Python 3.12 · containerised FastAPI service with an agent framework (to be selected) · stateless and horizontally scaled · authenticates to platform services with its own workload identity · infrastructure as code';
+
+  /* ---- archetypes ------------------------------------------------------------ */
+  const H = {};
+
+  /* A Python agent on serverless containers, optionally with a model and retrieval. */
+  H.agent = o => ({
+    model: 'PaaS · serverless containers', cls: '',
+    summary: o.summary || `${o.name} runs as a Python microservice on the project’s serverless container platform: one image, one service, scaled by the work in the queue and scaled to zero when idle. It holds no state of its own${o.llm ? '; reasoning calls go to the managed model service listed below' : ''}.`,
+    runtime: PY,
+    clouds: each(c => [
+      CONTAINER[c](o.min != null ? o.min : 0, o.max != null ? o.max : 3),
+      ...(o.schedule ? [SCHEDULE[c]] : []),
+      ...(o.llm ? [LLM[c](o.model && o.model[c], o.llmNote)] : []),
+      ...(o.embed ? [EMBED[c]] : []),
+      ...(o.retrieval ? [RETRIEVAL[c]] : []),
+      ...((o.extra && o.extra[c]) || [])
+    ]),
+    shared: true
+  });
+
+  /* Small Python steps (eligibility rules, verification) as functions. */
+  H.functions = o => ({
+    model: 'PaaS · serverless functions', cls: '',
+    summary: o.summary,
+    runtime: 'Python 3.12 functions · event-driven, idempotent, no servers · called by the agents of this project',
+    clouds: each(c => [FUNCTIONS[c](o.qty), ...((o.extra && o.extra[c]) || [])]),
+    shared: true
+  });
+
+  H.queue = o => ({
+    model: 'PaaS · managed messaging', cls: '',
+    summary: o && o.summary || 'A fully managed message queue: requests are accepted once, processed in order and never lost while an agent is busy. Nothing to patch or scale by hand; a dead-letter queue catches anything that cannot be processed.',
+    clouds: {
+      azure: [r('Azure Service Bus', 'Standard tier · base charge per namespace + per 1M operations', '1 namespace · 1 queue + dead-letter queue', 'Sessions keep one request’s messages in order')],
+      aws:   [r('Amazon SQS', 'Standard queue · per 1M requests · first 1M per month free', '1 queue + 1 dead-letter queue', 'FIFO queue if strict per-request ordering is required')],
+      gcp:   [r('Pub/Sub', 'Standard · per TiB delivered · first 10 GiB per month free', '1 topic · 1 pull subscription + dead-letter topic', 'Ordering keys keep one request’s messages in order')]
+    }
+  });
+
+  H.contextStore = o => ({
+    model: 'PaaS · serverless document store', cls: '',
+    summary: o && o.summary || 'The working context of a request is a short-lived document in a serverless store, written by the Orchestrator and enriched by the RAG Agent. It expires automatically once the request is closed.',
+    clouds: {
+      azure: [r('Azure Cosmos DB for NoSQL', 'Serverless · per 1M request units + GB stored', '1 account · 1 database · 1 container (TTL on closed requests)', 'Document per request; no capacity to manage')],
+      aws:   [r('Amazon DynamoDB', 'On-demand capacity · per 1M read / write request units + GB stored', '1 table (TTL enabled)', 'Item per request; no capacity to manage')],
+      gcp:   [r('Firestore', 'Native mode · per 100K document reads / writes + GiB stored', '1 database · 1 collection (TTL policy)', 'Document per request; no capacity to manage')]
+    }
+  });
+
+  /* A SharePoint list or library as proposed, with the cloud-native alternative. */
+  H.m365Store = o => ({
+    model: 'SaaS · Microsoft 365', cls: 'm-saas', independent: true,
+    summary: o.summary,
+    clouds: each(() => [M365.sharepoint(o.qty, o.note), M365.graph(undefined, o.perm || 'Sites.Selected · scoped to this site')]),
+    native: each(c => [OBJECT_STORE[c]]),
+    nativeNote: 'If the store were re-platformed instead of staying in Microsoft 365'
+  });
+
+  /* Existing process knowledge and manual effort records, loaded once and indexed for retrieval. */
+  H.knowledge = o => ({
+    model: 'Existing material · loaded & indexed', cls: 'm-ext',
+    summary: o.summary,
+    runtime: o.index === false ? 'Python 3.12 loader job · one-off back-fill of the exported history into the repository with original dates and source references, then a scheduled refresh' : 'Python 3.12 loader job · one-off load of the exported history, then a scheduled refresh · documents chunked, embedded and indexed with their source reference',
+    clouds: each(c => [
+      M365.sharepoint(o.qty, 'Runbooks, criteria, report definitions and exports kept where they live today'),
+      c === 'azure' ? r('Azure Container Apps Jobs', 'Consumption · manual trigger + monthly schedule · 1 vCPU / 2 GiB', '1 Python loader job', 'Loads and refreshes the exported history')
+        : c === 'aws' ? r('Amazon ECS on AWS Fargate · scheduled task', 'Fargate task · 1 vCPU / 2 GB · started by EventBridge Scheduler', '1 task definition · 1 schedule', 'Loads and refreshes the exported history')
+        : r('Cloud Run jobs', 'Per vCPU / GiB-second · 1 vCPU / 2 GiB · started by Cloud Scheduler', '1 job · 1 schedule', 'Loads and refreshes the exported history'),
+      ...(o.index === false ? [] : [EMBED[c], RETRIEVAL[c]])
+    ]),
+    shared: true
+  });
+
+  H.teams = o => ({
+    model: 'SaaS · Microsoft 365', cls: 'm-saas', independent: true,
+    summary: o.summary,
+    clouds: each(() => [M365.teams(o.qty), M365.approvals(o.approvals || '1 approval template'), M365.bot()])
+  });
+
+  H.people = o => ({
+    model: 'People · no hosting', cls: 'm-people', independent: true,
+    summary: o.summary,
+    clouds: each(() => [M365.approvals(o.qty), M365.bot()])
+  });
+
+  H.state = o => ({
+    model: 'Outcome state · no hosting', cls: 'm-none', independent: true,
+    summary: o.summary,
+    clouds: each(() => [r('No compute', `A state value written to ${o.store}`, '—', 'Nothing to host; the record store is sized under its own card')])
+  });
+
+  H.external = o => ({
+    model: 'External · vendor-operated', cls: 'm-ext', independent: true,
+    summary: o.summary,
+    clouds: each(() => [r('No hosting', o.sku || 'Vendor portals, feeds, APIs and mailboxes operated by the vendor', o.qty || '—', o.note || 'Read-only access over HTTPS from the collection component; no inbound connection')])
+  });
+
+  H.existingSaaS = o => ({
+    model: 'SaaS · existing (cloud-independent)', cls: 'm-saas', independent: true,
+    summary: o.summary,
+    clouds: each(() => o.rows)
+  });
+
+  H.estate = () => ({
+    model: 'Existing estate · not hosted here', cls: 'm-ext', independent: true,
+    summary: 'The managed endpoints and servers are not part of this solution’s hosting. They keep reporting into Microsoft Defender for Endpoint and Microsoft Intune; the agents only ever read those services.',
+    clouds: each(() => [r('No hosting', 'Approximately 140,000+ endpoints and servers already enrolled', '—', 'No agent, script or connection is installed on devices for collection')])
+  });
+
+  H.unconfirmed = o => ({
+    model: 'To be confirmed', cls: 'm-none', independent: true,
+    summary: o.summary,
+    clouds: each(() => [r('No hosting until confirmed', 'Read-only API or export from the existing source, consumed by the Collection Agent', '—', 'If confirmed, it is a connector configuration, not new infrastructure')])
+  });
+
+  H.webPortal = o => ({
+    model: 'SaaS form or PaaS web app', cls: '',
+    summary: o.summary,
+    clouds: each(() => [
+      r('Power Apps · or the existing ITSM self-service portal', 'Power Apps Premium · per user per month · canvas app with a queue connector — or an existing ITSM request form', 'Per requester, or the existing portal', 'Preferred: reuse the existing request channel'),
+      M365.graph('1 app registration', 'identity of the requester and device')
+    ]),
+    native: {
+      azure: [r('Azure App Service', 'Basic B1 · Linux · Python 3.12 · 1 core / 1.75 GB', '1 plan · 1 web app', 'If a dedicated request form is built instead')],
+      aws:   [r('AWS App Runner', '1 vCPU / 2 GB · provisioned + active instance hours', '1 service', 'If a dedicated request form is built instead')],
+      gcp:   [r('Cloud Run', 'Service · 1 vCPU / 512 MiB · request-based billing', '1 service', 'If a dedicated request form is built instead')]
+    },
+    nativeNote: 'If a dedicated request form is built as a web app'
+  });
+
+  H.powerAutomate = o => ({
+    model: 'SaaS · low-code workflow (Microsoft Power Platform)', cls: 'm-saas', independent: true,
+    summary: o.summary,
+    clouds: each(() => [
+      r('Power Automate', 'Power Automate Process · per unattended cloud flow per month · premium connectors included', o.qty, 'Scheduled and unattended flows are licensed per flow, not per user'),
+      ...(o.rows || [])
+    ]),
+    native: {
+      azure: [FUNCTIONS.azure(`1 function app · ${o.fn} Python functions`), r('Azure Service Bus', 'Basic tier · per 1M operations', '1 namespace · 1 queue', 'Hand-off between the Python steps')],
+      aws:   [r('AWS Step Functions', 'Standard workflows · per state transition', '1 state machine', 'Orchestrates the Python steps'), FUNCTIONS.aws(`${o.fn} Python functions`)],
+      gcp:   [r('Workflows', 'Per 1,000 internal and external steps', '1 workflow', 'Orchestrates the Python steps'), FUNCTIONS.gcp(`${o.fn} Python functions`)]
+    },
+    nativeNote: 'If the workflow were built in Python instead of Power Automate'
+  });
+
+  H.copilotStudio = o => ({
+    model: 'SaaS · Microsoft 365', cls: 'm-saas', independent: true,
+    summary: o.summary,
+    clouds: each(() => [
+      r('Copilot Studio', 'Copilot Studio · 25,000 Copilot Credits per tenant pack per month · or pay-as-you-go credits billed through an Azure subscription', '1 pack to start · 1 agent', 'Generative answers grounded in the SharePoint knowledge source; runs in the asking user’s context'),
+      M365.sharepoint(o.qty, 'Knowledge source for the agent')
+    ]),
+    native: {
+      azure: [r('Azure AI Foundry Agent Service', 'Standard agent setup · pay per model tokens + Azure AI Search Basic (1 search unit)', '1 agent · 1 search service', 'If the assistant were built as a Python agent instead')],
+      aws:   [r('Amazon Q Business', 'Pro subscription · per user per month · SharePoint connector', 'Per pilot user', 'Managed assistant over the same SharePoint content')],
+      gcp:   [r('Gemini Enterprise', 'Business or Standard edition · per seat per month · SharePoint connector', 'Per pilot user', 'Managed assistant over the same SharePoint content')]
+    },
+    nativeNote: 'Managed alternative on this cloud'
+  });
+
+  H.powerBI = o => ({
+    model: 'SaaS · Microsoft 365 / Fabric', cls: 'm-saas', independent: true,
+    summary: o.summary,
+    clouds: each(() => [
+      r('Power BI', 'Power BI Pro · per user per month for authors and consumers — or Microsoft Fabric F2 capacity for broad read-only distribution', 'Pro for each author and consumer · or 1 F2 capacity', 'Four recurring reports plus on-demand views'),
+      M365.sharepoint(o.qty, 'Report library and published datasets')
+    ]),
+    native: {
+      azure: [r('Microsoft Fabric', 'F2 capacity · pay-as-you-go · pausable', '1 capacity', 'Hosts the semantic models; viewers need no Pro licence on F64+ only')],
+      aws:   [r('Amazon QuickSight', 'Enterprise edition · Author per user per month + Reader per session', 'Authors: report owners · Readers: leadership audience', 'Managed BI over the same datasets')],
+      gcp:   [r('Looker Studio Pro + BigQuery', 'Looker Studio Pro · per user per month · BigQuery on-demand per TiB scanned', 'Per report user · 1 dataset', 'Managed BI over the same datasets')]
+    },
+    nativeNote: 'Managed alternative on this cloud'
+  });
+
+  Deck.hosting = H;
+  Deck.hostingPlatform = PLATFORM;
+  Deck.hostingRows = { r, graph: M365.graph, sharepoint: M365.sharepoint, teams: M365.teams, approvals: M365.approvals, bot: M365.bot };
+
+  /* ---- modal ------------------------------------------------------------------ */
+  let open = null;
+
+  function rowsHtml(rows, cls) {
+    return rows.map(x => `<tr class="${cls || ''}"><td class="c-service">${x.service}</td><td class="c-sku">${x.sku}</td><td class="c-qty">${x.qty}</td><td class="c-note">${x.note || ''}</td></tr>`).join('');
+  }
+
+  function showHosting(n, project, stage) {
+    const Hs = n.hosting; if (!Hs) return;
+    closeHosting();
+    const root = document.querySelector('.slides');
+    const el = h('div', 'hmodal'); el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', `Hosting: ${n.lines.join(' ')}`);
+    const kindLabel = Deck.kindLabel || {};
+    const render = () => {
+      const cloud = CLOUDS.find(c => c.id === Deck.cloud) || CLOUDS[0];
+      const rows = Hs.clouds[cloud.id] || [];
+      const nat = Hs.native && Hs.native[cloud.id];
+      const shared = Hs.shared ? PLATFORM[cloud.id] : null;
+      el.innerHTML = `
+        <div class="hm-card">
+          <div class="hm-head">
+            <div>
+              <div class="hm-kind"><span class="insp-kind kind-${n.kind}">${kindLabel[n.kind] || n.kind}</span><span class="insp-stage">${stage ? `${stage.num} · ${stage.title}` : ''}</span></div>
+              <h2>${n.lines.join(' ')}</h2>
+              ${n.platform ? `<span class="hm-platform">${n.platform}</span>` : ''}
+            </div>
+            <div class="hm-top-right">
+              <button class="ctl ctl-sm hm-close" data-hm="close" title="Close (Esc)">${uiIcon('close')}</button>
+              <span class="hm-model ${Hs.cls || ''}">${uiIcon('server')}${Hs.model}</span>
+            </div>
+          </div>
+          <div class="hm-body">
+            <p class="hm-summary">${Hs.summary}</p>
+            ${Hs.runtime ? `<div class="hm-runtime"><b>Built in Python</b><span>${Hs.runtime}</span></div>` : ''}
+            <div class="hm-bar">
+              <h4>Bill of materials · ${cloud.label}${Hs.independent ? ' · <span style="color:var(--ink-4)">same on every cloud</span>' : ''}</h4>
+              <div class="cloud-switch" role="tablist" aria-label="Cloud provider">${CLOUDS.map(c => `<button class="cloud-btn${c.id === cloud.id ? ' active' : ''}" role="tab" aria-selected="${c.id === cloud.id}" data-cloud="${c.id}"><i></i>${c.short}</button>`).join('')}</div>
+            </div>
+            <table class="hm-table">
+              <thead><tr><th>Service</th><th>SKU · tier</th><th>Quantity</th><th>Notes</th></tr></thead>
+              <tbody>
+                ${rowsHtml(rows)}
+                ${shared ? `<tr class="alt-head"><td colspan="4">Shared platform services · counted once per project</td></tr>${rowsHtml(shared, 'alt')}` : ''}
+                ${nat && nat.length ? `<tr class="alt-head"><td colspan="4">${Hs.nativeNote || 'Cloud-native alternative'} · ${cloud.short}</td></tr>${rowsHtml(nat, 'alt')}` : ''}
+              </tbody>
+            </table>
+          </div>
+          <div class="hm-foot">
+            <div>
+              ${project.hostingAssumption ? `<p><b>Sizing basis</b> · ${project.hostingAssumption}</p>` : ''}
+              <p>SKU and tier names as published by each provider at the time of writing; confirm current names, regions and prices at procurement. No prices are shown. Security technologies are selected separately in security review and are not part of this bill of materials.</p>
+            </div>
+            <p><b>1 · 2 · 3</b> switch cloud &nbsp; <b>Esc</b> close</p>
+          </div>
+        </div>`;
+    };
+    render();
+    el.addEventListener('click', e => {
+      const b = e.target.closest('.cloud-btn'); if (b) { Deck.cloud = b.dataset.cloud; render(); return; }
+      if (e.target.closest('[data-hm="close"]') || e.target === el) closeHosting();
+    });
+    root.appendChild(el);
+    open = el;
+    const first = el.querySelector('.cloud-btn.active'); if (first) first.focus();
+  }
+
+  function closeHosting() {
+    if (open) { open.remove(); open = null; }
+  }
+
+  /* keyboard handling while the modal is open: returns true when the key was consumed */
+  function hostingKey(e) {
+    if (!open) return false;
+    if (e.key === 'Escape') { closeHosting(); return true; }
+    const i = ['1', '2', '3'].indexOf(e.key);
+    if (i >= 0) { Deck.cloud = CLOUDS[i].id; const b = open.querySelector(`.cloud-btn[data-cloud="${CLOUDS[i].id}"]`); if (b) b.click(); return true; }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      const k = CLOUDS.findIndex(c => c.id === Deck.cloud);
+      const nk = (k + (e.key === 'ArrowRight' ? 1 : CLOUDS.length - 1)) % CLOUDS.length;
+      const b = open.querySelector(`.cloud-btn[data-cloud="${CLOUDS[nk].id}"]`); if (b) { b.click(); b.focus(); }
+      return true;
+    }
+    return true;   // the dialog is modal: swallow other presentation keys
+  }
+
+  Deck.showHosting = showHosting; Deck.closeHosting = closeHosting; Deck.hostingKey = hostingKey; Deck.hostingOpen = () => !!open;
+  Deck.CLOUDS = CLOUDS;
+})(window);
+
 /* ---- src/js/projects/endpoint-elevated-approval.js ---- */
 /* =============================================================================
    Project 01 — Endpoint Elevated Approval
@@ -2002,6 +2429,8 @@ window.Logos = {
     { id, x: COL[col], y: ROW[row] - NODE_H / 2, w: NODE_W, h: NODE_H },
     spec
   );
+  const H = Deck.hosting, HR = Deck.hostingRows;
+  const graphRead = HR.graph('1 app registration · read-only', 'DeviceManagementManagedDevices.Read.All · Machine.Read.All · User.Read.All');
 
   const slide = {
     id: 'endpoint-elevated-approval',
@@ -2018,8 +2447,9 @@ window.Logos = {
         { title: 'Justification instead of evidence', text: 'Outcomes turn on how convincingly a request is written, not on the device\'s state, the requester\'s role or the policy that applies.' },
         { title: 'Inconsistent exposure and accountability', text: 'Comparable requests receive different answers. Exposure varies by approver, and there is no uniform, auditable record of the rationale.' }
       ],
-      direction: 'Proposed direction: coordinated agents gather policy and endpoint evidence, triage every request against the same standard, keep people in control of the exceptions, execute approved access on a time-bound basis and document every outcome.'
+      direction: 'Proposed direction: coordinated agents gather policy and endpoint evidence, triage every request against the same standard, keep people in control of the exceptions, execute approved access on a time-bound basis and document every outcome. They start from today’s approval criteria and the record of past manual decisions, not from a blank page.'
     },
+    hostingAssumption: 'assumption to be confirmed with the service owner: up to ~2,000 elevated-access requests per month, ~6 agent steps and ~4 model calls per request. Everything scales to zero outside that load.',
 
     diagram: {
       viewBox: { w: 1856, h: 712 },
@@ -2034,39 +2464,43 @@ window.Logos = {
       laneH: 690,
 
       nodes: [
-        node('access', 'A', 'r2', { platform: 'Request form or ITSM self-service portal · to be confirmed', kind: 'input', icon: 'key', eyebrow: 'Request portal', lines: ['Access', 'Request'], stage: 's1',
+        node('access', 'A', 'r2', { hosting: H.webPortal({ summary: 'The request is captured in an existing channel wherever possible: a Power Apps form or the ITSM self-service portal, which drops the request on the cloud queue. No new servers are introduced for intake.' }), platform: 'Request form or ITSM self-service portal · to be confirmed', kind: 'input', icon: 'key', eyebrow: 'Request portal', lines: ['Access', 'Request'], stage: 's1',
           role: 'An elevated endpoint access request raised by a user or device owner. This is the trigger for the workflow.' }),
-        node('queue', 'A', 'r3', { logo: 'azure', platform: 'Proposed · Azure Service Bus or Storage Queue (Microsoft-aligned estate) · to be confirmed', kind: 'infra', icon: 'cloud', eyebrow: 'Azure queue', lines: ['Cloud', 'Queue'], stage: 's1',
+        node('queue', 'A', 'r3', { hosting: H.queue(), logo: 'azure', platform: 'Proposed · Azure Service Bus or Storage Queue (Microsoft-aligned estate) · to be confirmed', kind: 'infra', icon: 'cloud', eyebrow: 'Azure queue', lines: ['Cloud', 'Queue'], stage: 's1',
           role: 'Buffers incoming requests so they are processed in order and nothing is lost before the agents pick them up.' }),
 
-        node('orch', 'B', 'r3', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'hub', eyebrow: 'Coordination', lines: ['Orchestrator', 'Agent'], stage: 's2',
+        node('orch', 'B', 'r3', { hosting: H.agent({ name: 'The Orchestrator Agent', min: 1, max: 3, llm: true, llmNote: 'Light use: planning and summarising only; the coordination itself is deterministic Python' }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'hub', eyebrow: 'Coordination', lines: ['Orchestrator', 'Agent'], stage: 's2',
           role: 'Takes a request from the queue and coordinates the Policy Agent, the Tool Agent and the assembly of Context.' }),
-        node('orgpolicy', 'C', 'r1', { logo: 'sharepoint', platform: 'Proposed · policy library in SharePoint, versioned and owned by policy owners', kind: 'external', icon: 'landmark', eyebrow: 'SharePoint', lines: ['Organization', 'Policy'], stage: 's2',
+        node('orgpolicy', 'C', 'r1', { hosting: H.m365Store({ summary: 'The policy library stays a SharePoint document library owned by the policy owners. The Policy Agent reads it through Microsoft Graph, and the retrieval index holds an embedded copy with clause references so every citation points back to the governing document.', qty: '1 document library · versioning on', perm: 'Sites.Selected · read' }), logo: 'sharepoint', platform: 'Proposed · policy library in SharePoint, versioned and owned by policy owners', kind: 'external', icon: 'landmark', eyebrow: 'SharePoint', lines: ['Organization', 'Policy'], stage: 's2',
           role: 'The organisation’s access and security policies. Consulted by the Policy Agent; results flow back.' }),
-        node('policy', 'C', 'r2', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'shield', eyebrow: 'Governance', lines: ['Policy', 'Agent'], stage: 's2',
+        node('policy', 'C', 'r2', { hosting: H.agent({ name: 'The Policy Agent', llm: true, retrieval: true }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'shield', eyebrow: 'Governance', lines: ['Policy', 'Agent'], stage: 's2',
           role: 'Evaluates the request against Organization Policy and returns the applicable rules and constraints.' }),
-        node('tool', 'C', 'r4', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'wrench', eyebrow: 'Integration', lines: ['Tool', 'Agent'], stage: 's2',
+        node('tool', 'C', 'r4', { hosting: H.agent({ name: 'The Tool Agent', llm: false, extra: { azure: [graphRead], aws: [graphRead], gcp: [graphRead] } }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'wrench', eyebrow: 'Integration', lines: ['Tool', 'Agent'], stage: 's2',
           role: 'Queries Vendor Tools for facts about the endpoint and requester, and returns the findings.' }),
-        node('vendor', 'C', 'r5', { logos: ['intune', 'mde'], platform: 'Microsoft Intune and Microsoft Defender for Endpoint (the estate\'s endpoint tools) · directory lookups via Microsoft Entra ID (proposed)', kind: 'external', icon: 'layers', eyebrow: 'Intune · Defender', lines: ['Vendor', 'Tools'], stage: 's2',
+        node('vendor', 'C', 'r5', { hosting: H.existingSaaS({ summary: 'The endpoint tools are the estate’s existing Microsoft 365 services and stay where they are. The Tool Agent reads them through Microsoft Graph with a read-only application identity; no connector infrastructure is added.', rows: [HR.r('Microsoft Intune', 'Microsoft Intune Plan 1 · included in Microsoft 365 E3 / E5', 'Existing licences · no change', 'Compliance, configuration and ownership facts'), HR.r('Microsoft Defender for Endpoint', 'Microsoft Defender for Endpoint Plan 2 · included in Microsoft 365 E5 / E5 Security', 'Existing licences · no change', 'Sensor health, protection status and risk signals'), HR.r('Microsoft Entra ID', 'Microsoft Entra ID P1 · included in Microsoft 365 E3 / E5', 'Existing · no change', 'Requester directory attributes'), graphRead] }), logos: ['intune', 'mde'], platform: 'Microsoft Intune and Microsoft Defender for Endpoint (the estate\'s endpoint tools) · directory lookups via Microsoft Entra ID (proposed)', kind: 'external', icon: 'layers', eyebrow: 'Intune · Defender', lines: ['Vendor', 'Tools'], stage: 's2',
           role: 'The endpoint tools the Tool Agent queries for device facts: Microsoft Intune for compliance, configuration and ownership, Microsoft Defender for Endpoint for sensor health, protection status and risk signals. Directory attributes of the requester would come from Microsoft Entra ID.' }),
 
-        node('context', 'D', 'r3', { platform: 'Proposed · working context held by the agent runtime, not a separate store', kind: 'data', icon: 'files', eyebrow: 'Assembled', lines: ['Context'], stage: 's3',
+        node('context', 'D', 'r3', { hosting: H.contextStore(), platform: 'Proposed · working context held by the agent runtime, not a separate store', kind: 'data', icon: 'files', eyebrow: 'Assembled', lines: ['Context'], stage: 's3',
           role: 'The consolidated picture of the request: coordinated by the Orchestrator and enriched with retrieved information from the RAG Agent.' }),
-        node('rag', 'D', 'r4', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'book', eyebrow: 'Retrieval', lines: ['RAG', 'Agent'], stage: 's3',
+        node('rag', 'D', 'r4', { hosting: H.agent({ name: 'The RAG Agent', llm: true, embed: true, retrieval: true }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'book', eyebrow: 'Retrieval', lines: ['RAG', 'Agent'], stage: 's3',
           role: 'Retrieves relevant information, including documented records of earlier decisions, and provides it to Context.' }),
-        node('hil', 'E', 'r2', { platform: 'Proposed · Microsoft Teams approval card to the designated reviewer', kind: 'human', icon: 'user', eyebrow: 'Teams approval', lines: ['Human in', 'the Loop'], stage: 's3',
+        node('knowhow', 'E', 'r4', { kind: 'knowledge', icon: 'archive', eyebrow: 'SOPs · history', lines: ['Knowledge &', 'Effort Records'], stage: 's3', platform: 'Existing material · approval criteria, runbooks and exception lists (SharePoint) plus the exported history of manual approvals (ITSM) · to be confirmed',
+          hosting: H.knowledge({ summary: 'Nothing new is written for the agents to learn from. Today’s runbooks, approval criteria and exception lists stay in SharePoint; the history of manual approvals is exported once from the ticketing system. A Python loader embeds both into the retrieval index with source references, then refreshes on a schedule.', qty: '1 document library (runbooks, criteria, exceptions) + 1 list (exported approval history)' }),
+          role: 'How today’s process knowledge and the record of past manual effort are put to work: the criteria approvers apply, the runbooks and exception lists, and the history of manual approvals and denials with their reasons are loaded into the retrieval store, so the agents start from how decisions are made today rather than from a blank page.',
+          detail: ['Seeds retrieval: approval criteria, runbooks and known exceptions become citable context for the Policy and Triage agents', 'Precedents: comparable past decisions are retrieved so like cases are treated alike', 'Validation: the agents are run against past manual decisions in shadow mode before they decide anything live', 'Baseline: hours and turnaround from the manual records become the before-and-after measure'] }),
+        node('hil', 'E', 'r2', { hosting: H.people({ summary: 'A named reviewer reached through a Teams approval card. People need no hosting; the card and the response are carried by Teams and recorded with the reviewer’s identity and time.', qty: 'Designated reviewers per request type' }), platform: 'Proposed · Microsoft Teams approval card to the designated reviewer', kind: 'human', icon: 'user', eyebrow: 'Teams approval', lines: ['Human in', 'the Loop'], stage: 's3',
           role: 'A human reviewer connected to triage who can intervene where appropriate before a decision is final.' }),
-        node('triage', 'E', 'r3', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'scale', eyebrow: 'Decisioning', lines: ['Triage', 'Agent'], stage: 's3',
+        node('triage', 'E', 'r3', { hosting: H.agent({ name: 'The Triage Agent', llm: true }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'scale', eyebrow: 'Decisioning', lines: ['Triage', 'Agent'], stage: 's3',
           role: 'Responsible for decisioning. Weighs the assembled Context and routes to human review where appropriate.' }),
 
-        node('action', 'F', 'r3', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'play', eyebrow: 'Execution', lines: ['Action', 'Agent'], stage: 's4',
+        node('action', 'F', 'r3', { hosting: H.agent({ name: 'The Action Agent', llm: false, extra: { azure: [HR.graph('1 app registration · write scope limited to the elevation action', 'scoped to the elevation mechanism chosen in security review')], aws: [HR.graph('1 app registration · write scope limited to the elevation action', 'scoped to the elevation mechanism chosen in security review')], gcp: [HR.graph('1 app registration · write scope limited to the elevation action', 'scoped to the elevation mechanism chosen in security review')] } }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'play', eyebrow: 'Execution', lines: ['Action', 'Agent'], stage: 's4',
           role: 'Carries out the decision in a controlled way. Every request resolves to exactly one outcome.' }),
-        node('granted', 'G', 'r2', { kind: 'ok', icon: 'check', eyebrow: 'Outcome A', lines: ['Approval', 'Granted'], stage: 's4',
+        node('granted', 'G', 'r2', { hosting: H.state({ summary: 'An outcome, not a component: the granted decision is a state written to the record with its rationale and the time-bound elevation that follows.', store: 'the SharePoint record library' }), kind: 'ok', icon: 'check', eyebrow: 'Outcome A', lines: ['Approval', 'Granted'], stage: 's4',
           role: 'The elevated access is granted.' }),
-        node('denied', 'G', 'r4', { kind: 'deny', icon: 'x', eyebrow: 'Outcome B', lines: ['Approval', 'Denied'], stage: 's4',
+        node('denied', 'G', 'r4', { hosting: H.state({ summary: 'An outcome, not a component: the denied decision is a state written to the record with its rationale.', store: 'the SharePoint record library' }), kind: 'deny', icon: 'x', eyebrow: 'Outcome B', lines: ['Approval', 'Denied'], stage: 's4',
           role: 'The elevated access is denied.' }),
 
-        node('record', 'H', 'r3', { logo: 'sharepoint', platform: 'Proposed · SharePoint record library (decision, evidence, rationale, actor)', kind: 'data', icon: 'filecheck', eyebrow: 'SharePoint', lines: ['Record', 'Update'], stage: 's5',
+        node('record', 'H', 'r3', { hosting: H.m365Store({ summary: 'The decision record is a SharePoint list with an attachments library: decision, evidence, rationale, actor and time, versioned and under a retention label. Documented outcomes are embedded into the retrieval index so later evaluations can cite them.', qty: '1 list + 1 document library · versioning and retention label', perm: 'Sites.Selected · read / write' }), logo: 'sharepoint', platform: 'Proposed · SharePoint record library (decision, evidence, rationale, actor)', kind: 'data', icon: 'filecheck', eyebrow: 'SharePoint', lines: ['Record', 'Update'], stage: 's5',
           role: 'Writes the outcome and its rationale to the record. Documented outcomes are made available to the retrieval side.' }),
 
         /* security technologies */
@@ -2101,6 +2535,7 @@ window.Logos = {
         { id: 'e-orch-tool',      from: 'orch',    to: 'tool',    style: 'flow',   route: 's', fromDy: 12,  label: 'dispatches', labelAt: 0.5, labelDy: 16 },
         { id: 'e-policy-org',     from: 'policy',  to: 'orgpolicy', style: 'integration', route: 'v', bidirectional: true, label: 'consults', labelSide: 'right' },
         { id: 'e-tool-vendor',    from: 'tool',    to: 'vendor',  style: 'integration', route: 'v', bidirectional: true, label: 'queries',  labelSide: 'right' },
+        { id: 'e-knowhow-rag',    from: 'knowhow', to: 'rag',     style: 'enrich', route: 'h' },
         { id: 'e-rag-context',    from: 'rag',     to: 'context', style: 'enrich', route: 'v', label: 'retrieves into', labelSide: 'right' },
         { id: 'e-context-triage', from: 'context', to: 'triage',  style: 'flow',   route: 'h' },
         { id: 'e-triage-hil',     from: 'triage',  to: 'hil',     style: 'human',  route: 'v', bidirectional: true, label: 'review', labelSide: 'right' },
@@ -2162,8 +2597,8 @@ window.Logos = {
         caption: 'The Policy Agent consults Organization Policy; the Tool Agent queries Vendor Tools. Both exchanges are bidirectional.',
         nodes: ['orgpolicy', 'vendor', 'apigw'], edges: [['e-policy-org', 'e-tool-vendor', 'e-apigw-vendor']] },
       { stage: 's3', title: 'Context assembly',
-        caption: 'The Orchestrator assembles Context, and the RAG Agent enriches it with retrieved information.',
-        nodes: ['context', 'rag', 'dlp'], edges: [['e-orch-context', 'e-rag-context', 'e-dlp-context']] },
+        caption: 'The Orchestrator assembles Context. The RAG Agent enriches it with today’s approval criteria, runbooks and comparable past manual decisions, so the evaluation starts from how the process is run today.',
+        nodes: ['context', 'rag', 'knowhow', 'dlp'], edges: [['e-orch-context', 'e-knowhow-rag'], ['e-rag-context', 'e-dlp-context']] },
       { stage: 's3', title: 'Triage Agent',
         caption: 'The assembled Context flows into the Triage Agent, which is responsible for decisioning.',
         nodes: ['triage'], edges: ['e-context-triage'] },
@@ -2180,7 +2615,7 @@ window.Logos = {
         caption: 'Whichever outcome applies, it is documented with its rationale in the record.',
         nodes: ['record', 'dspm'], edges: [['e-granted-record', 'e-denied-record', 'e-dspm-record']] },
       { stage: 's5', title: 'Record feedback',
-        caption: 'Documented outcomes are available to the RAG Agent, so future evaluations can retrieve them.',
+        caption: 'Documented outcomes join the knowledge the RAG Agent retrieves from, so future evaluations build on both the manual history and every agent decision since.',
         nodes: ['rag'], edges: ['e-record-rag'] }
     ]
   };
@@ -2202,6 +2637,14 @@ window.Logos = {
   const ROW = { r1: 150, r2: 300, r3: 490, r4: 640 };
   const RAIL = 730;
   const node = (id, col, row, spec) => Object.assign({ id, x: COL[col], y: ROW[row] - NODE_H / 2, w: NODE_W, h: NODE_H }, spec);
+  const H = Deck.hosting, HR = Deck.hostingRows;
+  /* consolidated device data (owned by the Collection Agent, read by analysis, prioritization and reporting) */
+  const DATA = {
+    azure: [HR.r('Azure SQL Database', 'General Purpose · Serverless · Gen5 · 0.5–4 vCores · auto-pause', '1 database · daily snapshots of ~140K device records', 'Consolidated device data for analysis and reporting'), HR.r('Azure Blob Storage', 'Standard · Hot · LRS (ZRS in production) · per GB-month', '1 storage account · raw extracts, 90-day retention', 'Raw API extracts per collection cycle')],
+    aws:   [HR.r('Amazon Aurora PostgreSQL Serverless v2', '0.5–4 ACU · 1 writer instance', '1 cluster · daily snapshots of ~140K device records', 'Consolidated device data for analysis and reporting'), HR.r('Amazon S3', 'S3 Standard · per GB-month', '1 bucket · raw extracts, 90-day lifecycle rule', 'Raw API extracts per collection cycle')],
+    gcp:   [HR.r('Cloud SQL for PostgreSQL', 'Enterprise edition · 2 vCPU / 7.5 GB · EU region', '1 instance · daily snapshots of ~140K device records', 'Consolidated device data for analysis and reporting'), HR.r('Cloud Storage', 'Standard storage · EU region · per GB-month', '1 bucket · raw extracts, 90-day lifecycle rule', 'Raw API extracts per collection cycle')]
+  };
+  const remedWrite = HR.graph('1 app registration · write scope limited to approved actions', 'DeviceManagementScripts.ReadWrite.All · Defender response actions on approved devices only');
 
   Deck.registerProject({
     id: 'endpoint-security-compliance',
@@ -2225,8 +2668,9 @@ window.Logos = {
         { title: 'Risk is identified late', text: 'Around 5,000–6,000 devices may need attention at any time and the population shifts weekly, yet an on-demand answer takes one to two hours.' },
         { title: 'Remediation is uneven', text: 'Low-risk workstation fixes wait in the same queue as server changes that rightly require change control and management approval.' }
       ],
-      direction: 'Proposed direction: agents that consolidate the estate view, analyse and prioritise findings, deliver scheduled and on-demand insight in minutes, and remediate eligible low-risk issues under approval, with servers staying under change control.'
+      direction: 'Proposed direction: agents that consolidate the estate view, analyse and prioritise findings, deliver scheduled and on-demand insight in minutes, and remediate eligible low-risk issues under approval, with servers staying under change control. They start from the report definitions, reconciliation logic and remediation history the experts have already built.'
     },
+    hostingAssumption: 'figures from the stakeholder brief: ~140,000+ endpoints and servers collected once per day (~140K device records per cycle), four recurring reports per week, on-demand questions answered in minutes. Remediation volume is sized after the pilot.',
 
     diagram: {
       viewBox: { w: 1856, h: 762 },
@@ -2239,40 +2683,45 @@ window.Logos = {
       ],
 
       nodes: [
-        node('estate', 'A', 'r2', { kind: 'input', icon: 'monitor', eyebrow: '140K+ devices', lines: ['Endpoint', 'Estate'], stage: 's1',
+        node('estate', 'A', 'r2', { hosting: H.estate(), kind: 'input', icon: 'monitor', eyebrow: '140K+ devices', lines: ['Endpoint', 'Estate'], stage: 's1',
           role: 'The managed estate of approximately 140,000+ endpoints and servers. Devices report into the enterprise tools below; the system never talks to devices directly for collection.' }),
-        node('mde', 'B', 'r1', { kind: 'product', logo: 'mde', eyebrow: 'Microsoft', lines: ['Defender for', 'Endpoint'], stage: 's1',
+        node('mde', 'B', 'r1', { hosting: H.existingSaaS({ summary: 'Defender for Endpoint is an existing Microsoft 365 service and stays where it is. The Collection Agent reads it through the Defender and Microsoft Graph APIs with a read-only application identity, in pages, on the collection schedule.', rows: [HR.r('Microsoft Defender for Endpoint', 'Microsoft Defender for Endpoint Plan 2 · included in Microsoft 365 E5 / E5 Security', 'Existing licences for 140K+ devices · no change', 'Sensor health, protection status, posture and vulnerability findings'), HR.graph('1 app registration · read-only', 'Machine.Read.All · Vulnerability.Read.All · Alert.Read.All')] }), kind: 'product', logo: 'mde', eyebrow: 'Microsoft', lines: ['Defender for', 'Endpoint'], stage: 's1',
           role: 'Endpoint protection and detection data: sensor health, antivirus protection status, security posture and vulnerability-related findings.' }),
-        node('intune', 'B', 'r2', { kind: 'product', logo: 'intune', eyebrow: 'Microsoft', lines: ['Intune'], stage: 's1',
+        node('intune', 'B', 'r2', { hosting: H.existingSaaS({ summary: 'Intune is an existing Microsoft 365 service and stays where it is. The Collection Agent reads device compliance, configuration and management status through Microsoft Graph with a read-only application identity.', rows: [HR.r('Microsoft Intune', 'Microsoft Intune Plan 1 · included in Microsoft 365 E3 / E5', 'Existing licences for 140K+ devices · no change', 'Compliance, configuration, policy and management status'), HR.graph('1 app registration · read-only', 'DeviceManagementManagedDevices.Read.All · DeviceManagementConfiguration.Read.All')] }), kind: 'product', logo: 'intune', eyebrow: 'Microsoft', lines: ['Intune'], stage: 's1',
           role: 'Device management data: device compliance, configuration, policy and management status.' }),
-        node('addl', 'B', 'r3', { kind: 'external', icon: 'database', eyebrow: 'Unconfirmed', lines: ['Operational', 'Context'], stage: 's1',
+        node('addl', 'B', 'r3', { hosting: H.unconfirmed({ summary: 'A third operational source, possibly a CMDB, was mentioned but is not confirmed. If confirmed, it becomes a read-only connector configuration for the Collection Agent rather than new infrastructure.' }), kind: 'external', icon: 'database', eyebrow: 'Unconfirmed', lines: ['Operational', 'Context'], stage: 's1',
           role: 'Device operational status and other asset information, where available. A third source (possibly a CMDB) was mentioned but is not confirmed; it is shown dashed and is not an established integration.' }),
 
-        node('collection', 'C', 'r2', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'inbox', eyebrow: 'Collection', lines: ['Collection', 'Agent'], stage: 's2',
+        node('collection', 'C', 'r2', { hosting: H.agent({ name: 'The Collection Agent', min: 0, max: 5, schedule: true, llm: false, extra: DATA, summary: 'The Collection Agent is a Python service started by a schedule (or on demand). It pages through the Defender and Intune APIs, consolidates ~140K device records per cycle into the device data store below and scales to zero between cycles.' }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'inbox', eyebrow: 'Collection', lines: ['Collection', 'Agent'], stage: 's2',
           role: 'Periodically collects available endpoint and compliance information, consolidates it across the integrated systems and prepares structured data for analysis. Supports on-demand requests.' }),
-        node('orch', 'D', 'r2', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'hub', eyebrow: 'Coordination', lines: ['Orchestrator', 'Agent'], stage: 's2',
+        node('orch', 'D', 'r2', { hosting: H.agent({ name: 'The Orchestrator Agent', min: 1, max: 2, llm: false, summary: 'The Orchestrator Agent is a small, always-on Python service that sequences collection, analysis, prioritization and reporting and routes findings to the remediation path. Its coordination is deterministic code; it makes no model calls.' }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'hub', eyebrow: 'Coordination', lines: ['Orchestrator', 'Agent'], stage: 's2',
           role: 'The coordination hub: manages the workflow between collection, analysis, prioritization and reporting, and routes findings into reporting and remediation.' }),
-        node('analysis', 'E', 'r2', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'search', eyebrow: 'Analysis', lines: ['Analysis', 'Agent'], stage: 's2',
+        node('analysis', 'E', 'r2', { hosting: H.agent({ name: 'The Analysis Agent', min: 0, max: 5, llm: true, llmNote: 'Reasoning over correlated device records; every flagged gap cites the source signal. Figures never come from the model' }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'search', eyebrow: 'Analysis', lines: ['Analysis', 'Agent'], stage: 's2',
           role: 'Identifies compliance gaps from sensor health, antivirus, device status and other indicators; correlates device information and flags inconsistencies, e.g. a device that looks noncompliant in one system while its operational condition needs investigation.' }),
-        node('prior', 'F', 'r2', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'filter', eyebrow: 'Prioritization', lines: ['Prioritization', 'Agent'], stage: 's2',
+        node('prior', 'F', 'r2', { hosting: H.agent({ name: 'The Prioritization Agent', llm: true, llmNote: 'Applies today’s triage rules and available risk context; no numerical score is invented' }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'filter', eyebrow: 'Prioritization', lines: ['Prioritization', 'Agent'], stage: 's2',
           role: 'Organises findings using available risk and operational context, separates routine compliance findings from potentially urgent security concerns, and routes results to reporting and proposed remediation. No numerical scoring method is assumed.' }),
 
-        node('reporting', 'G', 'r1', { platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'filetext', eyebrow: 'Reporting', lines: ['Reporting', 'Agent'], stage: 's3',
+        node('knowhow', 'F', 'r2', { y: 162, kind: 'knowledge', icon: 'archive', eyebrow: 'SOPs · reports', lines: ['Knowledge &', 'Effort Records'], stage: 's2', platform: 'Existing material · report definitions, reconciliation logic, exception lists and remediation runbooks (SharePoint) plus exported report and ticket history · to be confirmed',
+          hosting: H.knowledge({ summary: 'The four report definitions, the experts’ reconciliation queries and exception lists and the remediation runbooks stay in SharePoint; past reports and remediation tickets are exported once. A Python loader indexes them with source references so the agents can cite the rule or precedent they applied.', qty: '1 document library (report definitions, runbooks, exceptions) + 1 list (exported report and ticket history)' }),
+          role: 'How today’s process knowledge and the record of past manual effort are put to work: the definitions of the four recurring reports, the reconciliation logic the experts apply across Defender and Intune, the exception lists, the remediation runbooks and the history of remediation tickets with their outcomes are captured once and supplied to the Analysis and Prioritization agents.',
+          detail: ['Codifies the experts’ reconciliation rules and exceptions so findings match how experts judge today', 'Report definitions let the Reporting Agent reproduce the four recurring reports from the first cycle', 'Past remediation tickets show which workstation fixes succeed reliably and inform eligibility', 'The 16–20 hours a week of manual reporting is the baseline the agents are measured against'] }),
+
+        node('reporting', 'G', 'r1', { hosting: H.agent({ name: 'The Reporting Agent', llm: true, llmNote: 'Narrative summaries only; the figures come from the device data store' }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'filetext', eyebrow: 'Reporting', lines: ['Reporting', 'Agent'], stage: 's3',
           role: 'Generates compliance and device-health summaries for scheduled daily, weekly or monthly reports and targeted on-demand reports, including prioritized findings and remediation status.' }),
-        node('reports', 'H', 'r1', { logo: 'powerbi', platform: 'Proposed · Power BI reports and dashboards over a SharePoint report library · to be confirmed', kind: 'data', icon: 'chart', eyebrow: 'Power BI', lines: ['Compliance', 'Reports'], stage: 's3',
+        node('reports', 'H', 'r1', { hosting: H.powerBI({ summary: 'Reports are Power BI reports and dashboards over the consolidated device data, published to a SharePoint report library on the agreed schedule and on demand.', qty: '1 report library · 4 recurring reports + on-demand views' }), logo: 'powerbi', platform: 'Proposed · Power BI reports and dashboards over a SharePoint report library · to be confirmed', kind: 'data', icon: 'chart', eyebrow: 'Power BI', lines: ['Compliance', 'Reports'], stage: 's3',
           role: 'Reports and compliance insights ready for consumption on a schedule or on demand.' }),
-        node('rag', 'H', 'r2', { logo: 'copilot', platform: 'Proposed enhancement · Copilot Studio assistant over the published reports', kind: 'proposed', icon: 'message', eyebrow: 'Copilot Studio', lines: ['RAG Report', 'Assistant'], stage: 's3',
+        node('rag', 'H', 'r2', { hosting: H.copilotStudio({ summary: 'The proposed assistant is a Copilot Studio agent grounded in the published report library. It answers within the asking user’s permissions and consumes Copilot Credits per message; nothing is hosted beyond the tenant.', qty: '1 report library as knowledge source' }), logo: 'copilot', platform: 'Proposed enhancement · Copilot Studio assistant over the published reports', kind: 'proposed', icon: 'message', eyebrow: 'Copilot Studio', lines: ['RAG Report', 'Assistant'], stage: 's3',
           role: 'A proposed enhancement, not an established requirement: a retrieval-augmented chatbot that would let users query available reports and supporting knowledge in natural language.' }),
 
-        node('assess', 'G', 'r3', { kind: 'process', icon: 'scale', eyebrow: 'Eligibility', lines: ['Remediation', 'Assessment'], stage: 's4',
+        node('assess', 'G', 'r3', { hosting: H.functions({ summary: 'Eligibility is a small set of Python functions: deterministic checks of device class, finding type and past remediation outcomes against the approved eligibility list. No model decides eligibility.', qty: '1 function app shared by the remediation steps · 2 functions' }), kind: 'process', icon: 'scale', eyebrow: 'Eligibility', lines: ['Remediation', 'Assessment'], stage: 's4',
           role: 'Assesses whether a prioritized finding is eligible for remediation and at what risk. Low-risk workstation issues may be automation candidates; higher-risk issues stay under human validation and established controls.' }),
-        node('approval', 'H', 'r3', { platform: 'Proposed · Microsoft Teams approval card; server changes also raise a change request', kind: 'human', icon: 'usercheck', eyebrow: 'Teams approval', lines: ['Human', 'Approval'], stage: 's4',
+        node('approval', 'H', 'r3', { hosting: H.people({ summary: 'Remediation approvers and server managers act through a Teams approval card; server changes also raise a change request in the existing change-control tool. People need no hosting.', qty: 'Named approvers per device class · change-control integration' }), platform: 'Proposed · Microsoft Teams approval card; server changes also raise a change request', kind: 'human', icon: 'usercheck', eyebrow: 'Teams approval', lines: ['Human', 'Approval'], stage: 's4',
           role: 'Required human approval before remediation. Server changes follow change-control procedures and need server manager approval; the system never modifies critical servers without authorization.' }),
-        node('remed', 'G', 'r4', { platform: 'Proposed · agent runtime driving Intune remediation scripts and Defender response actions under approval', kind: 'agent', icon: 'wrench', eyebrow: 'Authorized', lines: ['Remediation', 'Agent'], stage: 's4',
+        node('remed', 'G', 'r4', { hosting: H.agent({ name: 'The Remediation Agent', min: 0, max: 3, llm: false, extra: { azure: [remedWrite], aws: [remedWrite], gcp: [remedWrite] }, summary: 'The Remediation Agent is a Python service that executes only approved, allow-listed actions through Intune remediation scripts and Defender response actions, one approved device set at a time. It makes no model calls.' }), platform: 'Proposed · agent runtime driving Intune remediation scripts and Defender response actions under approval', kind: 'agent', icon: 'wrench', eyebrow: 'Authorized', lines: ['Remediation', 'Agent'], stage: 's4',
           role: 'Carries out authorized remediation for eligible issues. The stakeholder’s 50–70% workstation remediation figure is an exploratory ambition, not a verified target.' }),
-        node('verify', 'F', 'r4', { kind: 'process', icon: 'shieldcheck', eyebrow: 'Verification', lines: ['Verify', 'Device State'], stage: 's4',
+        node('verify', 'F', 'r4', { hosting: H.functions({ summary: 'Verification re-reads the device state from Intune and Defender after an attempt and compares it with the expected state. Failures and unresolved attempts are reported, never marked fixed.', qty: '1 function app shared by the remediation steps · 1 function' }), kind: 'process', icon: 'shieldcheck', eyebrow: 'Verification', lines: ['Verify', 'Device State'], stage: 's4',
           role: 'Verifies the resulting device state where possible. Failed or unresolved attempts are reported rather than treated as successful.' }),
-        node('status', 'E', 'r4', { logo: 'sharepoint', platform: 'Proposed · SharePoint / Dataverse status record · to be confirmed', kind: 'data', icon: 'filecheck', eyebrow: 'SharePoint', lines: ['Status', 'Update'], stage: 's4',
+        node('status', 'E', 'r4', { hosting: H.m365Store({ summary: 'The status record is a SharePoint list (Dataverse if Power Platform capacity is already licensed) holding every remediation outcome and verification result. The next collection cycle reads it.', qty: '1 list · versioning on', perm: 'Sites.Selected · read / write' }), logo: 'sharepoint', platform: 'Proposed · SharePoint / Dataverse status record · to be confirmed', kind: 'data', icon: 'filecheck', eyebrow: 'SharePoint', lines: ['Status', 'Update'], stage: 's4',
           role: 'Records the outcome and makes the updated information available to subsequent collection, analysis and reporting cycles.' }),
 
         /* security technologies */
@@ -2302,6 +2751,8 @@ window.Logos = {
         { id: 'e-coll-orch',     from: 'collection', to: 'orch', style: 'flow', route: 'h' },
         { id: 'e-orch-analysis', from: 'orch',   to: 'analysis', style: 'flow', route: 'h' },
         { id: 'e-analysis-prior', from: 'analysis', to: 'prior', style: 'flow', route: 'h' },
+        { id: 'e-knowhow-analysis', from: 'knowhow', to: 'analysis', style: 'enrich', route: 's', toDy: -14 },
+        { id: 'e-knowhow-prior', from: 'knowhow', to: 'prior', style: 'enrich', route: 'v', label: 'rules · history', labelSide: 'right' },
         { id: 'e-prior-reporting', from: 'prior', to: 'reporting', style: 'flow', route: 's', fromDy: -12, label: 'findings', labelAt: 0.55, labelDy: -8 },
         { id: 'e-prior-assess',  from: 'prior',  to: 'assess', style: 'flow', route: 's', fromDy: 12, label: 'candidates', labelAt: 0.5, labelDy: 16 },
         { id: 'e-reporting-reports', from: 'reporting', to: 'reports', style: 'flow', route: 'h' },
@@ -2350,22 +2801,22 @@ window.Logos = {
         caption: 'The Orchestrator Agent takes the consolidated data and coordinates the analysis, prioritization and reporting workflow.',
         nodes: ['orch', 'siem'], edges: ['e-coll-orch', 'e-siem-orch'] },
       { stage: 's2', title: 'Analysis',
-        caption: 'The Analysis Agent identifies compliance gaps and correlates device information. A device can look noncompliant in one system while its operational condition needs investigation.',
-        nodes: ['analysis', 'grd'], edges: ['e-orch-analysis', 'e-grd-analysis'] },
+        caption: 'The Analysis Agent identifies compliance gaps and correlates device information, applying the reconciliation logic and exception lists the experts use today. A device can look noncompliant in one system while its operational condition needs investigation.',
+        nodes: ['analysis', 'knowhow', 'grd'], edges: [['e-orch-analysis', 'e-knowhow-analysis'], 'e-grd-analysis'] },
       { stage: 's2', title: 'Prioritization',
-        caption: 'Findings are organised by available risk and operational context, separating routine compliance items from potentially urgent security concerns.',
-        nodes: ['prior'], edges: ['e-analysis-prior'] },
+        caption: 'Findings are organised by available risk and operational context and by today’s triage rules, separating routine compliance items from potentially urgent security concerns.',
+        nodes: ['prior'], edges: [['e-analysis-prior', 'e-knowhow-prior']] },
       { stage: 's3', title: 'Two operational paths',
         caption: 'Prioritized findings split into two paths: reporting for every finding, and a controlled remediation path for eligible candidates.',
         nodes: ['reporting', 'assess'], edges: [['e-prior-reporting', 'e-prior-assess']] },
       { stage: 's3', title: 'Compliance reports',
-        caption: 'The Reporting Agent generates compliance and device-health summaries, available as scheduled daily, weekly or monthly reports and targeted on-demand reports.',
+        caption: 'The Reporting Agent reproduces the four recurring reports from their existing definitions and adds targeted on-demand reports, available daily, weekly or monthly and on request.',
         nodes: ['reports', 'dlp'], edges: ['e-reporting-reports', 'e-dlp-reporting'] },
       { stage: 's3', title: 'Proposed report assistant',
         caption: 'A proposed enhancement: a RAG-powered assistant that would let users query reports and supporting knowledge in natural language. Not an established requirement.',
         nodes: ['rag'], edges: ['e-reports-rag', 'e-dlp-rag'] },
       { stage: 's4', title: 'Eligibility and approval',
-        caption: 'Each candidate is assessed for automation suitability and risk. Human approval is required where appropriate; server changes always go through change control and server manager approval.',
+        caption: 'Each candidate is assessed for automation suitability and risk; past remediation outcomes show which workstation fixes succeed reliably. Human approval is required where appropriate; server changes always go through change control and server manager approval.',
         nodes: ['approval'], edges: ['e-assess-approval'] },
       { stage: 's4', title: 'Authorized remediation',
         caption: 'For an eligible, approved example such as a low-risk workstation issue, the Remediation Agent carries out the authorized change.',
@@ -2404,8 +2855,16 @@ window.Logos = {
     withheld: 'Publication withheld',
     duplicate: 'Duplicate · observation recorded'
   };
+  const COVERAGE = {
+    covered: 'Covered by existing licence',
+    notCovered: 'Not covered · upgrade or add-on required',
+    unclear: 'Unclear · expert confirmation requested'
+  };
+  const H = Deck.hosting, HR = Deck.hostingRows;
+  const registerRead = HR.graph('1 app registration · read-only', 'Sites.Selected · Contract & Licence Register list');
   const announcement = {
     vendor: 'OEM A', product: 'Gateway Suite', id: 'DEMO-104',
+    coverage: COVERAGE.covered, coverageBasis: 'Gateway Suite 8.x · enterprise licence with active support · register entry OEM-A-GS-ENT · confirmed by Service Expert',
     category: 'Security advisory', severity: 'High', affected: '8.4', fixed: '8.4.2',
     audience: 'STS Pilot Group', reviewStatus: STATUS.approved, internalImpact: 'Not assessed',
     sourceUrl: 'https://oem-a.example/advisories/DEMO-104', sourceShort: 'oem-a.example/advisories/DEMO-104',
@@ -2414,8 +2873,8 @@ window.Logos = {
 
   /* ---- reusable trace steps ---------------------------------------------- */
   const S = {
-    monitor: { stage: 's1', title: 'Monitor approved sources', nodes: ['registry', 'sources'], edges: ['e-registry-sources'],
-      caption: 'On the configured schedule, the Collection Workflow consults the approved source registry. Only listed feeds, APIs and mailboxes are monitored; there is no open web browsing.' },
+    monitor: { stage: 's1', title: 'Monitor approved sources', nodes: ['knowhow', 'registry', 'sources'], edges: [['e-knowhow-registry', 'e-registry-sources']],
+      caption: 'On the configured schedule, the Collection Workflow consults the approved source registry, seeded from the sources and vendor owners the team already tracks by hand. Only listed feeds, APIs and mailboxes are monitored; there is no open web browsing.' },
     capture: { stage: 's1', title: 'Capture source evidence', nodes: ['collect', 'csg'], edges: [['e-sources-collect', 'e-csg-sources']],
       caption: 'A candidate announcement is collected with its source identity, source URL, publication time where stated, and detection time.' },
     detectNew: { stage: 's2', title: 'Detect: new announcement', nodes: ['detect'], edges: [['e-collect-detect', 'e-csg-detect'], 'e-detect-repo'],
@@ -2430,20 +2889,32 @@ window.Logos = {
       caption: 'Summary, category and tags are produced. Source-stated severity: High. Source severity is kept separate from internal review priority and is never invented when the source states none.' },
     analyseRev: { stage: 's2', title: 'Re-analyse the revision', nodes: ['analysis', 'grd'], edges: [['e-detect-analysis', 'e-grd-analysis']],
       caption: 'The changed content is re-analysed. The summary and classification are regenerated; the record keeps its identity and gains a new version.' },
-    gateRoutine: { stage: 's3', title: 'Routing gate: routine', nodes: ['gate', 'siem'], edges: ['e-analysis-gate', ['e-gate-repo', 'e-siem-gate']],
-      caption: 'Approved rules check source completeness, review requirements and configured vendor, product and domain ownership. Routine and sufficiently supported: it proceeds under approved publication rules without a reviewer.' },
-    gateRev: { stage: 's3', title: 'Routing gate: applicable rules', nodes: ['gate', 'siem'], edges: ['e-analysis-gate', ['e-gate-repo', 'e-siem-gate']],
-      caption: 'Publication rules apply to the revision as to any announcement. A routine, well-supported update proceeds; a high-impact change would route to a reviewer.' },
-    gateReview: { stage: 's3', title: 'Routing gate: review required', nodes: ['gate', 'review', 'siem'], edges: ['e-analysis-gate', ['e-gate-repo', 'e-siem-gate'], 'e-gate-review'],
+    analyseFeature: { stage: 's2', title: 'Generate structured intelligence', nodes: ['analysis', 'grd'], edges: [['e-detect-analysis', 'e-grd-analysis']],
+      caption: 'A feature release: summary, category “Feature release”, vendor, product and the edition the source names. The source states no severity, so severity stays “Not stated”.' },
+    coverCovered: { stage: 's3', title: 'Rate licence coverage: covered', nodes: ['coverage', 'register', 'experts'], edges: [['e-analysis-coverage', 'e-experts-register'], 'e-register-coverage'],
+      caption: `Vendor, product, edition and version are matched against the Contract & Licence Register that Service Experts maintain. The item falls within an existing entitlement: rated “${COVERAGE.covered}”, with the register entry recorded as the basis.` },
+    coverRev: { stage: 's3', title: 'Re-rate the revision', nodes: ['coverage', 'register', 'experts'], edges: [['e-analysis-coverage', 'e-experts-register'], 'e-register-coverage'],
+      caption: 'The changed content is rated again against the register. A revision that moves a capability to a higher edition, or a version beyond the supported range, changes the rating; the earlier rating stays in the record history.' },
+    coverUnclear: { stage: 's3', title: 'Rate licence coverage: unclear', nodes: ['coverage', 'register', 'experts'], edges: [['e-analysis-coverage', 'e-experts-register'], 'e-register-coverage'],
+      caption: `The product cannot be matched to any register entry. Rated “${COVERAGE.unclear}”: a Service Expert is asked to confirm, and the gap in the register is recorded.` },
+    coverNot: { stage: 's3', title: 'Rate licence coverage: not covered', nodes: ['coverage', 'register', 'experts'], edges: [['e-analysis-coverage', 'e-experts-register'], 'e-register-coverage'],
+      caption: `The announced feature is available only in an edition above the one ABB holds for this product. Rated “${COVERAGE.notCovered}”: a commercial signal for review, not a purchase decision.` },
+    gateRoutine: { stage: 's3', title: 'Routing gate: routine', nodes: ['gate', 'siem'], edges: ['e-coverage-gate', ['e-gate-repo', 'e-siem-gate']],
+      caption: 'Approved rules check source completeness, licence coverage, review requirements and configured vendor, product and domain ownership. Routine, covered and sufficiently supported: it proceeds under approved publication rules without a reviewer.' },
+    gateRev: { stage: 's3', title: 'Routing gate: applicable rules', nodes: ['gate', 'siem'], edges: ['e-coverage-gate', ['e-gate-repo', 'e-siem-gate']],
+      caption: 'Publication rules apply to the revision as to any announcement. A routine, well-supported and covered update proceeds; a high-impact change or a changed coverage rating would route to a reviewer.' },
+    gateReview: { stage: 's3', title: 'Routing gate: review required', nodes: ['gate', 'review', 'siem'], edges: ['e-coverage-gate', ['e-gate-repo', 'e-siem-gate'], 'e-gate-review'],
       caption: 'High-impact: the gate routes the item to a designated reviewer and records it as pending review. Nothing has been published yet.' },
-    gateHold: { stage: 's3', title: 'Routing gate: hold for review', nodes: ['gate', 'review', 'siem'], edges: ['e-analysis-gate', ['e-gate-repo', 'e-siem-gate'], 'e-gate-review'],
-      caption: 'Required source evidence is incomplete, or no configured owner matches the vendor, product or domain. The item is held for review and recorded as pending. It is not published broadly by default.' },
+    gateHold: { stage: 's3', title: 'Routing gate: hold for review', nodes: ['gate', 'review', 'siem'], edges: ['e-coverage-gate', ['e-gate-repo', 'e-siem-gate'], 'e-gate-review'],
+      caption: 'Required source evidence is incomplete, coverage is unclear, or no configured owner matches the vendor, product or domain. The item is held for review and recorded as pending. It is not published broadly by default.' },
+    gateCommercial: { stage: 's3', title: 'Routing gate: commercial review', nodes: ['gate', 'review', 'siem'], edges: ['e-coverage-gate', ['e-gate-repo', 'e-siem-gate'], 'e-gate-review'],
+      caption: 'A “Not covered” rating is a commercial impact: the gate routes the item to the designated reviewer, informs the Service Expert for the contract and records it as pending review. Nothing has been published yet.' },
     persist: { stage: 's4', title: 'Persist published state', nodes: ['publish', 'repo', 'dlp', 'dspm'], edges: ['e-gate-publish', ['e-publish-repo', 'e-dlp-publish', 'e-dspm-repo']],
-      caption: 'Publish & Notify writes the approved publication state to the repository first, so the record exists before anyone is alerted.' },
+      caption: 'Publish & Notify writes the approved publication state, including the licence coverage rating and its basis, to the repository first, so the record exists before anyone is alerted.' },
     persistRev: { stage: 's4', title: 'Persist the updated record', nodes: ['publish', 'repo', 'dlp', 'dspm'], edges: ['e-gate-publish', ['e-publish-repo', 'e-dlp-publish', 'e-dspm-repo']],
       caption: 'The revision is stored as a new version of the existing record. The earlier version and its source evidence are retained.' },
     alert: { stage: 's4', title: 'Targeted Teams alert', nodes: ['teams', 'iam'], edges: [['e-publish-teams', 'e-iam-teams']],
-      caption: 'Then the targeted notification reaches the configured pilot audience with category, product, source link and publication status. Delivery status is recorded.' },
+      caption: 'Then the targeted notification reaches the configured pilot audience with category, product, licence coverage, source link and publication status. Delivery status is recorded.' },
     alertRev: { stage: 's4', title: 'Update alert', nodes: ['teams', 'iam'], edges: [['e-publish-teams', 'e-iam-teams']],
       caption: 'An update notification, marked as a revision of the earlier announcement, goes to the same configured audience.' },
     search: { stage: 's5', title: 'Searchable afterwards', nodes: ['copilot', 'users', 'iam'], edges: ['e-repo-copilot', ['e-users-copilot', 'e-iam-users']],
@@ -2452,19 +2923,19 @@ window.Logos = {
 
   const scenarios = [
     { id: 'routine', short: 'New routine', title: 'New routine announcement',
-      description: 'collection → detection → analysis → publication rules → repository → targeted alert.',
-      steps: [S.monitor, S.capture, S.detectNew, S.analyse, S.gateRoutine, S.persist, S.alert, S.search] },
+      description: 'collection → detection → analysis → licence coverage → publication rules → repository → targeted alert.',
+      steps: [S.monitor, S.capture, S.detectNew, S.analyse, S.coverCovered, S.gateRoutine, S.persist, S.alert, S.search] },
     { id: 'duplicate', short: 'Unchanged duplicate', title: 'Unchanged duplicate',
       description: 'collection → detection → duplicate recorded → stop. No AI re-analysis and no new publication alert.',
       steps: [S.monitor, S.capture, S.detectDup,
         { stage: 's2', title: 'Duplicate recorded · stop', nodes: ['dup'], edges: ['e-detect-dup'],
-          caption: 'The observation is recorded against the existing announcement and processing stops. No AI re-analysis, no new publication and no audience alert.' }] },
+          caption: 'The observation is recorded against the existing announcement and processing stops. No AI re-analysis, no re-rating, no new publication and no audience alert.' }] },
     { id: 'revision', short: 'Material revision', title: 'Material revision',
-      description: 'existing identity, changed content → re-analysis → applicable review gate → updated record and update alert.',
-      steps: [S.monitor, S.capture, S.detectRev, S.analyseRev, S.gateRev, S.persistRev, S.alertRev] },
+      description: 'existing identity, changed content → re-analysis → re-rating → applicable review gate → updated record and update alert.',
+      steps: [S.monitor, S.capture, S.detectRev, S.analyseRev, S.coverRev, S.gateRev, S.persistRev, S.alertRev] },
     { id: 'high', short: 'High-impact advisory', title: 'High-impact advisory',
       description: 'analysis → review required → reviewer notification → pause until an explicit simulated review action.',
-      steps: [S.monitor, S.capture, S.detectNew, S.analyseHigh, S.gateReview,
+      steps: [S.monitor, S.capture, S.detectNew, S.analyseHigh, S.coverCovered, S.gateReview,
         { stage: 's3', title: 'Reviewer notified · paused', nodes: ['teams'], edges: ['e-review-teams'],
           caption: 'A designated-reviewer notification is sent through Teams. This is not the audience alert. Playback waits for the reviewer’s decision.',
           gate: { action: 'Reviewer approves publication', hint: 'Simulated action · approves publication only, never a production change' } },
@@ -2476,13 +2947,23 @@ window.Logos = {
       description: 'held for review with the missing evidence or routing configuration explained. Not published broadly by default.',
       steps: [S.monitor, S.capture, S.detectNew,
         { stage: 's2', title: 'Generate structured intelligence', nodes: ['analysis', 'grd'], edges: [['e-detect-analysis', 'e-grd-analysis']],
-          caption: 'The summary is produced, but the source states no severity (“Not stated”) and the product cannot be matched to any configured STS ownership.' },
-        S.gateHold,
+          caption: 'The summary is produced, but the source states no severity (“Not stated”) and the product cannot be matched to any configured STS ownership or register entry.' },
+        S.coverUnclear, S.gateHold,
         { stage: 's3', title: 'Reviewer notified · held', nodes: ['teams'], edges: ['e-review-teams'],
           caption: 'The designated reviewer is notified of a held item and what is missing: the evidence gap or the ownership rule that needs configuring. No pilot-audience alert is sent.',
           gate: { action: 'Reviewer withholds publication', hint: 'Simulated action · a reason is recorded, the item stays traceable' } },
         { stage: 's3', title: 'Withheld with recorded reason', nodes: ['withheld'], edges: ['e-review-withheld'],
-          caption: `Publication is withheld and the reason is recorded in the repository (status “${STATUS.withheld}”). The item is visible in the authorized reviewer view only; ordinary users and Copilot answers do not see it as published knowledge.` }] }
+          caption: `Publication is withheld and the reason is recorded in the repository (status “${STATUS.withheld}”). The item is visible in the authorized reviewer view only; ordinary users and Copilot answers do not see it as published knowledge.` }] },
+    { id: 'notcovered', short: 'Feature not covered', title: 'New feature outside the current licence',
+      description: 'feature release → analysis → rated “Not covered” → commercial review → publication with the licence flag.',
+      steps: [S.monitor, S.capture, S.detectNew, S.analyseFeature, S.coverNot, S.gateCommercial,
+        { stage: 's3', title: 'Reviewer notified · paused', nodes: ['teams'], edges: ['e-review-teams'],
+          caption: 'The designated reviewer is notified with the coverage rating and the register entry it was based on. Playback waits for the decision.',
+          gate: { action: 'Reviewer approves publication with licence note', hint: 'Simulated action · approves publication only; no upgrade or purchase is decided' } },
+        { stage: 's3', title: 'Approved with commercial note', nodes: ['publish'], edges: ['e-review-publish'],
+          caption: 'The reviewer approves publication with the coverage note attached. Approval to publish is not an upgrade or purchase decision; that remains with the contract owner.' },
+        { stage: 's4', title: 'Persist, then alert with licence flag', nodes: ['repo', 'teams', 'dlp', 'dspm', 'iam'], edges: [['e-publish-repo', 'e-dlp-publish', 'e-dspm-repo'], ['e-publish-teams', 'e-iam-teams']],
+          caption: `The record and the targeted alert carry “${COVERAGE.notCovered}”, so the audience knows an entitlement change would be needed before adoption.` }] }
   ];
 
   Deck.registerProject({
@@ -2499,11 +2980,13 @@ window.Logos = {
       issues: [
         { title: 'Fragmented intelligence', text: 'Releases, advisories and lifecycle changes arrive in different sources and formats, with no single trusted feed.' },
         { title: 'Coverage by individual effort', text: 'Monitoring depends on personal subscriptions, availability and repeated portal checks. It does not scale and leaves gaps.' },
-        { title: 'Untargeted, unrecorded alerts', text: 'Important updates can be missed while generic alerts create noise, and there is no traceable record of what was reviewed, published or withheld.' }
+        { title: 'Untargeted, unrecorded alerts', text: 'Important updates can be missed while generic alerts create noise, and there is no traceable record of what was reviewed, published or withheld.' },
+        { title: 'Licence position checked by asking around', text: 'Whether a new feature or fix is covered by the contracts ABB already holds is known to a few Service Experts and confirmed case by case, so commercial impact surfaces late or not at all.' }
       ],
-      direction: 'Proposed direction: approved-source monitoring, evidence-backed summaries, controlled review, targeted notifications and a searchable history, delivered as a controlled MVP.',
+      direction: 'Proposed direction: approved-source monitoring, evidence-backed summaries, a licence-coverage rating against the contracts ABB already holds, controlled review, targeted notifications and a searchable history, delivered as a controlled MVP that starts from today’s monitoring practice.',
       scopeNote: 'Proposed MVP · 3–5 OEMs · One STS pilot group'
     },
+    hostingAssumption: 'assumption to be confirmed with the sponsor: 3–5 OEMs, up to ~500 candidate announcements per month, one STS pilot group; model calls only for new or revised announcements.',
 
     diagram: {
       viewBox: { w: 1856, h: 740 },
@@ -2511,57 +2994,75 @@ window.Logos = {
       stages: [
         { id: 's1', num: '01', title: 'Source Intake',         x: 12,   w: 204 },
         { id: 's2', num: '02', title: 'Detection & Analysis',  x: 240,  w: 436, desc: 'New, revised or unchanged duplicate' },
-        { id: 's3', num: '03', title: 'Governance & Routing',  x: 708,  w: 436, desc: 'Rules first, then reviewers' },
+        { id: 's3', num: '03', title: 'Coverage, Review & Routing', x: 708, w: 436, desc: 'Licence coverage first, then rules and reviewers' },
         { id: 's4', num: '04', title: 'Publication & Alerts',  x: 1176, w: 436, desc: 'Persist the record, then notify' },
         { id: 's5', num: '05', title: 'Search & History',      x: 1644, w: 204 }
       ],
       nodes: [
-        node('registry', 'A', 'r1', { logo: 'sharepoint', kind: 'config', icon: 'clipboard', eyebrow: 'SharePoint', lines: ['Source', 'Registry'], stage: 's1', platform: 'SharePoint list (proposed)',
+        node('registry', 'A', 'r1', { hosting: H.m365Store({ summary: 'The approved source registry is a SharePoint list maintained by source owners: one row per feed, API or mailbox with vendor, owner and status. The Collection Workflow reads it at the start of every run.', qty: '1 list · versioning on', perm: 'Sites.Selected · read' }), logo: 'sharepoint', kind: 'config', icon: 'clipboard', eyebrow: 'SharePoint', lines: ['Source', 'Registry'], stage: 's1', platform: 'SharePoint list (proposed)',
           role: 'The approved source registry: which feeds, APIs and mailboxes may be monitored, for which vendor, and who owns them. Collection never goes beyond this list.',
           detail: ['Reference component, maintained by source owners', 'No unrestricted web browsing is implied'] }),
-        node('sources', 'A', 'r2', { kind: 'external', icon: 'rss', eyebrow: 'Approved only', lines: ['Approved', 'OEM Sources'], stage: 's1', platform: 'Vendor portals, RSS, APIs, email',
+        node('sources', 'A', 'r2', { hosting: H.external({ summary: 'Vendor portals, RSS feeds, APIs and notification mailboxes are operated by the vendors. They are read over HTTPS, and mailboxes through Microsoft Graph, by the Collection Workflow; nothing is hosted for them.', sku: 'Vendor-operated feeds, APIs, portals and mailboxes · 3–5 OEMs in the MVP', qty: '≈ 5–15 registered sources', note: 'Read-only; a shared mailbox for vendor notifications is included in Microsoft 365' }), kind: 'external', icon: 'rss', eyebrow: 'Approved only', lines: ['Approved', 'OEM Sources'], stage: 's1', platform: 'Vendor portals, RSS, APIs, email',
           role: 'Trusted vendor channels listed in the registry: RSS feeds, APIs, vendor emails and other supported sources for product releases, feature announcements, security advisories and lifecycle updates.',
           detail: ['Specific OEMs are not yet selected (3–5 planned for the MVP)'] }),
-        node('collect', 'A', 'r3', { logo: 'powerautomate', kind: 'process', icon: 'inbox', eyebrow: 'Power Automate', lines: ['Collection', 'Workflow'], stage: 's1', platform: 'Power Automate · approved connectors',
+        node('collect', 'A', 'r3', { hosting: H.powerAutomate({ summary: 'Collection runs as scheduled Power Automate cloud flows on approved connectors (RSS, HTTP, Office 365 Outlook). Flows that run unattended are licensed per flow; a Python alternative is listed for comparison.', qty: '1 scheduled parent flow + up to 3 connector flows (RSS · API · mailbox)', fn: 4 }), logo: 'powerautomate', kind: 'process', icon: 'inbox', eyebrow: 'Power Automate', lines: ['Collection', 'Workflow'], stage: 's1', platform: 'Power Automate · approved connectors',
           role: 'Runs on a configured schedule (on-demand runs are possible) and collects candidate announcements, retaining source identity, source URL, publication time when available and detection time.',
           detail: ['Scheduler, connectors and storage are proposed, not yet integrated'] }),
 
-        node('detect', 'B', 'r3', { logo: 'powerautomate', kind: 'process', icon: 'compare', eyebrow: 'Power Automate', lines: ['Normalize', '& Detect'], stage: 's2', platform: 'Power Automate',
+        node('detect', 'B', 'r3', { hosting: H.powerAutomate({ summary: 'Normalisation and duplicate detection is one cloud flow that compares stable identifiers, normalised source identity and content fingerprints against the repository list.', qty: '1 cloud flow', fn: 1 }), logo: 'powerautomate', kind: 'process', icon: 'compare', eyebrow: 'Power Automate', lines: ['Normalize', '& Detect'], stage: 's2', platform: 'Power Automate',
           role: 'Normalises metadata and compares the candidate against existing records. Three outcomes: new announcement, material revision of an existing announcement, or unchanged duplicate.',
           detail: ['Stable source identifiers where available', 'Normalised source identity and content/version comparison as supporting mechanisms', 'Title matching alone is not treated as reliable'] }),
-        node('analysis', 'C', 'r3', { logo: 'azure', kind: 'agent', icon: 'sparkles', eyebrow: 'Azure OpenAI', lines: ['Intelligence', 'Analysis'], stage: 's2', platform: 'Proposed · Azure OpenAI through an approved connector (alternative: AI Builder) · to be confirmed',
+        node('analysis', 'C', 'r3', { hosting: H.agent({ name: 'Intelligence Analysis', min: 0, max: 3, llm: true, llmNote: 'Summary, category, tags and source-stated severity with citations; nothing is invented' }), logo: 'azure', kind: 'agent', icon: 'sparkles', eyebrow: 'Azure OpenAI', lines: ['Intelligence', 'Analysis'], stage: 's2', platform: 'Proposed · Azure OpenAI through an approved connector (alternative: AI Builder) · to be confirmed',
           role: 'Produces a concise factual summary, category, vendor and product tags, source-stated severity where available, and potential relevance to configured STS ownership.',
           detail: ['Missing severity stays “Not stated” — no invented score', 'Source-stated severity is separate from internal review priority', 'Does not establish which internal installations are affected'] }),
-        node('dup', 'C', 'r5', { kind: 'stop', icon: 'stop', eyebrow: 'No alert', lines: ['Duplicate', 'Recorded'], stage: 's2', platform: 'Repository observation',
+        node('dup', 'C', 'r5', { hosting: H.state({ summary: 'A terminal outcome, not a component: the duplicate observation is written against the existing announcement.', store: 'the OEM Release Repository (SharePoint)' }), kind: 'stop', icon: 'stop', eyebrow: 'No alert', lines: ['Duplicate', 'Recorded'], stage: 's2', platform: 'Repository observation',
           role: `Terminal outcome for an unchanged duplicate: the observation is recorded against the existing announcement and processing stops (status “${STATUS.duplicate}”). No AI re-analysis, no publication, no audience alert.` }),
 
-        node('gate', 'D', 'r3', { logo: 'powerautomate', kind: 'process', icon: 'scale', eyebrow: 'Power Automate', lines: ['Review &', 'Routing Gate'], stage: 's3', platform: 'Workflow rules · ownership configuration',
-          role: 'Checks source completeness, review requirements and configured vendor/product/domain ownership. Routine, sufficiently supported items proceed under approved publication rules; high-impact, ambiguous, low-confidence or unmapped items require reviewer attention.',
+        node('coverage', 'D', 'r3', { logo: 'azure', kind: 'agent', icon: 'license', eyebrow: 'Azure OpenAI', lines: ['Licence', 'Coverage'], stage: 's3', platform: 'Proposed · Python rating service with Azure OpenAI matching over the register · to be confirmed',
+          hosting: H.agent({ name: 'Licence Coverage Rating', min: 0, max: 3, llm: true, llmNote: 'Reads edition and version requirements from the announcement and matches them to register entries; the rating rule itself is deterministic', extra: { azure: [registerRead], aws: [registerRead], gcp: [registerRead] } }),
+          role: `Rates each new or revised announcement against the Contract & Licence Register: does the feature, version or fix fall within an entitlement ABB already holds? Outcomes: “${COVERAGE.covered}”, “${COVERAGE.notCovered}” or “${COVERAGE.unclear}”. The rating and the register entry it rests on travel with the record and the alert.`,
+          detail: ['Deterministic match on vendor, product, edition, version range and covered modules; the model only extracts the edition and version the source names', 'Unclear ratings request confirmation from a Service Expert and record the register gap', 'An indication for review, not a contractual determination or a purchase decision'] }),
+        node('register', 'D', 'r4', { logo: 'sharepoint', kind: 'data', icon: 'database', eyebrow: 'SharePoint', lines: ['Licence', 'Register'], stage: 's3', platform: 'SharePoint list (proposed) · maintained by Service Experts',
+          hosting: H.m365Store({ summary: 'The Contract & Licence Register is a SharePoint list maintained by Service Experts: vendor, product, edition, entitlements, support level, renewal date and covered modules. The rating service reads it through Microsoft Graph; experts edit it with their own accounts.', qty: '1 list · 1 row per vendor, product and edition · versioning on', perm: 'Sites.Selected · read' }),
+          role: 'The database of what ABB holds with each vendor: contract type, licence edition and tier, entitlements and covered modules, support level, renewal dates and the contract owner. Fed and kept current by Service Experts; read by the rating service for every announcement.',
+          detail: ['One row per vendor, product and edition, with the evidence document linked', 'Every change is versioned and attributed to the expert who made it', 'Gaps found by the rating service are logged here for the experts to close'] }),
+        node('experts', 'D', 'r5', { kind: 'human', icon: 'users', eyebrow: 'STS experts', lines: ['Service', 'Experts'], stage: 's3', platform: 'STS Service Experts · contract and licence owners',
+          hosting: H.people({ summary: 'Service Experts maintain the register directly in SharePoint and answer confirmation requests through a Teams approval card. People need no hosting.', qty: 'Named Service Experts per vendor contract' }),
+          role: 'The people who know the details of the contracts ABB has with each vendor: licence editions, entitlements, support terms and renewals. They feed that knowledge into the Contract & Licence Register once, keep it current, and confirm or correct ratings the service marks as unclear.',
+          detail: ['Expert knowledge is captured once and reused for every announcement instead of being asked for case by case', 'Confirmation requests arrive as Teams approval cards with the announcement and the candidate register entry', 'Experts decide coverage questions; they are not asked to approve publication'] }),
+
+        node('gate', 'E', 'r3', { hosting: H.powerAutomate({ summary: 'The routing gate is one cloud flow that evaluates completeness, coverage, ownership and review rules, writes the pending state to the repository and raises a Teams approval for items that need a reviewer.', qty: '1 cloud flow + Teams Approvals (included)', fn: 2 }), logo: 'powerautomate', kind: 'process', icon: 'scale', eyebrow: 'Power Automate', lines: ['Review &', 'Routing Gate'], stage: 's3', platform: 'Workflow rules · ownership configuration',
+          role: 'Checks source completeness, licence coverage, review requirements and configured vendor/product/domain ownership. Routine, covered and sufficiently supported items proceed under approved publication rules; high-impact, not-covered, ambiguous, low-confidence or unmapped items require reviewer attention.',
           detail: ['Records the pending-review state in the repository', 'Triggers a designated-reviewer notification for items awaiting review'] }),
-        node('review', 'E', 'r2', { kind: 'human', icon: 'usercheck', eyebrow: 'Teams approval', lines: ['Human', 'Review'], stage: 's3', platform: 'Designated reviewer · proposed Microsoft Teams approval card',
+        node('review', 'E', 'r2', { hosting: H.people({ summary: 'Designated reviewers approve, edit or withhold publication through a Teams approval card. People need no hosting; the decision is recorded with identity and time.', qty: 'Designated reviewers per vendor and domain' }), kind: 'human', icon: 'usercheck', eyebrow: 'Teams approval', lines: ['Human', 'Review'], stage: 's3', platform: 'Designated reviewer · proposed Microsoft Teams approval card',
           role: 'A designated reviewer can approve publication, edit and approve, or withhold publication with a recorded reason. A real branch from the gate — not a mandatory step for every routine announcement.',
           detail: ['Approval to publish is not approval to make a production change', 'Held and pending items are visible in the authorized reviewer view only'] }),
-        node('withheld', 'E', 'r1', { kind: 'deny', icon: 'x', eyebrow: 'With reason', lines: ['Publication', 'Withheld'], stage: 's3', platform: 'Repository state',
+        node('withheld', 'E', 'r1', { hosting: H.state({ summary: 'A terminal outcome: publication withheld with a recorded reason, visible in the reviewer view only.', store: 'the OEM Release Repository (SharePoint)' }), kind: 'deny', icon: 'x', eyebrow: 'With reason', lines: ['Publication', 'Withheld'], stage: 's3', platform: 'Repository state',
           role: `Terminal outcome when the reviewer withholds publication (status “${STATUS.withheld}”). The reason is recorded; no audience alert is sent; the record stays traceable.` }),
 
-        node('publish', 'F', 'r3', { logo: 'powerautomate', kind: 'process', icon: 'send', eyebrow: 'Power Automate', lines: ['Publish', '& Notify'], stage: 's4', platform: 'Power Automate',
+        node('publish', 'F', 'r3', { hosting: H.powerAutomate({ summary: 'Publish & Notify is one cloud flow that writes the published state first and then posts the targeted Teams message, recording delivery status.', qty: '1 cloud flow', fn: 2 }), logo: 'powerautomate', kind: 'process', icon: 'send', eyebrow: 'Power Automate', lines: ['Publish', '& Notify'], stage: 's4', platform: 'Power Automate',
           role: 'Persists the approved publication state in the repository first, then delivers the targeted Teams notification and records its delivery status.',
           detail: ['Sequence: ① persist the published record, ② send the audience alert', 'Does not install patches or change configurations'] }),
-        node('teams', 'G', 'r2', { kind: 'product', logo: 'teams', eyebrow: 'Targeted alert', lines: ['Microsoft', 'Teams'], stage: 's4', platform: 'Microsoft Teams',
+        node('teams', 'G', 'r2', { hosting: H.teams({ summary: 'Targeted alerts and reviewer notifications are posted to existing Teams channels. No licensing is added beyond the tenant’s Teams.', qty: '1 team · 1 channel per pilot audience · 1 reviewer channel', approvals: '1 approval template (publication review)' }), kind: 'product', logo: 'teams', eyebrow: 'Targeted alert', lines: ['Microsoft', 'Teams'], stage: 's4', platform: 'Microsoft Teams',
           role: 'Routes the summary to the configured pilot audience with category, relevant product, source link and review/publication status. Also carries the separate designated-reviewer notification for items awaiting review.',
           detail: ['Audience alert and reviewer notification are distinct messages'] }),
 
-        node('users', 'H', 'r1', { kind: 'input', icon: 'user', eyebrow: 'Pilot group', lines: ['Authorized', 'Users'], stage: 's5', platform: 'STS pilot group · reviewers',
+        node('users', 'H', 'r1', { hosting: H.people({ summary: 'Pilot-group members and reviewers use Teams and Copilot with their existing accounts; nothing is hosted for them.', qty: 'One STS pilot group' }), kind: 'input', icon: 'user', eyebrow: 'Pilot group', lines: ['Authorized', 'Users'], stage: 's5', platform: 'STS pilot group · reviewers',
           role: 'Members of the pilot audience and designated reviewers who search stored announcements and ask source-grounded questions.' }),
-        node('copilot', 'H', 'r2', { kind: 'product', logo: 'copilot', eyebrow: 'Copilot Studio', lines: ['Copilot Query', 'Experience'], stage: 's5', platform: 'Copilot Studio',
+        node('copilot', 'H', 'r2', { hosting: H.copilotStudio({ summary: 'The query experience is a Copilot Studio agent grounded in the published repository records. It answers with source references within the asking user’s permissions and consumes Copilot Credits per message.', qty: '1 SharePoint site (published records) as knowledge source' }), kind: 'product', logo: 'copilot', eyebrow: 'Copilot Studio', lines: ['Copilot Query', 'Experience'], stage: 's5', platform: 'Copilot Studio',
           role: 'Reads authorized repository content to answer questions with source references. A separate query path, not a stage of the ingestion pipeline.',
           detail: ['Ordinary answers use published records only', 'Pending-review content appears only in an explicitly authorized reviewer view', 'Answers state when no published source establishes a fact'] }),
-        node('repo', 'H', 'r3', { kind: 'product', logo: 'sharepoint', eyebrow: 'SharePoint', lines: ['OEM Release', 'Repository'], stage: 's5', platform: 'SharePoint',
+        node('repo', 'H', 'r3', { hosting: H.m365Store({ summary: 'The OEM Release Repository is a SharePoint list with an evidence library: identity, versions, source evidence, summaries, classifications, coverage rating, review state and notification history.', qty: '1 list + 1 evidence library · versioning and retention label', perm: 'Sites.Selected · read / write' }), kind: 'product', logo: 'sharepoint', eyebrow: 'SharePoint', lines: ['OEM Release', 'Repository'], stage: 's5', platform: 'SharePoint',
           role: 'Stores announcement identity, versions, source evidence, summaries, classifications, review state and notification history.',
           detail: ['Populated throughout the cycle, not only at the end', 'Candidate, pending-review, withheld, published and failed-processing states remain traceable'] }),
 
+        node('knowhow', 'B', 'r1', { kind: 'knowledge', icon: 'archive', eyebrow: 'Manual history', lines: ['Knowledge &', 'Effort Records'], stage: 's2', platform: 'Existing material · the sources people check today, who handles which vendor, and the advisories already reviewed by hand (mailboxes, notes) · to be confirmed',
+          hosting: H.knowledge({ index: false, summary: 'The sources people check today and who handles which vendor are captured once into the Source Registry. Advisories already reviewed by hand are exported from mailboxes and notes and back-filled into the repository by a Python loader with their original dates, so duplicate detection and Copilot have history from day one.', qty: '1 document library (current monitoring list, notes) + 1 exported mailbox history' }),
+          role: 'How today’s process knowledge and the record of past manual effort are put to work: the portals, feeds and mailboxes people check today and who handles which vendor seed the Source Registry and the ownership rules; advisories already reviewed by hand are back-filled into the repository as history.',
+          detail: ['Seeds the approved source list and vendor ownership from current practice', 'Back-fills previously handled announcements so duplicate detection and Copilot have history from day one', 'Past manual triage (what was forwarded, what was ignored) calibrates the publication rules', 'Hours spent on manual monitoring become the baseline for the MVP’s success evidence'] }),
+
         /* security technologies */
-        node('csg', 'B', 'r2', { kind: 'sectech', icon: 'rosette', eyebrow: 'Security · Content', lines: ['Content', 'Sanitization'], stage: 's2', platform: 'Security technology category · product selected in security review',
+        node('csg', 'B', 'r2', { kind: 'sectech', icon: 'rosette', eyebrow: 'Security · Input', lines: ['Content', 'Sanitization'], stage: 's2', platform: 'Security technology category · product selected in security review',
           role: 'Secure content gateway for inbound vendor material: authenticates feeds and senders, scans links and attachments, and removes embedded instructions or active content so that only sanitised text reaches detection and analysis.', detail: ['Feed and sender authentication; link and attachment scanning', 'Strips embedded instructions and active content before analysis', 'Protects against spoofed, poisoned or tampered inputs'] }),
         node('grd', 'C', 'r2', { kind: 'sectech', icon: 'shieldai', eyebrow: 'Security · AI', lines: ['AI Guardrail', 'Enforcement'], stage: 's2', platform: 'Security technology category · product selected in security review',
           role: 'Guardrail enforcement around the AI capability: vendor content is handled as untrusted data, never as instructions; prompts are screened for injection; outputs must cite the source and may not invent a severity.', detail: ['Separates instructions from data and screens every prompt for injection', 'Validates outputs: decisions and summaries must cite their source and may not invent facts or scores', 'Bounds task scope and keeps tool use within a deny-by-default allow-list'] }),
@@ -2581,9 +3082,12 @@ window.Logos = {
         { id: 'e-collect-detect',   from: 'collect', to: 'detect',  style: 'flow',   route: 'h' },
         { id: 'e-detect-analysis',  from: 'detect',  to: 'analysis', style: 'flow',  route: 'h' },
         { id: 'e-detect-dup',       from: 'detect',  to: 'dup',     style: 'stop',   route: 's', fromDy: 12, label: 'unchanged', labelAt: 0.5, labelDy: 14 },
-        { id: 'e-analysis-gate',    from: 'analysis', to: 'gate',   style: 'flow',   route: 'h' },
-        { id: 'e-gate-publish',     from: 'gate',    to: 'publish', style: 'flow',   route: 'h', label: 'routine · rules met', labelAt: 0.5, labelDy: -10 },
-        { id: 'e-gate-review',      from: 'gate',    to: 'review',  style: 'human',  route: 's', fromDy: -12, label: 'review required', labelAt: 0.42, labelDy: -10 },
+        { id: 'e-analysis-coverage', from: 'analysis', to: 'coverage', style: 'flow', route: 'h' },
+        { id: 'e-register-coverage', from: 'register', to: 'coverage', style: 'enrich', route: 'v', label: 'entitlements', labelSide: 'right' },
+        { id: 'e-experts-register',  from: 'experts',  to: 'register', style: 'human', route: 'v', label: 'maintain · confirm', labelSide: 'right' },
+        { id: 'e-coverage-gate',    from: 'coverage', to: 'gate',   style: 'flow',   route: 'h', label: 'rated', labelAt: 0.5, labelDy: -10 },
+        { id: 'e-gate-publish',     from: 'gate',    to: 'publish', style: 'flow',   route: 'h', label: 'routine', labelAt: 0.5, labelDy: -10 },
+        { id: 'e-gate-review',      from: 'gate',    to: 'review',  style: 'human',  route: 'v', label: 'review required', labelSide: 'left' },
         { id: 'e-review-publish',   from: 'review',  to: 'publish', style: 'human',  route: 's', fromDy: 12, toDy: -12, label: 'approve · edit', labelAt: 0.5, labelDy: 14 },
         { id: 'e-review-withheld',  from: 'review',  to: 'withheld', style: 'deny',  route: 'v', label: 'withhold · reason', labelSide: 'right' },
         { id: 'e-review-teams',     from: 'review',  to: 'teams',   style: 'human',  route: 'h', fromDy: -12, toDy: -12, label: 'reviewer notification', labelAt: 0.5, labelDy: -9 },
@@ -2597,7 +3101,8 @@ window.Logos = {
         { id: 'e-csg-sources',  from: 'csg',  to: 'sources',  style: 'sec', route: 'h' },
         { id: 'e-csg-detect',   from: 'csg',  to: 'detect',   style: 'sec', route: 'v' },
         { id: 'e-grd-analysis', from: 'grd',  to: 'analysis', style: 'sec', route: 'v' },
-        { id: 'e-siem-gate',    from: 'siem', to: 'gate',     style: 'sec', route: 'v' },
+        { id: 'e-siem-gate',    from: 'siem', to: 'gate',     style: 'sec', route: 's', toDy: -22 },
+        { id: 'e-knowhow-registry', from: 'knowhow', to: 'registry', style: 'enrich', route: 'h' },
         { id: 'e-dlp-publish',  from: 'dlp',  to: 'publish',  style: 'sec', route: 'v' },
         { id: 'e-iam-users',    from: 'iam',  to: 'users',    style: 'sec', route: 'h' },
         { id: 'e-iam-teams',    from: 'iam',  to: 'teams',    style: 'sec', route: 'v' },
@@ -2610,7 +3115,7 @@ window.Logos = {
           { style: 'flow',        text: 'Publication path' },
           { style: 'stream',      text: 'Source intake' },
           { style: 'enrich',      text: 'Reference · retrieval' },
-          { style: 'human',       text: 'Human review · reviewer notice', bi: false },
+          { style: 'human',       text: 'Human input · review', bi: false },
           { style: 'deny',        text: 'Withheld publication' },
           { style: 'stop',        text: 'Duplicate · stop' },
           { style: 'integration', text: 'Question · answer' },
@@ -2626,24 +3131,25 @@ window.Logos = {
     workflow: {
       title: 'How one announcement moves through the system',
       steps: [
-        { stage: 's1', title: 'Monitor approved sources', caption: 'Run the configured collection schedule against the approved source registry.' },
+        { stage: 's1', title: 'Monitor approved sources', caption: 'Run the configured collection schedule against the approved source registry, seeded from the sources and vendor owners the team tracks by hand today.' },
         { stage: 's1', title: 'Capture source evidence', caption: 'Collect announcement content and retain its origin and timestamps.' },
         { stage: 's2', title: 'Detect new or changed content', caption: 'Separate new announcements and material revisions from unchanged duplicates.' },
         { stage: 's2', title: 'Generate structured intelligence', caption: 'Create a factual summary, category, product/domain tags, and source-stated severity.' },
-        { stage: 's3', title: 'Evaluate relevance and review requirements', caption: 'Apply configured ownership and publication rules.' },
+        { stage: 's3', title: 'Rate licence coverage', caption: 'Match vendor, product, edition and version against the Contract & Licence Register maintained by Service Experts: covered, not covered or unclear.' },
+        { stage: 's3', title: 'Evaluate relevance and review requirements', caption: 'Apply configured ownership, coverage and publication rules.' },
         { stage: 's3', title: 'Resolve review when required', caption: 'A designated reviewer approves, edits, or withholds publication.' },
-        { stage: 's4', title: 'Persist and notify', caption: 'Store the approved record, then send the targeted Teams alert.' },
+        { stage: 's4', title: 'Persist and notify', caption: 'Store the approved record with its coverage rating, then send the targeted Teams alert.' },
         { stage: 's5', title: 'Search the published history', tag: 'Subsequent user interaction', caption: 'Users query stored updates through Copilot and receive source-linked answers — when they ask, not for every announcement.' },
         { stage: 's5', title: 'Retain the operational trail', caption: 'Keep processing, review, version, and notification history, including unsuccessful or withheld paths.' }
       ]
     },
 
     components: {
-      title: 'Six components, one controlled pipeline',
+      title: 'Seven components, one controlled pipeline',
       items: [
         { name: 'Collection & Detection', platform: 'Power Automate · approved connectors',
           blurb: 'Monitors approved sources, normalizes announcements, identifies duplicates and material revisions.',
-          inputs: 'Approved source registry; vendor feeds, APIs and mailboxes; existing repository records for comparison.',
+          inputs: 'Approved source registry, seeded from today’s manual monitoring list; vendor feeds, APIs and mailboxes; existing repository records, including back-filled history, for comparison.',
           responsibility: 'Collect candidates on schedule or on demand; retain source identity, URL and timestamps; normalise metadata; classify each candidate as new, materially revised or unchanged.',
           outputs: 'Candidate records with evidence; revision links to existing announcements; duplicate observations recorded without a new alert.',
           boundary: 'Collects only from registry-approved sources. Does not browse the open web, and does not rely on title matching alone to decide a duplicate.' },
@@ -2653,28 +3159,34 @@ window.Logos = {
           responsibility: 'Produce a concise factual summary, a category, vendor/product tags, source-stated severity where available, and potential relevance to configured STS ownership.',
           outputs: 'Evidence-backed summary and proposed classification, with severity left as “Not stated” when the source gives none.',
           boundary: 'Does not independently establish which internal installations are affected, assign an internal risk score, or decide publication.' },
+        { name: 'Contract & Licence Coverage', platform: 'Python rating service · SharePoint register · Service Experts',
+          blurb: 'Rates each announcement against the contracts and licences ABB holds with the vendor.',
+          inputs: 'Vendor, product, edition, version and feature tags from Intelligence Analysis; the Contract & Licence Register maintained by Service Experts.',
+          responsibility: `Match the announcement to the relevant register entry and rate it “${COVERAGE.covered}”, “${COVERAGE.notCovered}” or “${COVERAGE.unclear}”; record the basis; request expert confirmation when unclear and log register gaps.`,
+          outputs: 'A coverage rating with its basis on every record and alert; confirmation requests and register gaps for Service Experts.',
+          boundary: 'An indication for review, not a contractual determination. It does not purchase, renew or change licences, and it never rates an item when the register has no entry without saying so.' },
         { name: 'Review & Routing', platform: 'Workflow rules · designated reviewers',
           blurb: 'Applies publication rules, identifies the responsible audience, and requests review when needed.',
-          inputs: 'Analysis output; configured vendor/product/domain ownership; review requirements and publication rules.',
+          inputs: 'Analysis output and coverage rating; configured vendor/product/domain ownership; review requirements and publication rules.',
           responsibility: 'Check source completeness and review requirements; route routine, well-supported items to publication; hold high-impact, ambiguous, low-confidence or unmapped items for a designated reviewer, who approves, edits or withholds with a recorded reason.',
           outputs: `Items marked “${STATUS.approved}”, “${STATUS.pending}” or “${STATUS.withheld}”; reviewer notifications for items awaiting review.`,
           boundary: 'Review approves publication only. It does not approve production changes, risk acceptance or purchases.' },
         { name: 'Publication & Notifications', platform: 'Power Automate · SharePoint · Teams',
           blurb: 'Persists the approved state and delivers targeted messages with recorded delivery status.',
           inputs: 'Approved publication decisions and the audience identified by routing.',
-          responsibility: 'Persist the published record first; then deliver the targeted Teams alert with category, product, source link and status; record delivery outcome.',
+          responsibility: 'Persist the published record first; then deliver the targeted Teams alert with category, product, licence coverage, source link and status; record delivery outcome.',
           outputs: 'Published repository record; targeted audience alert; delivery status in the operational history.',
           boundary: 'Informs people. It does not install patches, change production configurations or act on devices.' },
         { name: 'Repository & History', platform: 'SharePoint',
           blurb: 'Retains evidence, versions, review decisions, publication status, and processing records.',
           inputs: 'Candidate observations, versions, analysis results, review decisions, publication and notification events.',
-          responsibility: 'Keep announcement identity, source evidence, summaries, classifications, review state and notification history traceable across candidate, pending-review, withheld, published and failed-processing states.',
+          responsibility: 'Keep announcement identity, source evidence, summaries, classifications, coverage ratings, review state and notification history traceable across candidate, pending-review, withheld, published and failed-processing states.',
           outputs: 'Authoritative records for alerts, Copilot answers, audits and MVP success evidence.',
           boundary: 'A system of record for this workflow, not a configuration-management database or an inventory of internal deployments.' },
         { name: 'Conversational Search', platform: 'Copilot Studio',
           blurb: 'Answers questions using authorized stored records and exposes supporting source references.',
           inputs: 'Natural-language questions from authorized users; published repository records (reviewer-only records for authorized reviewer views).',
-          responsibility: 'Retrieve relevant stored announcements, answer with source references, and state clearly when no published source establishes a fact.',
+          responsibility: 'Retrieve relevant stored announcements, answer with source references, including whether an item is covered by the existing licence and which register entry says so, and state clearly when no published source establishes a fact.',
           outputs: 'Source-linked answers; explicit insufficient-evidence responses.',
           boundary: 'Does not expose reviewer-only or pending-review records to ordinary users, and does not infer internal exposure that no source states.' }
       ]
@@ -2709,6 +3221,9 @@ window.Logos = {
           { q: `What changed for ${announcement.vendor} this week?`,
             a: `One approved security advisory was published for ${announcement.product}. The source identifies version ${announcement.fixed} as the fixed version. Internal deployment impact has not been assessed.`,
             source: `${announcement.id} · ${announcement.sourceShort}` },
+          { q: 'Is the fix covered by our current licence?',
+            a: `Yes. ${announcement.id} is rated “${announcement.coverage}”: ${announcement.product} 8.x is held under an enterprise licence with active support (register entry OEM-A-GS-ENT), confirmed by a Service Expert on 20 Oct 2026.`,
+            source: `${announcement.id} · register entry OEM-A-GS-ENT` },
           { q: 'Is our environment affected?',
             a: 'No published source in this repository establishes whether our environment is affected.',
             noSource: 'No supporting published source',
@@ -2723,19 +3238,20 @@ window.Logos = {
 
     scope: {
       title: 'A controlled MVP first, then a baseline',
-      scope: ['3–5 prioritized OEMs', 'One selected STS pilot group', 'Approved-source monitoring and duplicate detection', 'AI-assisted summaries and controlled review', 'Targeted Teams notifications', 'Searchable announcement and review history'],
+      scope: ['3–5 prioritized OEMs', 'One selected STS pilot group', 'Approved-source monitoring and duplicate detection', 'AI-assisted summaries and controlled review', 'Licence coverage rating from an expert-maintained register', 'Targeted Teams notifications', 'Searchable announcement and review history'],
       mvpNote: 'No OEM list, deployment inventory, implementation status, ROI, budget or delivery timeline has been confirmed; these are decided with the sponsor.',
       measures: [
         { name: 'Source reliability', text: 'Collection success and visible source failures.' },
         { name: 'Duplicate suppression', text: 'Repeated items prevented from generating repeat alerts.' },
         { name: 'Alert relevance', text: 'Feedback from the pilot audience and reviewers.' },
         { name: 'Traceability', text: 'Records retaining source evidence and decision history.' },
-        { name: 'Review turnaround', text: 'Elapsed time for items requiring human review.' }
+        { name: 'Review turnaround', text: 'Elapsed time for items requiring human review.' },
+        { name: 'Coverage accuracy', text: 'Ratings confirmed or corrected by Service Experts.' }
       ],
       measuresNote: 'Quantitative targets will be agreed after the MVP establishes a baseline.',
-      ask: 'Approve a controlled MVP, confirm the initial sources and pilot audience, enable the required platform access, and nominate a sponsor, source owners, and reviewers.',
+      ask: 'Approve a controlled MVP, confirm the initial sources and pilot audience, enable the required platform access, and nominate a sponsor, source owners, reviewers and the Service Experts who own the licence register.',
       reviews: 'Before production rollout: security, DLP, architecture and user-acceptance review.',
-      boundary: 'The solution informs and routes decisions. It does not install patches, change production configurations, approve risk acceptance, or purchase products.'
+      boundary: 'The solution informs and routes decisions. It does not install patches, change production configurations, approve risk acceptance, or purchase products. A licence coverage rating informs review; it is not a contractual determination.'
     }
   });
 })(window.Deck);
