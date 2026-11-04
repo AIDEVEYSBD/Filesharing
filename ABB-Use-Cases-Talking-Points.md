@@ -1,4 +1,4 @@
-# Talking points · Agentic use cases 01, 02 and 03
+# Talking points · Agentic use cases 01 to 04
 
 *For the presenter. One sentence per bullet, plain language, about five minutes per use case. The decks carry the detail; these are the words to say. Figures are only those from the stakeholder briefs.*
 
@@ -19,7 +19,7 @@
 - A small team of AI agents, each with one job, handles the routine part of the work and sorts every request into green, orange or red.
 - One agent reads our policy and finds the rules that apply to the request.
 - One agent gathers the evidence from systems we already have: the file's reputation from Google Threat Intelligence, the device's security score and open alerts from Defender, application and organisational details from SharePoint, and the requester's history from ServiceNow.
-- The Company Portal would add application catalogue details; it is shown as a proposal until we confirm the agents can read it.
+- The Company Portal, Intune's application catalogue, tells us whether the application is already packaged and who else uses it.
 - One agent brings in our existing approval criteria and the record of past manual decisions, so the system starts from how we decide today.
 - One agent weighs it all: green is approved automatically and the allow-list entry written; orange goes to a named reviewer with the evidence attached, under a review process we still have to define together; red is escalated to the relevant security team with the full context.
 - Every outcome is written to a record and back to the ServiceNow ticket, with the evidence and the reasoning.
@@ -137,10 +137,54 @@
 
 ---
 
+## Use Case 04 · Archon, the AI context engine for Solution Architects
+
+*What it is about: the weeks a Solution Architect spends gathering standards, controls and requirements before design can start.*
+
+**The problem today**
+- For every new initiative an architect reads and correlates our 30 to 35 ABB standards and policies, our reference architectures and the external frameworks (NIST, IEC, CIS) by hand to find what applies.
+- Establishing that context and producing the initial architecture takes three to four weeks, about 160 hours per initiative, and depends on who does it.
+- New architects need a long time to learn their way around our standards and guidance before they are fully effective.
+- Manual interpretation leads to inconsistent outcomes and missed requirements, and those become compliance and design gaps later.
+
+**What we propose**
+- Archon: a set of AI agents that take the new requirement and build the architecture context, with the architect reviewing at every stage.
+- One agent understands the architecture question and the intended outcome and confirms them with the architect.
+- One agent searches the ABB standards, policies and reference architectures and lists the applicable controls, each with the clause it comes from.
+- One agent aligns those controls to NIST, IEC and CIS, so every ABB requirement carries its global reference.
+- One agent derives the use cases and the functional and non-functional requirements, each traced to its source control.
+- One agent produces the data for the evaluation criteria and first drafts: the business case, applicable controls, requirements, use cases, building blocks, risks, dependencies, and the HLD and SDP first drafts.
+- Previous HLDs, LLDs, SOPs, concept documents and white papers are indexed once, so every initiative starts from what the team has already designed.
+- On the stakeholders' figures, context arrives in one to two days instead of three to four weeks, and 10 architects release 1,440 to 3,040 hours a year for design, stakeholder work and risk decisions.
+
+**The safeguards we are adding**
+- Every control, requirement and draft statement must cite the document and clause it comes from; if it cannot, it is not produced.
+- The documents Archon reads are treated as information, never as instructions, so a document cannot steer the system.
+- Each agent has its own identity and only the permissions it needs, and it can only retrieve what the requesting architect is allowed to read.
+- Solution documents can describe sensitive designs, so sensitive content is masked before any AI model sees it and outputs go only to the requesting architect.
+- Licensed standards such as IEC are used only under the terms of the subscription we already hold.
+- Every retrieval, generated statement, review decision and delivered document is logged in a way that cannot be altered and feeds our security monitoring.
+
+**What the business gains**
+- Architecture-ready context in days instead of weeks.
+- Architect capacity released to higher-value design work.
+- One interpretation of the standards, whoever the architect is.
+- Every requirement traceable to its source control, so gaps show before design starts.
+- Faster onboarding, because new architects work from the same assembled context.
+- Enterprise knowledge becomes a reusable asset instead of living in a few experts' heads.
+
+**How we start, and what stays in your hands**
+- Shadow mode first: Archon runs on completed initiatives and its context is compared with what the architects produced.
+- The architect validates each stage and remains accountable for the final design decision.
+- Policy owners keep the standards; what enters the knowledge base and who may read it is the team's call.
+- Any agent can be stopped instantly by disabling its identity.
+
+---
+
 ## If they ask
 
 - **"Does the AI decide on its own?"** It gathers facts and applies our own rules; people decide anything unclear or high-risk, and every server change goes through change control.
 - **"Can it be manipulated?"** Requests and data are treated as information, not instructions, and every decision must cite its source.
 - **"What does it cost?"** Each deck's hosting workbook lists every component and quantity; pricing follows once volumes are confirmed.
-- **"Why these three first?"** Each replaces manual, repetitive judgement with evidence we already hold, and each keeps a person in charge of the exceptions.
+- **"Why these four?"** Each replaces manual, repetitive judgement with evidence we already hold, and each keeps a person in charge of the exceptions.
 - **"What if it goes wrong?"** Every agent has its own identity; disable it and it stops, and nothing it did is missing from the log.

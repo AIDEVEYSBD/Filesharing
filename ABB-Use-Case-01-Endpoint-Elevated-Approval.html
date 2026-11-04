@@ -759,7 +759,7 @@ html.reduced-motion .hmodal, html.reduced-motion .hm-card { animation: none; }
 /* ---- src/js/config.js ---- */
 /* Deck-wide configuration shared by every use-case deck built from this source. */
 window.DECK_CONFIG = {
-  seriesTotal: 3,                                  // the use cases form a series of three decks
+  seriesTotal: 4,                                  // the use cases form a series of three decks
   creditsLabel: 'Prepared by',
   credits: ['Anik Akella', 'Madhusadhan', 'Vikas']
 };
@@ -2552,7 +2552,7 @@ window.Logos = {
     spec
   );
   const H = Deck.hosting, HR = Deck.hostingRows;
-  const graphRead = HR.graph('1 app registration · read-only', 'Machine.Read.All · Alert.Read.All · Sites.Selected · User.Read.All');
+  const graphRead = HR.graph('1 app registration · read-only', 'Machine.Read.All · Alert.Read.All · DeviceManagementApps.Read.All · Sites.Selected · User.Read.All');
 
   const slide = {
     id: 'endpoint-elevated-approval',
@@ -2648,13 +2648,13 @@ window.Logos = {
         node('policy', 'C', 'r2', { hosting: H.agent({ name: 'The Policy Agent', llm: true, retrieval: true }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'shield', eyebrow: 'Governance', lines: ['Policy', 'Agent'], stage: 's2',
           role: 'Evaluates the request against Organization Policy and returns the applicable rules and constraints.' }),
         node('tool', 'C', 'r4', { hosting: H.agent({ name: 'The Tool Agent', llm: false, extra: { azure: [graphRead], aws: [graphRead], gcp: [graphRead] } }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'wrench', eyebrow: 'Integration', lines: ['Tool', 'Agent'], stage: 's2',
-          role: 'Gathers the evidence for the request: file hash and application reputation from Google Threat Intelligence, the device’s security score and open alerts from Defender, application and organisational information from SharePoint (and the Company Portal once confirmed), and the requester’s request history from ServiceNow. Returns the findings.' }),
+          role: 'Gathers the evidence for the request: file hash and application reputation from Google Threat Intelligence, the device’s security score and open alerts from Defender, application and organisational information from SharePoint and the Company Portal, and the requester’s request history from ServiceNow. Returns the findings.' }),
         node('vendor', 'C', 'r5', { hosting: H.existingSaaS({ summary: 'The Microsoft evidence sources are the estate’s existing services and stay where they are. The Tool Agent reads them through Microsoft Graph with a read-only application identity; no connector infrastructure is added.', rows: [HR.r('Microsoft Defender for Endpoint', 'Microsoft Defender for Endpoint Plan 2 · included in Microsoft 365 E5 / E5 Security', 'Existing licences · no change', 'Device security score, open alerts, protection status'), HR.r('SharePoint Online', 'SharePoint Online Plan 2 · included in Microsoft 365 E3 / E5', 'Existing licences · no change', 'Application and organisational information'), HR.r('Microsoft Entra ID', 'Microsoft Entra ID P1 · included in Microsoft 365 E3 / E5', 'Existing · no change', 'Requester directory attributes'), graphRead] }), logos: ['mde', 'sharepoint'], platform: 'Microsoft Defender for Endpoint (device security score, open alerts) · SharePoint (application and organisational information) · Entra ID (requester attributes)', kind: 'external', icon: 'layers', eyebrow: 'Microsoft', lines: ['Defender &', 'SharePoint'], stage: 's2',
           role: 'The Microsoft evidence the Tool Agent queries: Defender for Endpoint for the device’s security score and open alerts, SharePoint for application and organisational information, and Entra ID for the requester’s directory attributes.' }),
         node('gti', 'B', 'r4', { hosting: H.existingSaaS({ summary: 'Google Threat Intelligence is reached through its API with a key held in the vault. The team’s existing proof of concept already performs hash lookups against it from an automation platform; the Tool Agent reuses that access rather than replacing it.', rows: [HR.r('Google Threat Intelligence', 'Existing subscription · API access for file hash and application reports · tier to be confirmed', 'Existing · 1 API key in the vault', 'File hash and application reputation; the proof of concept already uses it')] }), kind: 'external', icon: 'radar', eyebrow: 'Google TI', lines: ['Threat', 'Intelligence'], stage: 's2', platform: 'Google Threat Intelligence · file hash and application reputation · existing proof of concept',
           role: 'External threat intelligence consulted by the Tool Agent: the reputation of the file hash and of the application, and any known malicious associations. The team already checks hashes this way in a proof of concept; the agent builds on it.' }),
-        node('cportal', 'D', 'r5', { hosting: H.unconfirmed({ summary: 'The Company Portal (the Intune application catalogue) was named as a source of application and organisational information, but its availability to the agents is not confirmed. If confirmed, it is a read-only Microsoft Graph query for the Tool Agent rather than new infrastructure.' }), kind: 'proposed', icon: 'monitor', eyebrow: 'Unconfirmed', lines: ['Company', 'Portal'], stage: 's3', platform: 'Proposed · Intune Company Portal · application and organisational information · availability to be confirmed',
-          role: 'Application and organisational context from the Company Portal: whether the application is in the catalogue, its packaging status and who else uses it. Named by the team as a source but not yet confirmed as available to the agents, so it is shown dotted until it is.' }),
+        node('cportal', 'D', 'r5', { hosting: H.existingSaaS({ summary: 'The Company Portal is the Intune application catalogue and stays where it is. The Tool Agent reads it through Microsoft Graph with the same read-only application identity as the other Microsoft sources; no connector infrastructure is added.', rows: [HR.r('Microsoft Intune · Company Portal', 'Microsoft Intune Plan 1 · included in Microsoft 365 E3 / E5', 'Existing licences · no change', 'Application catalogue, packaging status, assignments'), HR.graph('shared read-only app registration', 'DeviceManagementApps.Read.All')] }), logo: 'intune', kind: 'external', icon: 'monitor', eyebrow: 'Intune', lines: ['Company', 'Portal'], stage: 's3', platform: 'Microsoft Intune Company Portal · application catalogue and organisational information · confirmed with the team',
+          role: 'Application and organisational context from the Company Portal, the Intune application catalogue: whether the application is already in the catalogue, its packaging status and who else it is assigned to. Confirmed by the team as a source.' }),
         node('context', 'D', 'r3', { hosting: H.contextStore(), platform: 'Proposed · working context held by the agent runtime, not a separate store', kind: 'data', icon: 'files', eyebrow: 'Assembled', lines: ['Context'], stage: 's3',
           role: 'The consolidated picture of the request: coordinated by the Orchestrator and enriched with retrieved information from the RAG Agent.' }),
         node('rag', 'D', 'r4', { hosting: H.agent({ name: 'The RAG Agent', llm: true, embed: true, retrieval: true }), platform: 'Proposed agent runtime · platform to be confirmed', kind: 'agent', icon: 'book', eyebrow: 'Retrieval', lines: ['RAG', 'Agent'], stage: 's3',
@@ -2680,7 +2680,7 @@ window.Logos = {
         node('grd', 'B', 'r1', { kind: 'sectech', icon: 'shieldai', eyebrow: 'Security · AI', lines: ['AI Guardrail', 'Enforcement'], stage: 's2', platform: 'Security technology category · product selected in security review',
           role: 'Guardrail enforcement around every model call. The business justification is free text written by the requester and is the one input an applicant could craft to steer the model, so it and all retrieved text are treated as data, never as instructions; every classification must cite the policy clause and the evidence it relied on.', detail: ['Treats the requester’s justification and all retrieved text as data; screens every prompt for injection', 'Validates outputs: classifications and summaries must cite their evidence and may not invent facts or scores', 'Bounds task scope and keeps tool use within a deny-by-default allow-list'] }),
         node('apigw', 'B', 'r5', { kind: 'sectech', icon: 'plug', eyebrow: 'Security · API', lines: ['API Security', 'Gateway'], stage: 's2', platform: 'Security technology category · product selected in security review',
-          role: 'API security gateway between the Tool Agent and the evidence sources: only allow-listed, read-only calls with scoped credentials reach Google Threat Intelligence, Defender, SharePoint and ServiceNow.', detail: ['Allow-listed, authenticated connectors with credentials held in a vault', 'Schema and input validation, rate limiting and sandboxed execution', 'Protects against connector abuse and uncontrolled outbound calls'] }),
+          role: 'API security gateway between the Tool Agent and the evidence sources: only allow-listed, read-only calls with scoped credentials reach Google Threat Intelligence, Defender, SharePoint, the Company Portal and ServiceNow.', detail: ['Allow-listed, authenticated connectors with credentials held in a vault', 'Schema and input validation, rate limiting and sandboxed execution', 'Protects against connector abuse and uncontrolled outbound calls'] }),
         node('dlp', 'D', 'r2', { kind: 'sectech', icon: 'filelock', eyebrow: 'Security · DLP', lines: ['Data Loss', 'Prevention'], stage: 's3', platform: 'Security technology category · product selected in security review',
           role: 'Data loss prevention on the assembled Context: sensitive requester and device attributes in the ticket and the evidence are masked before they reach any model or record, and nothing leaves the decision boundary except the classification, its evidence and its rationale.', detail: ['Policies on what may flow between connectors, prompts, outputs and notifications', 'Masks or blocks sensitive content before it leaves its boundary', 'Restricts delivery to the intended audience'] }),
         node('pam', 'F', 'r1', { kind: 'sectech', icon: 'lockclock', eyebrow: 'Security · PAM', lines: ['Privileged', 'Access Mgmt'], stage: 's4', platform: 'Security technology category · product selected in security review',
@@ -2707,7 +2707,7 @@ window.Logos = {
         { id: 'e-policy-org',     from: 'policy',  to: 'orgpolicy', style: 'integration', route: 'v', bidirectional: true, label: 'consults', labelSide: 'right' },
         { id: 'e-tool-vendor',    from: 'tool',    to: 'vendor',  style: 'integration', route: 'v', bidirectional: true, label: 'queries',  labelSide: 'right' },
         { id: 'e-tool-gti',       from: 'tool',    to: 'gti',     style: 'integration', route: 'h', bidirectional: true },
-        { id: 'e-cportal-tool',   from: 'cportal', to: 'tool',    style: 'enrich', route: 's', toDy: 14 },
+        { id: 'e-cportal-tool',   from: 'tool',    to: 'cportal', style: 'integration', route: 's', fromDy: 14, bidirectional: true },
         { id: 'e-knowhow-rag',    from: 'knowhow', to: 'rag',     style: 'enrich', route: 'h' },
         { id: 'e-rag-context',    from: 'rag',     to: 'context', style: 'enrich', route: 'v', label: 'retrieves into', labelSide: 'right' },
         { id: 'e-context-triage', from: 'context', to: 'triage',  style: 'flow',   route: 'h' },
@@ -2740,7 +2740,7 @@ window.Logos = {
         items: [
           { style: 'flow',        text: 'Process flow' },
           { style: 'integration', text: 'Bidirectional integration' },
-          { style: 'enrich',      text: 'Enrichment · proposed source' },
+          { style: 'enrich',      text: 'Contextual enrichment' },
           { style: 'human',       text: 'Human review' },
           { style: 'ok',          text: 'Outcome · green, approved' },
           { style: 'esc',         text: 'Outcome · red, escalated' },
@@ -2770,8 +2770,8 @@ window.Logos = {
       { stage: 's2', title: 'Policy & evidence sources',
         caption: 'The Policy Agent consults Organization Policy. The Tool Agent gathers the evidence: file hash and application reputation from Google Threat Intelligence, the device’s security score and open alerts from Defender, application and organisational information from SharePoint, and the requester’s history from ServiceNow.',
         nodes: ['orgpolicy', 'vendor', 'gti', 'apigw'], edges: [['e-policy-org', 'e-tool-vendor', 'e-tool-gti', 'e-apigw-vendor', 'e-apigw-gti']] },
-      { stage: 's2', title: 'Proposed source',
-        caption: 'The Company Portal was named as a further source of application and organisational information, but its availability to the agents is not yet confirmed, so it is shown dotted until it is.',
+      { stage: 's2', title: 'Company Portal',
+        caption: 'The Tool Agent also queries the Company Portal, the Intune application catalogue, for whether the application is already packaged and who else it is assigned to.',
         nodes: ['cportal'], edges: ['e-cportal-tool'] },
       { stage: 's3', title: 'Context assembly',
         caption: 'The Orchestrator assembles Context. The RAG Agent enriches it with today’s approval criteria, runbooks and comparable past manual decisions, so the evaluation starts from how the process is run today.',
