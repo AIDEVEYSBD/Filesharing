@@ -916,6 +916,30 @@ html.reduced-motion .sm-table tbody tr, html.reduced-motion .sm-table tfoot tr {
 .sc-table tr.has-deck:hover .sc-deck .ui-ico { transform: translateX(3px); color: var(--accent); }
 .sc-table tr.has-deck:hover .sc-uc b { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--ink-4); }
 
+/* journey page, second version: states by colour only, two implementation routes, ownership line */
+.jr-title { font-size: 42px; }
+.jr-role-points { list-style: none; margin: 14px 0 0; padding: 0; display: grid; row-gap: 9px; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.jr-role-points li { position: relative; padding-left: 16px; }
+.jr-role-points li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 1px; background: var(--ink-4); }
+.jr-steps { margin-top: 0; border-top: 0; }
+.jr-step { min-height: 232px; padding-top: 20px; border-top: 2px solid var(--emerald); }
+.jr-step.is-now { border-top-color: var(--steel); }
+.jr-step.is-next { border-top-color: var(--accent); margin-top: 0; }
+.jr-step + .jr-step { border-left: 0; padding-left: 0; }
+.jr-step { margin-right: 22px; padding-right: 0; }
+.jr-step.is-next { padding: 20px 20px 18px; }
+.jr-step.is-done .jr-step-top b { color: var(--emerald); }
+.jr-step.is-now .jr-step-top b { color: var(--steel); }
+.jr-lead { margin: 14px 0 0; font-size: 17px; line-height: 1.4; color: var(--ink-2); }
+.jr-routes { display: grid; grid-template-columns: 1fr 1fr; column-gap: 22px; margin-top: 18px; }
+.jr-route { padding: 20px 22px 20px; background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--steel); border-radius: 0 0 6px 6px; }
+.jr-route.is-independent { border-top-color: var(--accent); }
+.jr-route h3 { margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -.015em; line-height: 1.2; color: var(--steel); }
+.jr-route.is-independent h3 { color: var(--accent); }
+.jr-route p { margin: 8px 0 0; font-size: 15px; line-height: 1.4; color: var(--ink-2); }
+.jr-own { display: grid; grid-template-columns: 120px 1fr; column-gap: 20px; align-items: baseline; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); }
+.jr-own p { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -.005em; color: var(--ink); }
+
 </style>
 </head>
 <body>
@@ -926,7 +950,7 @@ html.reduced-motion .sm-table tbody tr, html.reduced-motion .sm-table tfoot tr {
 window.DECK_CONFIG = {
   seriesTotal: 4,                                  // the use cases form a series of three decks
   creditsLabel: 'Prepared by',                     // shown on the combined deck's title page only
-  credits: ['Swathi Sreekanth', 'Jai Verma'],
+  credits: ['Swathi Sreekant', 'Jai Verma'],
   ownerLabel: ['Use Case Owner', 'Use Case Owners']  // each use-case cover names its owners (project.owners); no authorship is claimed for them
 };
 
@@ -2379,32 +2403,28 @@ window.Logos = {
     const body = h('div', 'cover sm-cover jr-cover');
     body.innerHTML = `
       <div class="cover-left">
-        <span class="eyebrow rise"><i class="eyebrow-dash"></i>${J.eyebrow}</span>
-        <h1 class="cover-title sm-title rise">${J.title}</h1>
+        <h1 class="cover-title sm-title jr-title rise">${J.title}</h1>
         <p class="cover-direction rise">${J.text}</p>
         <div class="jr-role rise">
           <span class="credits-label">${J.roleLabel}</span>
           <p class="jr-role-statement">${J.roleStatement}</p>
-          <p>${J.roleText}</p>
-          <p class="jr-role-keeps">${uiIcon('check')}<span>${J.roleKeeps}</span></p>
+          <ul class="jr-role-points">${J.rolePoints.map(t => `<li>${t}</li>`).join('')}</ul>
         </div>
       </div>
       <div class="cover-right">
-        <span class="eyebrow rise"><i class="eyebrow-dash"></i>${J.stepsEyebrow}</span>
-        <p class="cover-statement sm-statement rise">${J.statement}</p>
         <ol class="jr-steps">
-          ${J.steps.map((st, i) => `<li class="jr-step rise${st.next ? ' is-next' : ''}">
+          ${J.steps.map((st, i) => `<li class="jr-step rise is-${st.state}">
             <span class="jr-step-top"><b>${pad2(i + 1)}</b><span>${st.stage}</span></span>
             <h3>${st.head}</h3>
             ${st.text ? `<p>${st.text}</p>` : ''}
             ${st.checks ? `<ul>${st.checks.map(c => `<li>${c}</li>`).join('')}</ul>` : ''}
-            <span class="jr-state"><i></i>${st.next ? J.nextLabel : J.doneLabel}</span>
           </li>`).join('')}
         </ol>
         <div class="jr-ask">
-          <span class="eyebrow rise"><i class="eyebrow-dash"></i>${J.askEyebrow}</span>
-          <ol class="jr-asks">${J.asks.map((a, i) => `<li class="rise"><span class="issue-num">${pad2(i + 1)}</span><span>${a}</span></li>`).join('')}</ol>
-          <p class="jr-closing rise">${J.closing}</p>
+          <span class="eyebrow rise"><i class="eyebrow-dash"></i>${J.pathEyebrow}</span>
+          <p class="jr-lead rise">${J.pathLead}</p>
+          <div class="jr-routes">${J.routes.map(r => `<div class="jr-route is-${r.tone} rise"><h3>${r.head}</h3><p>${r.text}</p></div>`).join('')}</div>
+          <div class="jr-own rise"><span class="credits-label">${J.ownershipLabel}</span><p>${J.ownership}</p></div>
         </div>
       </div>`;
     slide.appendChild(body);
@@ -2909,7 +2929,7 @@ window.Logos = {
       tagline: 'Engineered to outrun',
       indexEyebrow: 'In this deck',
       sections: {
-        journey: ['From AI idea to controlled investment decision', 'Where Cohort 1 stands, our role, and the direction we need from leadership'],
+        journey: ['A repeatable system from AI idea to implementation decision', 'The five stages, our role, and the implementation path management decides'],
         showcase: ['Cohort 1 use cases: prototype showcase', 'The RICE-ranked top three and two additional use cases, with owners and status'],
         summary: ['The business case', 'The problem, the proposal and the stakeholders’ figures'],
         approach: ['How we would build it', 'Why purpose-built agents, rather than Abby or Copilot Studio']
@@ -2917,35 +2937,33 @@ window.Logos = {
       useCaseLine: 'Business problem, architecture and business benefits'
     },
 
-    /* page 2: the Cohort 1 journey, our role, and the decisions asked of leadership */
+    /* page 2: the journey, our role and the implementation path. Wording is the leadership slide's own, kept verbatim. */
     journey: {
-      eyebrow: 'Where Cohort 1 stands',
-      title: 'From AI idea to controlled investment decision',
-      text: 'Cohort 1 has built capability, generated and prioritised opportunities, and created prototypes.',
-      roleLabel: 'Our role · single-window enabler',
-      roleStatement: 'We enable the journey; we do not own the use case.',
-      roleText: 'We coordinate skills, ideation, prioritisation, design and prototyping, and support the owning team to shape its business case and progress implementation.',
-      roleKeeps: 'Accountability stays with the service or department.',
-      stepsEyebrow: 'The journey',
-      statement: 'Validation, not the prototype, is the next gate to investment.',
-      doneLabel: 'Done', nextLabel: 'Next gate',
+      title: 'A repeatable system from AI idea to implementation decision',
+      text: 'AI Security Training has moved from capability building and ideation to prioritized, visualized solution prototypes',
+      /* state: done | now | next (the slide's green, blue and red markers) */
       steps: [
-        { stage: 'Build capability', head: 'People skilled', text: 'Teams equipped to spot and shape business opportunities.' },
-        { stage: 'Generate ideas', head: '38+ ideas', text: 'Structured ideation grounded in business needs.' },
-        { stage: 'Prioritise', head: 'Top 3 via RICE', text: 'Focus on the highest-priority opportunities.' },
-        { stage: 'Prototype', head: 'Solution visualised', text: 'High-level technical design and a prototype.' },
-        { stage: 'Validate and decide', head: 'Investment gate', next: true,
-          checks: ['Business value and success measures', 'Data and integration feasibility', 'Responsible AI and security review', 'Named sponsor and product owner', 'Platform or independent build'] }
+        { stage: 'Build capability', head: 'People skilled', state: 'done', text: '50+ participants are skilled in practical AI and can spot and shape business opportunities.' },
+        { stage: 'Generate ideas', head: '91+ ideas', state: 'done', text: 'Structured ideation grounded in business and operational needs in functional areas' },
+        { stage: 'Prioritize', head: 'Top use cases via RICE', state: 'done', text: 'Focus on the highest-priority opportunities.' },
+        { stage: 'Prototype', head: 'Visualize solution', state: 'now', text: 'High-level technical design and prototype walkthrough' },
+        { stage: 'Validate & decide', head: 'Investment gate', state: 'next',
+          checks: ['Business value & success measures', 'Data & integration feasibility', 'Responsible AI & security review', 'Named sponsor & product owner', 'Platform or independent build'] }
       ],
-      askEyebrow: 'Leadership direction required',
-      asks: [
-        'Which prototypes should progress to validation or pilot?',
-        'Who is the accountable business sponsor and product owner?',
-        'AI SecOps platform or independent build for each solution?',
-        'What measurable business outcome will define success?',
-        'What capacity or funding is available for the next stage?'
+      roleLabel: 'Our role | Single-window enabler',
+      roleStatement: 'We enable and accelerate the journey; we provide the framework and momentum; owners will own delivery and value realization.',
+      rolePoints: [
+        'Organizing and leading the capability building, ideation, prioritization, solution design and prototypes.',
+        'Partner with the owning team to shape the business case and support solution implementation.'
       ],
-      closing: 'A prototype is evidence for a controlled investment decision, not the finish line.'
+      pathEyebrow: 'Management decides the implementation path',
+      pathLead: 'Subject to leadership direction, either route may be pursued:',
+      routes: [
+        { tone: 'platform', head: 'Use the AI SecOps platform', text: 'currently being developed' },
+        { tone: 'independent', head: 'Develop independently', text: 'build a dedicated solution' }
+      ],
+      ownershipLabel: 'Ownership',
+      ownership: 'Use-case accountability, business case, outcomes and delivery ownership stay with the relevant service / department.'
     },
 
     /* page 3: the use cases with owners and status. `project` links a row to its deck. */
