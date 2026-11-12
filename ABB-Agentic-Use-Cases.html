@@ -840,6 +840,82 @@ html.reduced-motion .sm-table tbody tr, html.reduced-motion .sm-table tfoot tr {
 .bc-table tbody td.bc-base { font-size: 13px; color: var(--ink-3); }
 .bc-table tbody tr:hover .bc-uc span:last-child { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--ink-4); }
 
+/* ---- series pages from the Cohort 1 leadership slides: title contents, journey, showcase ---- */
+.tl-title { font-size: 72px; }
+.tl-sub { font-size: 22px; color: var(--ink-2); }
+.tl-credits { margin-top: 44px; }
+.tl-tagline { margin: 26px 0 0; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-4); }
+.tl-contents .tl-item { grid-template-columns: 44px 1fr auto; column-gap: 18px; padding: 15px 18px 15px 6px; }
+.tl-contents .tl-num { font-size: 20px; padding-top: 3px; }
+.tl-contents .tl-body b { font-size: 19px; }
+.tl-contents .tl-body span { margin-top: 4px; font-size: 13.5px; color: var(--ink-3); }
+.tl-contents .tl-pages { padding-top: 5px; }
+
+.jr-role { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); }
+.jr-role p { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.jr-role .jr-role-statement { margin-top: 12px; font-size: 21px; line-height: 1.25; font-weight: 600; letter-spacing: -.012em; color: var(--ink); }
+.jr-role .jr-role-keeps { display: flex; gap: 9px; align-items: flex-start; margin-top: 14px; font-weight: 500; color: var(--ink); }
+.jr-role-keeps .ui-ico { width: 15px; height: 15px; color: var(--emerald); flex: none; margin-top: 3px; }
+.jr-steps { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr) 1.35fr; column-gap: 0; border-top: 1px solid var(--ink-4); }
+.jr-step { position: relative; display: flex; flex-direction: column; padding: 18px 18px 16px 0; margin-right: 18px; min-height: 212px; }
+.jr-step + .jr-step { padding-left: 18px; border-left: 1px solid var(--line); }
+.jr-step-top { display: flex; align-items: baseline; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.jr-step-top b { font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--accent); font-variant-numeric: tabular-nums; }
+.jr-step h3 { margin: 12px 0 0; font-size: 22px; font-weight: 600; letter-spacing: -.015em; line-height: 1.2; }
+.jr-step p { margin: 8px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--ink-2); }
+.jr-step ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; row-gap: 5px; font-size: 13px; line-height: 1.35; color: var(--ink-2); }
+.jr-step ul li { padding-left: 14px; position: relative; }
+.jr-step ul li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 1px; background: var(--ink-4); }
+.jr-state { display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 14px; font-size: 12px; font-weight: 600; color: var(--ink-3); }
+.jr-state i { width: 9px; height: 9px; border-radius: 2px; background: var(--emerald); }
+.jr-step.is-next { margin-right: 0; padding: 18px 20px 16px; background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--accent); border-radius: 0 0 6px 6px; margin-top: -1px; }
+.jr-step.is-next .jr-state { color: var(--accent); }
+.jr-step.is-next .jr-state i { background: transparent; border: 1.5px solid var(--accent); }
+.jr-ask { margin-top: 30px; }
+.jr-asks { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, auto); grid-auto-flow: column; column-gap: 48px; }
+.jr-asks li { display: grid; grid-template-columns: 30px 1fr; column-gap: 8px; align-items: baseline; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 15.5px; font-weight: 500; line-height: 1.35; }
+.jr-closing { margin: 18px 0 0; font-size: 14px; color: var(--ink-2); }
+
+.sc-path { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); }
+.sc-path ol { list-style: none; margin: 12px 0 0; padding: 0; }
+.sc-path li { position: relative; display: grid; grid-template-columns: 26px 1fr auto; column-gap: 12px; align-items: center; padding: 9px 0; font-size: 15px; color: var(--ink-3); }
+.sc-path li b { width: 24px; height: 24px; display: grid; place-items: center; border-radius: 3px; border: 1.5px solid var(--line); font-size: 12px; font-weight: 600; color: var(--ink-3); background: var(--bg); position: relative; z-index: 1; }
+.sc-path li + li::before { content: ''; position: absolute; left: 11.5px; top: -9px; height: 18px; width: 1.5px; background: var(--line); }
+.sc-path li em { font-style: normal; font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.sc-path li.is-here { color: var(--ink); font-weight: 600; }
+.sc-path li.is-here b { background: var(--ink); border-color: var(--ink); color: #fff; }
+.sc-path li.is-next { color: var(--ink); }
+.sc-path li.is-next b { border-color: var(--accent); color: var(--accent); }
+.sc-path li.is-next em { color: var(--accent); }
+.sc-table { margin-top: 22px; }
+.sc-table thead th { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); padding-top: 0; padding-bottom: 10px; }
+.sc-table th:first-child { width: 49%; }
+.sc-table th:nth-child(2) { width: 15%; }
+.sc-table th:nth-child(3) { width: 18%; }
+.sc-table tbody tr { opacity: 0; }
+.slide-sc.entered .sc-table tbody tr { opacity: 1; }
+.sc-table tbody tr.has-deck { cursor: pointer; }
+.sc-table tr.sc-group th { padding: 16px 0 8px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); border-bottom: 1px solid var(--ink-4); }
+.sc-table tbody th, .sc-table tbody td { padding-top: 12px; padding-bottom: 12px; }
+.sc-uc { display: grid; grid-template-columns: 34px 1fr; column-gap: 10px; }
+.sc-uc b { display: block; font-size: 16.5px; font-weight: 600; letter-spacing: -.008em; line-height: 1.3; }
+.sc-uc p { margin: 3px 0 0; font-size: 13.5px; font-weight: 400; line-height: 1.4; color: var(--ink-2); }
+.sc-works { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 7px; }
+.sc-works > span { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 400; color: var(--ink-3); white-space: nowrap; }
+.sc-works .tl-logo { width: 14px; height: 14px; }
+.sc-by { display: block; margin-top: 6px; font-size: 12px; font-weight: 500; color: var(--steel); }
+.sc-owner span { display: block; font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--ink); }
+.sc-status { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; white-space: nowrap; }
+.sc-status i { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+.sc-status.st-done { color: var(--emerald); } .sc-status.st-done i { background: var(--emerald); }
+.sc-status.st-hold { color: var(--amber); } .sc-status.st-hold i { background: var(--amber); }
+.sc-status.st-shown { color: var(--steel); } .sc-status.st-shown i { background: var(--steel); }
+.sc-deck span { display: block; font-size: 13.5px; font-weight: 500; line-height: 1.35; color: var(--ink); }
+.sc-deck small { display: inline-flex !important; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; }
+.sc-deck .ui-ico { width: 13px; height: 13px; color: var(--ink-4); transition: transform .2s var(--ease), color .2s var(--ease); }
+.sc-table tr.has-deck:hover .sc-deck .ui-ico { transform: translateX(3px); color: var(--accent); }
+.sc-table tr.has-deck:hover .sc-uc b { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--ink-4); }
+
 </style>
 </head>
 <body>
@@ -849,8 +925,9 @@ html.reduced-motion .sm-table tbody tr, html.reduced-motion .sm-table tfoot tr {
 /* Deck-wide configuration shared by every use-case deck built from this source. */
 window.DECK_CONFIG = {
   seriesTotal: 4,                                  // the use cases form a series of three decks
-  creditsLabel: 'Prepared by',
-  credits: ['Anik Akella', 'Madhusadhan', 'Vikas']
+  creditsLabel: 'Prepared by',                     // shown on the combined deck's title page only
+  credits: ['Swathi Sreekanth', 'Jai Verma'],
+  ownerLabel: ['Use Case Owner', 'Use Case Owners']  // each use-case cover names its owners (project.owners); no authorship is claimed for them
 };
 
 /* ---- src/js/icons.js ---- */
@@ -1752,7 +1829,7 @@ window.Logos = {
         <p class="cover-sub rise">${project.subtitle}</p>
         ${P.scopeNote ? `<span class="scope-note rise">${P.scopeNote}</span>` : ''}
         <p class="cover-direction rise">${P.direction || ''}</p>
-        ${(global.DECK_CONFIG && global.DECK_CONFIG.credits && global.DECK_CONFIG.credits.length) ? `<div class="cover-credits rise"><span class="credits-label">${global.DECK_CONFIG.creditsLabel || 'Prepared by'}</span><ol class="credits-list">${global.DECK_CONFIG.credits.map(n => `<li>${n}</li>`).join('')}</ol></div>` : ''}
+        ${(project.owners && project.owners.length) ? `<div class="cover-credits rise"><span class="credits-label">${((global.DECK_CONFIG && global.DECK_CONFIG.ownerLabel) || ['Use Case Owner', 'Use Case Owners'])[project.owners.length > 1 ? 1 : 0]}</span><ol class="credits-list">${project.owners.map(n => `<li>${n}</li>`).join('')}</ol></div>` : ''}
       </div>
       <div class="cover-right">
         <span class="eyebrow rise"><i class="eyebrow-dash"></i>${P.eyebrow}</span>
@@ -2256,42 +2333,128 @@ window.Logos = {
     return { el: slide, type: 'benefits', project, player: null, entered };
   }
 
-  /* ---- page: series title (combined deck only): identity left, the use cases as a clickable index right ---- */
+  /* ---- page: series title (combined deck only): identity left, the deck's contents as a clickable list right ---- */
   function renderTitle(project, page, total) {
     const T = project.intro, C = global.DECK_CONFIG || {};
     const slide = h('section', 'slide slide-cover slide-title');
     slide.appendChild(header(project, page, total, false));
-    let at = 0;
-    const entries = Deck.projects.map(p => { const first = at + 1; at += Deck.pagesOf(p).length; return { p, first, last: at }; }).filter(e => e.p !== project);
+    const entries = []; let at = 0;
+    Deck.projects.forEach(p => {
+      const types = Deck.pagesOf(p);
+      if (p === project) types.forEach((t, i) => { if (T.sections[t]) entries.push({ first: at + i + 1, last: at + i + 1, title: T.sections[t][0], text: T.sections[t][1] }); });
+      else entries.push({ first: at + 1, last: at + types.length, title: p.title, text: T.useCaseLine, uc: p.index });
+      at += types.length;
+    });
     const body = h('div', 'cover tl-cover');
     body.innerHTML = `
       <div class="cover-left">
         <span class="eyebrow rise"><i class="eyebrow-dash"></i>${T.eyebrow}</span>
         <h1 class="cover-title tl-title rise">${project.title}</h1>
-        <p class="cover-sub rise">${T.sub}</p>
-        <p class="cover-direction rise">${T.direction}</p>
-        ${(C.credits && C.credits.length) ? `<div class="cover-credits rise"><span class="credits-label">${C.creditsLabel || 'Prepared by'}</span><ol class="credits-list">${C.credits.map(n => `<li>${n}</li>`).join('')}</ol></div>` : ''}
+        <p class="cover-sub tl-sub rise">${T.sub}</p>
+        ${(C.credits && C.credits.length) ? `<div class="cover-credits tl-credits rise"><span class="credits-label">${C.creditsLabel || 'Prepared by'}</span><ol class="credits-list">${C.credits.map(n => `<li>${n}</li>`).join('')}</ol></div>` : ''}
+        ${T.tagline ? `<p class="tl-tagline rise">${T.tagline}</p>` : ''}
       </div>
       <div class="cover-right">
         <span class="eyebrow rise"><i class="eyebrow-dash"></i>${T.indexEyebrow}</span>
-        <ol class="tl-index">
-          ${entries.map(e => `<li class="rise"><button class="tl-item" data-goto="${e.first - 1}" title="Go to ${e.p.title}">
-            <span class="tl-num">${pad2(e.p.index)}</span>
-            <span class="tl-body"><b>${e.p.title}</b><span>${T.lines[e.p.id] || e.p.subtitle}</span>
-              <span class="tl-meta">
-                ${T.works[e.p.id] ? `<span class="tl-meta-col"><i>${T.worksLabel}</i><span class="tl-works">${T.works[e.p.id].map(([k, name]) => `<span>${k && global.Logos[k] ? `<svg class="tl-logo" viewBox="${global.Logos[k].viewBox}" aria-hidden="true">${global.Logos[k].body}</svg>` : ''}${name}</span>`).join('')}</span></span>` : ''}
-                ${T.keeps[e.p.id] ? `<span class="tl-meta-col"><i>${T.keepsLabel}</i><span>${T.keeps[e.p.id]}</span></span>` : ''}
-              </span>
-            </span>
-            <span class="tl-pages">Pages ${pad2(e.first)}–${pad2(e.last)}${uiIcon('nextSlide')}</span>
+        <ol class="tl-index tl-contents">
+          ${entries.map(e => `<li class="rise"><button class="tl-item" data-goto="${e.first - 1}" title="Go to ${e.title}">
+            <span class="tl-num">${pad2(e.first)}</span>
+            <span class="tl-body"><b>${e.title}</b><span>${e.uc ? `Use case ${pad2(e.uc)} · ` : ''}${e.text}</span></span>
+            <span class="tl-pages">${e.last > e.first ? `Pages ${pad2(e.first)}–${pad2(e.last)}` : `Page ${pad2(e.first)}`}${uiIcon('nextSlide')}</span>
           </button></li>`).join('')}
         </ol>
       </div>`;
     body.addEventListener('click', e => { const b = e.target.closest('[data-goto]'); if (b) Deck.show(Number(b.dataset.goto), 1); });
     slide.appendChild(body);
-    slide.appendChild(controlBar({ hint: `Press <b>→</b> to continue, or choose a use case · <b>F</b> full screen · <b>?</b> presenter controls` }));
+    slide.appendChild(controlBar({ hint: `Press <b>→</b> to continue, or choose a section · <b>F</b> full screen · <b>?</b> presenter controls` }));
     slide.querySelectorAll('.rise').forEach((el, i) => el.style.setProperty('--i', i));
     return { el: slide, type: 'title', project, player: null };
+  }
+
+  /* ---- page: series journey (combined deck only): where the cohort stands and our role left, the five stages and the asks right ---- */
+  function renderJourney(project, page, total) {
+    const J = project.journey;
+    const slide = h('section', 'slide slide-cover slide-jr');
+    slide.appendChild(header(project, page, total, false));
+    const body = h('div', 'cover sm-cover jr-cover');
+    body.innerHTML = `
+      <div class="cover-left">
+        <span class="eyebrow rise"><i class="eyebrow-dash"></i>${J.eyebrow}</span>
+        <h1 class="cover-title sm-title rise">${J.title}</h1>
+        <p class="cover-direction rise">${J.text}</p>
+        <div class="jr-role rise">
+          <span class="credits-label">${J.roleLabel}</span>
+          <p class="jr-role-statement">${J.roleStatement}</p>
+          <p>${J.roleText}</p>
+          <p class="jr-role-keeps">${uiIcon('check')}<span>${J.roleKeeps}</span></p>
+        </div>
+      </div>
+      <div class="cover-right">
+        <span class="eyebrow rise"><i class="eyebrow-dash"></i>${J.stepsEyebrow}</span>
+        <p class="cover-statement sm-statement rise">${J.statement}</p>
+        <ol class="jr-steps">
+          ${J.steps.map((st, i) => `<li class="jr-step rise${st.next ? ' is-next' : ''}">
+            <span class="jr-step-top"><b>${pad2(i + 1)}</b><span>${st.stage}</span></span>
+            <h3>${st.head}</h3>
+            ${st.text ? `<p>${st.text}</p>` : ''}
+            ${st.checks ? `<ul>${st.checks.map(c => `<li>${c}</li>`).join('')}</ul>` : ''}
+            <span class="jr-state"><i></i>${st.next ? J.nextLabel : J.doneLabel}</span>
+          </li>`).join('')}
+        </ol>
+        <div class="jr-ask">
+          <span class="eyebrow rise"><i class="eyebrow-dash"></i>${J.askEyebrow}</span>
+          <ol class="jr-asks">${J.asks.map((a, i) => `<li class="rise"><span class="issue-num">${pad2(i + 1)}</span><span>${a}</span></li>`).join('')}</ol>
+          <p class="jr-closing rise">${J.closing}</p>
+        </div>
+      </div>`;
+    slide.appendChild(body);
+    slide.appendChild(controlBar({ hint: `Press <b>→</b> or <b>PgDn</b> for the use cases · <b>PgUp</b> to go back` }));
+    slide.querySelectorAll('.rise').forEach((el, i) => el.style.setProperty('--i', i));
+    return { el: slide, type: 'journey', project, player: null };
+  }
+
+  /* ---- page: series showcase (combined deck only): the path to production left, the use cases with owner and status right ---- */
+  function renderShowcase(project, page, total) {
+    const S = project.showcase;
+    const slide = h('section', 'slide slide-cover slide-sc');
+    slide.appendChild(header(project, page, total, false));
+    let at = 0; const where = {};
+    Deck.projects.forEach(p => { where[p.id] = { p, first: at + 1, last: at + Deck.pagesOf(p).length }; at += Deck.pagesOf(p).length; });
+    const logo = k => k && global.Logos[k] ? `<svg class="tl-logo" viewBox="${global.Logos[k].viewBox}" aria-hidden="true">${global.Logos[k].body}</svg>` : '';
+    const row = it => {
+      const w = it.project && where[it.project], owners = it.owners || (w && w.p.owners) || [], works = S.works[it.project];
+      return `<tr class="rise${w ? ' has-deck' : ''}"${w ? ` data-goto="${w.first - 1}" title="Go to ${w.p.title}"` : ''}>
+        <th><div class="sc-uc"><span class="bc-num">${it.rank ? pad2(it.rank) : ''}</span><div><b>${it.name}</b><p>${it.text}</p>${works ? `<span class="tl-works sc-works">${works.map(([k, name]) => `<span>${logo(k)}${name}</span>`).join('')}</span>` : ''}${it.by ? `<span class="sc-by">${it.by}</span>` : ''}</div></div></th>
+        <td class="sc-owner">${owners.map(o => `<span>${o}</span>`).join('')}</td>
+        <td><span class="sc-status st-${it.status[0]}"><i></i>${it.status[1]}</span>${it.status[2] ? `<small>${it.status[2]}</small>` : ''}</td>
+        <td class="sc-deck">${w ? `<span>${w.p.title}</span><small>Pages ${pad2(w.first)}–${pad2(w.last)}${uiIcon('nextSlide')}</small>` : `<small>${S.noDeck}</small>`}</td>
+      </tr>`;
+    };
+    const body = h('div', 'cover sm-cover sc-cover');
+    body.innerHTML = `
+      <div class="cover-left">
+        <span class="eyebrow rise"><i class="eyebrow-dash"></i>${S.eyebrow}</span>
+        <h1 class="cover-title sm-title rise">${S.title}</h1>
+        <p class="cover-direction rise">${S.text}</p>
+        <div class="sc-path rise">
+          <span class="credits-label">${S.pathLabel}</span>
+          <ol>${S.path.map((st, i) => `<li class="${i === S.pathAt ? 'is-here' : i === S.pathAt + 1 ? 'is-next' : ''}"><b>${i + 1}</b><span>${st}</span>${i === S.pathAt ? `<em>${S.hereLabel}</em>` : i === S.pathAt + 1 ? `<em>${S.nextLabel}</em>` : ''}</li>`).join('')}</ol>
+        </div>
+      </div>
+      <div class="cover-right">
+        <span class="eyebrow rise"><i class="eyebrow-dash"></i>${S.positionEyebrow}</span>
+        <p class="cover-statement sm-statement rise">${S.statement}</p>
+        <table class="sm-table sc-table">
+          <thead class="rise"><tr>${S.columns.map(c => `<th>${c}</th>`).join('')}</tr></thead>
+          ${S.groups.map(g => `<tbody><tr class="sc-group rise"><th colspan="${S.columns.length}">${g.label}</th></tr>${g.items.map(row).join('')}</tbody>`).join('')}
+        </table>
+        <p class="sm-foot rise">${S.note}</p>
+      </div>`;
+    body.addEventListener('click', e => { const b = e.target.closest('[data-goto]'); if (b) Deck.show(Number(b.dataset.goto), 1); });
+    slide.appendChild(body);
+    slide.appendChild(controlBar({ hint: `Press <b>→</b> or <b>PgDn</b> for the business case, or choose a use case · <b>PgUp</b> to go back` }));
+    slide.querySelectorAll('.rise').forEach((el, i) => el.style.setProperty('--i', i));
+    return { el: slide, type: 'showcase', project, player: null };
   }
 
   /* ---- page: series business case (combined deck only): the problem left, the proposal and its figures right ---- */
@@ -2357,7 +2520,7 @@ window.Logos = {
     return { el: slide, type: 'approach', project, player: null };
   }
 
-  Object.assign(Deck.pageRenderers, { components: renderComponents, examples: renderExamples, scope: renderScope, benefits: renderBenefits, title: renderTitle, summary: renderSummary, approach: renderApproach });
+  Object.assign(Deck.pageRenderers, { components: renderComponents, examples: renderExamples, scope: renderScope, benefits: renderBenefits, title: renderTitle, journey: renderJourney, showcase: renderShowcase, summary: renderSummary, approach: renderApproach });
 })(window);
 
 /* ---- src/js/hosting.js ---- */
@@ -2721,10 +2884,12 @@ window.Logos = {
 
 /* ---- src/js/projects/series-intro.js ---- */
 /* =============================================================================
-   Series introduction — the three opening pages of the combined deck
-   (title, the business case, then how it would be built). Pure data; the
-   'title', 'summary' and 'approach' page types are rendered by pages.js. Loaded only by
+   Series introduction — the five opening pages of the combined deck:
+   title, the Cohort 1 journey and the direction asked of leadership, the
+   prototype showcase (status and owners), the business case, and how it would
+   be built. Pure data; the page types are rendered by pages.js. Loaded only by
    the combined deck and the dev index, never by a single use-case deck.
+   Pages 1 to 3 carry the content of the Cohort 1 leadership slides.
    ========================================================================== */
 (function (Deck) {
   'use strict';
@@ -2733,39 +2898,90 @@ window.Logos = {
     id: 'series-intro',
     index: 0,
     metaLabel: 'Introduction',
-    title: 'Agentic Use Cases',
-    subtitle: 'Four proposals for ABB',
-    pages: ['title', 'summary', 'approach'],
+    title: 'Cohort 1 AI Use Cases',
+    subtitle: 'Leadership demo',
+    pages: ['title', 'journey', 'showcase', 'summary', 'approach'],
 
+    /* page 1: title, with the deck's contents as a clickable list */
     intro: {
-      eyebrow: 'ABB · Four proposals',
-      sub: 'Where AI agents can take on evidence gathering, compliance reporting, vendor monitoring and architecture context, while ABB’s people keep every decision that matters.',
-      direction: 'Each use case is presented the same way: the business problem, the proposed architecture with its safeguards and hosting requirements, and the business benefits.',
+      eyebrow: 'Leadership demo · 12 November 2026',
+      sub: 'From capability building to prototype showcase',
+      tagline: 'Engineered to outrun',
       indexEyebrow: 'In this deck',
-      /* one line per use case, written from that deck's own proposed direction */
-      lines: {
-        'endpoint-elevated-approval': 'Every ServiceNow request to allow an application is classified green, orange or red on security evidence. Green is approved automatically; the rest goes to people with the evidence attached.',
-        'endpoint-security-compliance': 'One consolidated view of more than 140,000 endpoints and servers, insight in minutes, and low-risk remediation under approval, with servers staying under change control.',
-        'oem-intelligence-agent': 'Approved vendor sources are monitored, each announcement is summarised with its evidence, rated against the contracts ABB holds, reviewed and sent to the people who need it.',
-        'archon-context-engine': 'A new requirement becomes architecture-ready context, with every statement traced to its source clause and the Solution Architect accountable for the result.'
+      sections: {
+        journey: ['From AI idea to controlled investment decision', 'Where Cohort 1 stands, our role, and the direction we need from leadership'],
+        showcase: ['Cohort 1 use cases: prototype showcase', 'The RICE-ranked top three and two additional use cases, with owners and status'],
+        summary: ['The business case', 'The problem, the proposal and the stakeholders’ figures'],
+        approach: ['How we would build it', 'Why purpose-built agents, rather than Abby or Copilot Studio']
       },
-      /* systems and the human decision point, as each use case's own architecture names them; [logo key, label] */
-      worksLabel: 'Works with', keepsLabel: 'Decision stays with',
+      useCaseLine: 'Business problem, architecture and business benefits'
+    },
+
+    /* page 2: the Cohort 1 journey, our role, and the decisions asked of leadership */
+    journey: {
+      eyebrow: 'Where Cohort 1 stands',
+      title: 'From AI idea to controlled investment decision',
+      text: 'Cohort 1 has built capability, generated and prioritised opportunities, and created prototypes.',
+      roleLabel: 'Our role · single-window enabler',
+      roleStatement: 'We enable the journey; we do not own the use case.',
+      roleText: 'We coordinate skills, ideation, prioritisation, design and prototyping, and support the owning team to shape its business case and progress implementation.',
+      roleKeeps: 'Accountability stays with the service or department.',
+      stepsEyebrow: 'The journey',
+      statement: 'Validation, not the prototype, is the next gate to investment.',
+      doneLabel: 'Done', nextLabel: 'Next gate',
+      steps: [
+        { stage: 'Build capability', head: 'People skilled', text: 'Teams equipped to spot and shape business opportunities.' },
+        { stage: 'Generate ideas', head: '38+ ideas', text: 'Structured ideation grounded in business needs.' },
+        { stage: 'Prioritise', head: 'Top 3 via RICE', text: 'Focus on the highest-priority opportunities.' },
+        { stage: 'Prototype', head: 'Solution visualised', text: 'High-level technical design and a prototype.' },
+        { stage: 'Validate and decide', head: 'Investment gate', next: true,
+          checks: ['Business value and success measures', 'Data and integration feasibility', 'Responsible AI and security review', 'Named sponsor and product owner', 'Platform or independent build'] }
+      ],
+      askEyebrow: 'Leadership direction required',
+      asks: [
+        'Which prototypes should progress to validation or pilot?',
+        'Who is the accountable business sponsor and product owner?',
+        'AI SecOps platform or independent build for each solution?',
+        'What measurable business outcome will define success?',
+        'What capacity or funding is available for the next stage?'
+      ],
+      closing: 'A prototype is evidence for a controlled investment decision, not the finish line.'
+    },
+
+    /* page 3: the use cases with owners and status. `project` links a row to its deck. */
+    showcase: {
+      eyebrow: 'Prototype showcase',
+      title: 'Cohort 1 use cases',
+      text: 'RICE-ranked priorities and additional opportunities, with a clear path from prototype to production roadmap.',
+      pathLabel: 'Path to production',
+      path: ['Prototype complete', 'Business validation', 'Feasibility assessment', 'Pilot decision', 'Production roadmap'],
+      pathAt: 0, hereLabel: 'We are here', nextLabel: 'Required next',
+      note: 'Demo note: prototypes use dummy data, or public vendor advisories in the OEM prototype, and illustrate what the solution design could look like. They do not represent production data or a live system.',
+      positionEyebrow: 'Current position',
+      statement: 'Prototypes complete. Business validation is required next.',
+      columns: ['Use case', 'Owner', 'Status', 'In this deck'],
+      groups: [
+        { label: 'Top 3 · RICE-prioritised', items: [
+          { rank: 1, name: 'Privileged Access', text: 'Whitelisting of EPM accounts, with explainable request decisions.', status: ['done', 'Prototype complete', 'Business validation required'], project: 'endpoint-elevated-approval' },
+          { rank: 2, name: 'Endpoint Security & Posture Management', text: 'Assess device posture, prioritise vulnerabilities and support remediation.', status: ['done', 'Prototype complete', 'Business validation required'], project: 'endpoint-security-compliance' },
+          { rank: 3, name: 'OT Security: Elimination of False Positives', text: 'Reduce false positives in OT security alerts.', owners: ['Prasad L'], status: ['hold', 'On hold', ''], project: null }
+        ] },
+        { label: 'Additional use cases', items: [
+          { name: 'Archon', text: 'Organisational context engine for standards discovery, control mapping and requirements contextualisation.', status: ['shown', 'Presented', 'To leadership'], project: 'archon-context-engine' },
+          { name: 'OEM Notification Engine', text: 'Collect, consolidate and prioritise OEM security notifications and advisories.', by: 'Suggested by Gomeet', status: ['done', 'Prototype complete', 'Business validation required'], project: 'oem-intelligence-agent' }
+        ] }
+      ],
+      noDeck: 'No pages in this deck',
+      /* systems each use case works with, as its own architecture names them; [logo key, label] */
       works: {
-        'endpoint-elevated-approval': [[null, 'ServiceNow'], ['mde', 'Defender'], ['intune', 'Intune'], ['sharepoint', 'SharePoint'], [null, 'Google Threat Intelligence']],
+        'endpoint-elevated-approval': [[null, 'ServiceNow'], ['mde', 'Defender'], ['intune', 'Intune'], ['sharepoint', 'SharePoint']],
         'endpoint-security-compliance': [['mde', 'Defender for Endpoint'], ['intune', 'Intune'], ['teams', 'Teams'], ['powerbi', 'Power BI']],
         'oem-intelligence-agent': [[null, 'Approved OEM sources'], ['sharepoint', 'SharePoint'], ['powerautomate', 'Power Automate'], ['teams', 'Teams']],
         'archon-context-engine': [['sharepoint', 'ABB standards and policies'], [null, 'NIST · IEC · CIS']]
-      },
-      keeps: {
-        'endpoint-elevated-approval': 'A reviewer on orange, the security team on red',
-        'endpoint-security-compliance': 'An approver in Teams; servers under change control',
-        'oem-intelligence-agent': 'Service Experts, before anything is published',
-        'archon-context-engine': 'The Solution Architect, at every stage'
       }
     },
 
-    /* page 2: the business case. Every figure and statement is taken from the four use-case decks. */
+    /* page 4: the business case. Every figure and statement is taken from the four use-case decks. */
     summary: {
       eyebrow: 'The business case',
       title: 'Expert time is spent preparing decisions, not making them',
@@ -2794,7 +3010,7 @@ window.Logos = {
       footnote: 'Figures are the stakeholders’ own and have not been independently validated. Use Cases 01 and 03 claim no figure in advance. Interactive prototypes accompany Use Cases 01, 02 and 03.'
     },
 
-    /* page 3: how it would be built, and why not on Abby or Copilot Studio */
+    /* page 5: how it would be built, and why not on Abby or Copilot Studio */
     approach: {
       eyebrow: 'How we would build it',
       title: 'Why purpose-built agents',
@@ -2868,6 +3084,7 @@ window.Logos = {
   const slide = {
     id: 'endpoint-elevated-approval',
     index: 1,
+    owners: ['Anil Akella', 'Amit Awaghan'],
     title: 'Endpoint Elevated Approval',
     subtitle: 'Agentic Architecture & Decision Workflow',
 
@@ -3137,6 +3354,7 @@ window.Logos = {
   Deck.registerProject({
     id: 'endpoint-security-compliance',
     index: 2,
+    owners: ['Madhusudan BM'],
     title: 'Endpoint Security Compliance & Remediation',
     subtitle: 'Agentic Compliance Intelligence & Automated Remediation',
 
@@ -3522,6 +3740,7 @@ window.Logos = {
   Deck.registerProject({
     id: 'oem-intelligence-agent',
     index: 3,
+    owners: ['Priyanka Purohit', 'Vikash Kumar'],
     title: 'OEM Intelligence Agent',
     subtitle: 'Architecture & Intelligence Workflow',
     pages: ['cover', 'architecture', 'benefits'],
@@ -3877,6 +4096,7 @@ window.Logos = {
   Deck.registerProject({
     id: 'archon-context-engine',
     index: 4,
+    owners: ['Abhishek Chakraborty'],
     title: 'Archon · AI Context Engine',
     subtitle: 'Architecture-ready context for Solution Architects',
 
